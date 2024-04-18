@@ -1,7 +1,5 @@
 package PageObjects;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -11,6 +9,7 @@ public class TraditionalMenu extends TestBase{
 
 public  WebDriver driver;
 CCPMenu ccp;
+
 
 	
 	public TraditionalMenu(WebDriver driver) {
@@ -31,6 +30,8 @@ private static final String Save="//button[@type='button' and text()='Save']";
 private static final String Nutmeg_Radio_No="(//span[@class='radiobtn'])[2]";
 private static final String Edit_Menu="//h2[@class='header-info-label' and text()='Edit Menu']";
 private static final String Edit_Rules="//button[@type='button' and text()='Edit Rules']";
+private static final String Copy_Icon="(//i[@class='pwm-icon fas fa-copy table-icon-copy menu-search-icon link'])[1]";
+private static final String Name="//input[@placeholder='Write menu name']";
 
 
 
@@ -142,9 +143,43 @@ public  boolean Validate_EditRules_Page()  {
 	if (VisibilityofELement(Heading_Rules_Page, 10)==true) {
 		return true;
 	}
-	return false;
+	return false;	
+}
+
+public  boolean User_Move_to_EditDTT()   {
 	
+	InvisibilityofElement(Loader, 10);
+	click(Serach);
+	InvisibilityofElement(Loader, 10);
+	click(Copy_Icon);
+	InvisibilityofElement(Loader, 20);
+	return true;
+
 	
 }
+
+public  boolean User_Validates_Copied_Menu_Name()   {
+	
+	InvisibilityofElement(Loader, 10);
+	click(Serach);
+	InvisibilityofElement(Loader, 10);
+	String Copy_Name=ListStringElements(Menu_Table_value).get(0);
+	click(Copy_Icon);
+	InvisibilityofElement(Loader, 20);
+	String Actual_Name=Element(Name).getAttribute("value");
+	System.out.println(Copy_Name+" "+Actual_Name);
+	
+	if(Copy_Name.equalsIgnoreCase(Actual_Name)) {
+		
+		return true;	
+	}
+	return false;
+
+	
+}
+
+
+
+
 
 }

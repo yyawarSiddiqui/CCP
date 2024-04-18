@@ -22,7 +22,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
@@ -33,9 +32,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utils.ExtentReport;
-import utils.RandomStringGenerator;
-
-import static utils.RandomStringGenerator.*;
+import static utils.generateString.*;
 
 public class TestBase {
 
@@ -161,23 +158,24 @@ public static WebElement Element(String Ele) {
 		
 	}
 
-public static List<String> ListElements(String Ele) {
+public static List<String> ListStringElements(String Ele) {
 	
 	List<WebElement> Elements=driver.findElements(By.xpath(Ele));
 	
 	
-	Set<String> list_Text=new HashSet<String>();
+	List<String> list_Text=new ArrayList<String>();
         
 	for(WebElement Element:Elements) {
 		
 		String Text=Element.getText();
+		//System.out.println(Text);
 		list_Text.add(Text);
 	}
 	// Convert the set to a list
-    List<String> textList = new ArrayList<>(list_Text);
-    
+  //  List<String> textList = new ArrayList<>(list_Text);
     // Return the list of unique text values
-    return textList;
+	
+    return list_Text;
 	
 }
 
@@ -218,7 +216,7 @@ public static List<WebElement>  ListWebElement(String Ele) {
 	
 	public void SendText(String Elem) throws InterruptedException {
 		
-		driver.findElement(By.xpath(Elem)).sendKeys(generateRandomString(10));
+		driver.findElement(By.xpath(Elem)).sendKeys(RandaomName());
 		
 		
 	}

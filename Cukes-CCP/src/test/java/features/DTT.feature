@@ -12,7 +12,7 @@ Feature: Login to ARAMARK CCP Portal and DTT Field Validation
   Then User Move to  DTT page  
   And validates the ScreenTitle
     
-    
+  
   Scenario: Verifying the DTT Field(Second Scenario)
   Given User goes to Menu Section
   Then User Move to  DTT page

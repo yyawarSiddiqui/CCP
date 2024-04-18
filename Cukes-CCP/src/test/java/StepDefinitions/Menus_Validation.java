@@ -7,7 +7,6 @@ import PageObjects.Modules;
 import PageObjects.TraditionalMenu;
 import PageObjects.loginpage;
 import io.cucumber.java.en.*;
-import static utils.ExtentReport.*;
 
 
 
@@ -59,6 +58,22 @@ public class Menus_Validation {
 		 traditionalMenu=new TraditionalMenu(driver);
 		 TestBase.result("Validate Menu Grid Screen is Displayed", traditionalMenu.Validate_EditRules_Page()); 
 			
+	 }
+	 
+	 
+	 @Given("User Copies Menu")
+	 public void user_copies_menu() throws InterruptedException {
+		 
+		 traditionalMenu=new TraditionalMenu(driver);
+		 TestBase.result("Validate DTT screen should get displayed for Copy Menu", traditionalMenu.User_Move_to_EditDTT()); 
+	 }
+	 
+	 
+	 @Given("validates The name field should display the same name as the copied menu")
+	 public void validates_the_name_field_should_display_the_same_name_as_the_copied_menu() {
+	  
+		 traditionalMenu=new TraditionalMenu(driver);
+		 TestBase.result("validates The name field should display the same name as the copied menu", traditionalMenu.User_Validates_Copied_Menu_Name()); 
 	 }
 	
 }
