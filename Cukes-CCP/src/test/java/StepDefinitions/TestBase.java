@@ -204,16 +204,29 @@ public static List<WebElement>  ListWebElement(String Ele) {
 		
 	}
 	
-	public void SelectDropDown(String Elem , String value)  {
+	public Boolean SelectDropDown(String Elem , String value)  {
 		
-		
+		VisibilityofELement(Elem, 5);
 		WebElement Element=driver.findElement(By.xpath(Elem));
 		jsClick(Elem);
 		Select sc=new Select(Element);
 		sc.selectByValue(value);
+		return true;
+		
 			
 	}
 	
+public WebElement GetSelectedDropDown(String Elem )  {
+		
+		VisibilityofELement(Elem, 5);
+		WebElement Element=driver.findElement(By.xpath(Elem));
+		Select sc=new Select(Element);
+		WebElement SelctedElement=sc.getFirstSelectedOption();
+		return SelctedElement;
+		
+			
+	}
+
 	public void SendText(String Elem) throws InterruptedException {
 		
 		driver.findElement(By.xpath(Elem)).sendKeys(RandaomName());

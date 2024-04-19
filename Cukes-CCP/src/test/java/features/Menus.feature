@@ -40,8 +40,38 @@ Scenario: Verifying the Menu Created
   And  User Copies Menu 
   And validates the ScreenTitle
   
-   @test
-  Scenario: Verifying the Edit Menu DTT Title
+  
+  Scenario: Verifying the Copy Menu Name 
   Given User goes to Menu Section  
   And validates The name field should display the same name as the copied menu
+  
+  
+  
+  
+  Scenario: Verifying the Copy Menu Description field 
+  Given User goes to Menu Section  
+  And validates The Description field should display the same Description as the copied menu
+  
+  
+   
+  Scenario: Verifying the Copy Menu Service channel 
+  Given User goes to Menu Section  
+   And  User Copies Menu 
+  And Validate Service channel should be Corrections and auto populated always
+  
+  
+  
+  
+  Scenario: Verifying the Copy Menu Status field 
+  Given User goes to Menu Section  
+   And  User Copies Menu 
+  And Validate Status Field
+  
+  
+   @test
+  Scenario: Verifying the Copy Menu fields 
+  Given User goes to Menu Section  
+   Then  User Create full Menu
+  And Validate the data Provided during Creation of Menu
+  
   

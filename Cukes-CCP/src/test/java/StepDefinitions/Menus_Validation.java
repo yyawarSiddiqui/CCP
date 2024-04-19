@@ -53,7 +53,7 @@ public class Menus_Validation {
 		TestBase.result("Validate Menu Grid Screen is Displayed", traditionalMenu.Validate_EditMenu_Title()); 
 	 }
 	 
-	 @Given("User Verify RulePage Screen Title")
+	 @And("User Verify RulePage Screen Title")
 	 public void user_verify_rule_page_screen_title()  {
 		 traditionalMenu=new TraditionalMenu(driver);
 		 TestBase.result("Validate Menu Grid Screen is Displayed", traditionalMenu.Validate_EditRules_Page()); 
@@ -69,11 +69,48 @@ public class Menus_Validation {
 	 }
 	 
 	 
-	 @Given("validates The name field should display the same name as the copied menu")
+	 @And("validates The name field should display the same name as the copied menu")
 	 public void validates_the_name_field_should_display_the_same_name_as_the_copied_menu() {
 	  
 		 traditionalMenu=new TraditionalMenu(driver);
 		 TestBase.result("validates The name field should display the same name as the copied menu", traditionalMenu.User_Validates_Copied_Menu_Name()); 
 	 }
+	 
+	 @And("validates The Description field should display the same Description as the copied menu")
+	 public void validates_the_description_field_should_display_the_same_description_as_the_copied_menu()  {
+	     
+		 traditionalMenu=new TraditionalMenu(driver);
+		 try {
+			TestBase.result("validates The Description field should display the same Description as the copied menu", traditionalMenu.User_Validates_Copied_Description_Name());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	 
+	 }
+	 
+	 @Given("Validate Status Field")
+	 public void validate_status_field() {
+	     
+		 traditionalMenu=new TraditionalMenu(driver);
+		 TestBase.result("validates Status Field on the Opened copied menu", traditionalMenu.User_validate_Status_on_Copymenu()); 
+	 
+	 }
 	
+	 @Then("User Create full Menu")
+	 public void user_create_full_menu() throws InterruptedException {
+		 
+		  definethetarget=new DefineTheTarget(driver);
+		 TestBase.result("validates User Creates Full Menu", definethetarget.Create_Menu_allFields());
+	 }
+	 
+	 
+	 @Then("Validate the data Provided during Creation of Menu")
+	 public void validate_the_data_provided_during_creation_of_menu()  {
+		 
+		 traditionalMenu=new TraditionalMenu(driver);
+		 TestBase.result("validates the data Provided during Creation of Menu is Same in Copy Menu", traditionalMenu.User_validate_Fields_on_Copymenu());
+		 
+	     
+	 }
 }
