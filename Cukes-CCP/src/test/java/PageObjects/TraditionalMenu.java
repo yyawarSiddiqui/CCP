@@ -1,5 +1,6 @@
 package PageObjects;
 
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,12 +12,14 @@ public class TraditionalMenu extends TestBase{
 	public  WebDriver driver;
 	CCPMenu ccp =new CCPMenu(driver);
 	DefineTheTarget dtt =new DefineTheTarget(driver);
+	private final JSONObject value;
 
 
 
 	public TraditionalMenu(WebDriver driver) {
 
 		this.driver=driver;
+		this.value = new JSONObject();
 
 	}
 
@@ -226,8 +229,9 @@ public class TraditionalMenu extends TestBase{
 
 		Boolean val=Element(Status_DropDown).isEnabled();
 		String text=Element(Text_Value_for_Status).getText();
-
-		if(val==false && text.equalsIgnoreCase(Status_Text)) {
+   
+		System.out.println(value.getJSONObject("TraditionalMenu").getString("status"));
+		if(val==false && text.equalsIgnoreCase(value.getJSONObject("TraditionalMenu").getString("status"))) { ///Put  Status_Text here from above
 
 			return true;
 		}

@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
-import org.apache.hc.core5.http.Chars;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -27,7 +27,6 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -40,17 +39,38 @@ public class TestBase {
 	static ExtentTest  Logger;
 	Properties prop=new Properties();
 	FileInputStream fs = null;
+	InputStream data;
+	JSONObject Value;
 	
 	
 @Before
-public void setup() { 
+public void setup() throws Exception { 
 		
 	FileInputStream fs = null;
 	 String QaURL = null;
 	 
+	 try {
+		 
+		 String dataFileName = "data/TestData.json";
+		data= getClass().getClassLoader().getResourceAsStream(dataFileName);
+		JSONTokener tokener=new JSONTokener(data);
+		Value=new JSONObject(tokener);
+		
+	 }catch(Exception e) {
+		 
+		 e.printStackTrace();
+	 }finally {
+		 
+		 if(data!=null) {
+			 data.close();
+		 }
+		 
+	 }
+	 
+	 
 	 
 	try {
-		fs = new FileInputStream(System.getProperty("user.dir")+File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+"config.properties");
+		fs = new FileInputStream(System.getProperty("user.dir")+File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+"data"+File.separator+"config.properties");
 	} catch (FileNotFoundException e) {
 
 		e.printStackTrace();

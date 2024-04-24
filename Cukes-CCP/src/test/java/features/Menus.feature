@@ -61,14 +61,14 @@ Scenario: Verifying the Menu Created
   
   
   
-  
+  @test
   Scenario: Verifying the Copy Menu Status field 
   Given User goes to Menu Section  
    And  User Copies Menu 
   And Validate Status Field
   
   
-   @test
+   
   Scenario: Verifying the Copy Menu fields 
   Given User goes to Menu Section  
    Then  User Create full Menu
