@@ -37,16 +37,16 @@ public class TestBase {
 
 	private static WebDriver driver;
 	static ExtentTest  Logger;
-	Properties prop=new Properties();
-	FileInputStream fs = null;
+	public  static Properties prop=new Properties();
+	public static FileInputStream fs ;
 	InputStream data;
-	JSONObject Value;
+	 public static JSONObject Value;
 	
 	
 @Before
 public void setup() throws Exception { 
 		
-	FileInputStream fs = null;
+	 fs = null;
 	 String QaURL = null;
 	 
 	 try {
@@ -55,6 +55,7 @@ public void setup() throws Exception {
 		data= getClass().getClassLoader().getResourceAsStream(dataFileName);
 		JSONTokener tokener=new JSONTokener(data);
 		Value=new JSONObject(tokener);
+      // System.out.println(Value.getJSONObject("TraditionalMenu").toString());		
 		
 	 }catch(Exception e) {
 		 
@@ -158,7 +159,6 @@ public void setup() throws Exception {
 	
 		VisibilityofELement(Elem, 8);
 		WebElement Ele =driver.findElement(By.xpath(Elem));
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Ele);
 		
 	}
@@ -172,7 +172,8 @@ public void setup() throws Exception {
 	}
 	
 public static WebElement Element(String Ele) {
-		
+	
+		VisibilityofELement(Ele, 7);
 		WebElement Element=driver.findElement(By.xpath(Ele));
 		return Element;
 		
@@ -247,6 +248,26 @@ public WebElement GetSelectedDropDown(String Elem )  {
 			
 	}
 
+public List<String> GetDropDownOptions(String Elem )  {
+	
+	List<String> New_List=new ArrayList<String>();
+	VisibilityofELement(Elem, 5);
+	WebElement Element=driver.findElement(By.xpath(Elem));
+	Select sc=new Select(Element);
+	List<WebElement> AllElement=sc.getOptions();
+	for(WebElement SingleElement:AllElement) {
+		
+		String TextDropDown=SingleElement.getText();
+		New_List.add(TextDropDown);
+		
+		
+	}
+		
+	return New_List;
+	
+		
+}
+
 	public void SendText(String Elem) throws InterruptedException {
 		
 		driver.findElement(By.xpath(Elem)).sendKeys(RandaomName());
@@ -273,7 +294,7 @@ public void Sendval(String Elem, String Values) throws InterruptedException {
 			return false;
 
 		}
-	}
-	
+	}	
+
 	
 }

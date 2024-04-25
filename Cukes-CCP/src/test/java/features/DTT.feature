@@ -52,3 +52,21 @@ Feature: Login to ARAMARK CCP Portal and DTT Field Validation
   Then User Move to  DTT page
   And Validate Calorie Level Functionality
   
+  
+ 
+  Scenario: Verifying the DTT Field(Ninth Scenario)
+  Given User goes to Menu Section
+  Then User Move to  DTT page
+  And Verify the functionality of the Status dropdown 
+  
+  
+   Scenario: Verifying the DTT Field(Tenth Scenario)
+  Given User goes to Menu Section
+  Then User Move to  DTT page
+  And Verify the functionality of the Number of Cycle Weeks dropdown 
+  
+  
+  
+  
+  
+  

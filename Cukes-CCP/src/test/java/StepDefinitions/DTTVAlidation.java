@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import PageObjects.CCPMenu;
 import PageObjects.DefineTheTarget;
@@ -17,6 +18,7 @@ public class DTTVAlidation {
 	CCPMenu ccpmenu;
 	TraditionalMenu traditionalMenu;
 	DefineTheTarget definethetarget;
+	 public JSONObject Value;
 	
  private WebDriver driver;
 	
@@ -116,6 +118,25 @@ public class DTTVAlidation {
 		definethetarget.Verify_Calorie_Level();
 		
 	}
+	
+	@Then("Verify the functionality of the Status dropdown")
+	public void verify_the_functionality_of_the_status_dropdown() {
+	    
+		definethetarget=new DefineTheTarget(driver);
+		TestBase.result("Validate the functionality of the Status dropdown" , definethetarget.User_validate_Status_on_DTT());
+		
+	}
+	
+	@Then("Verify the functionality of the Number of Cycle Weeks dropdown")
+	public void verify_the_functionality_of_the_number_of_cycle_weeks_dropdown() {
+		
+		definethetarget=new DefineTheTarget(driver);
+		TestBase.result("Validate the functionality Number of Cycle Weeks dropdown" , definethetarget.User_Validate_the_functionality_of_the_Number_of_Cycle_Weeks_dropdown());
+		
+	}
+
+
+
 	
 	
 }

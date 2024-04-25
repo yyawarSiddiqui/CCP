@@ -1,6 +1,6 @@
 package PageObjects;
 
-import org.json.JSONObject;
+import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,20 +10,22 @@ import StepDefinitions.TestBase;
 public class TraditionalMenu extends TestBase{
 
 	public  WebDriver driver;
-	CCPMenu ccp =new CCPMenu(driver);
-	DefineTheTarget dtt =new DefineTheTarget(driver);
-	private final JSONObject value;
+	CCPMenu ccp ;
+	DefineTheTarget dtt ;
+	
+	//public JSONObject Value;
+
 
 
 
 	public TraditionalMenu(WebDriver driver) {
 
 		this.driver=driver;
-		this.value = new JSONObject();
+		
 
 	}
-
-
+	
+	
 
 	private static final String Add="//button[@type='button' and text()='Add']";
 	private static final String Serach="//button[@type='button' and text()='Search']";
@@ -41,7 +43,6 @@ public class TraditionalMenu extends TestBase{
 	private static final String Menu_Table_Description="//table[@class='search-result']//tr//td[2]";
 	private static final String Status_DropDown="(//select[@class='form-control'])[1]";
 	private static final String Text_Value_for_Status="//option[@value='1'and text()='Recently Added']";
-	private static final String Status_Text="Recently Added";
 	private static final String Select_Cycle_Weeks="(//select[@class='form-control'])[2]";
 	private static final String Gender="(//select[@class='form-control' ])[3]";
 	private static final String Population_Type="//select[@id='mySelect1']";
@@ -52,6 +53,7 @@ public class TraditionalMenu extends TestBase{
 
 	public  boolean clickonAdd() {
 
+		
 		VisibilityofELement(Add, 8);
 		jsClick(Add);
 		return true;
@@ -72,7 +74,7 @@ public class TraditionalMenu extends TestBase{
 
 		try {
 			ccp=new CCPMenu(driver);
-
+           dtt=new DefineTheTarget(driver);
 			String Menu_Name=dtt.Create_Menu();
 			ccp.clickonTraditional_Menus();
 			Sendval(Menu_Box, Menu_Name);
@@ -103,6 +105,7 @@ public class TraditionalMenu extends TestBase{
 
 
 		try {
+			dtt=new DefineTheTarget(driver);
 			dtt.Create_Menu();
 			boolean val=VisibilityofELement(Heading_Rules_Page, 8);
 			if(val==true) {
@@ -120,9 +123,9 @@ public class TraditionalMenu extends TestBase{
 
 	public  boolean Validate_rules_are_saved() {
 
-		DefineTheTarget dt=new DefineTheTarget(driver);
+		 dtt=new DefineTheTarget(driver);
 		try {
-			dt.Create_Menu();
+			dtt.Create_Menu();
 			InvisibilityofElement(Loader, 10);
 			click(Nutmeg_Radio_No);
 			click(Save);
@@ -205,6 +208,7 @@ public class TraditionalMenu extends TestBase{
 
 	public  boolean User_Validates_Copied_Description_Name()    {
 
+		 dtt=new DefineTheTarget(driver);
 		InvisibilityofElement(Loader, 10);
 		click(Serach);
 		InvisibilityofElement(Loader, 10);
@@ -213,7 +217,7 @@ public class TraditionalMenu extends TestBase{
 		clickCopyIcon(4);
 		InvisibilityofElement(Loader, 30);
 		String Actual_Name=dtt.getDescriptionText();
-		System.out.println(Copy_Name+" "+Actual_Name);
+		//System.out.println(Copy_Name+" "+Actual_Name);
 
 		if(Copy_Name.equalsIgnoreCase(Actual_Name)) {
 
@@ -225,13 +229,15 @@ public class TraditionalMenu extends TestBase{
 
 	}
 
-	public  boolean User_validate_Status_on_Copymenu()   {
+	public  boolean User_validate_Status_on_Copymenu() throws IOException   {
 
+		
 		Boolean val=Element(Status_DropDown).isEnabled();
 		String text=Element(Text_Value_for_Status).getText();
-   
-		System.out.println(value.getJSONObject("TraditionalMenu").getString("status"));
-		if(val==false && text.equalsIgnoreCase(value.getJSONObject("TraditionalMenu").getString("status"))) { ///Put  Status_Text here from above
+		//prop.load(fs);
+   //	System.out.println(prop.getProperty("url"));
+		//System.out.println(Value.getJSONObject("TraditionalMenu").getString("status"));
+		if(val==false && text.equalsIgnoreCase(Value.getJSONObject("TraditionalMenu").getString("status")) ){ //Put  Status_Text here from above
 
 			return true;
 		}
@@ -241,7 +247,7 @@ public class TraditionalMenu extends TestBase{
 	}
 
 	public  boolean User_validate_Fields_on_Copymenu()     {
-
+       ccp=new CCPMenu(driver);
 		ccp.clickonTraditional_Menus();
 		InvisibilityofElement(Loader, 8);
 		click(Serach);
@@ -251,6 +257,7 @@ public class TraditionalMenu extends TestBase{
 		String GenderValue= GetSelectedDropDown(Gender).getText();
 		String PopulationValue=GetSelectedDropDown(Population_Type).getText();
 		int Menu_Size=ListWebElement(Selected_Meal).size();
+		//System.out.println(prop.getProperty("Cycle_Weeks"));
 
 		//  System.out.println(cycle_Weeks +"  "+"  "+GenderValue+"  "+PopulationValue+"  "+Menu_Size);
 
@@ -264,9 +271,9 @@ public class TraditionalMenu extends TestBase{
 					Element(Gender).isEnabled()&&
 					Element(Population_Type).isEnabled()&&
 					Element(Edit_Meal).isDisplayed()&&
-					cycle_Weeks.equalsIgnoreCase("5") &&
-					GenderValue.equalsIgnoreCase("Female") &&
-					PopulationValue.equalsIgnoreCase("Adult")&&
+					cycle_Weeks.equalsIgnoreCase(prop.getProperty("Cycle_Weeks")) &&
+					GenderValue.equalsIgnoreCase(prop.getProperty("Gender")) &&
+					PopulationValue.equalsIgnoreCase(prop.getProperty("Population"))&&
 					Menu_Size==3;                    
 			i++;
 		}

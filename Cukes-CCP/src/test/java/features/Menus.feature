@@ -60,18 +60,24 @@ Scenario: Verifying the Menu Created
   And Validate Service channel should be Corrections and auto populated always
   
   
-  
-  @test
+
   Scenario: Verifying the Copy Menu Status field 
   Given User goes to Menu Section  
    And  User Copies Menu 
   And Validate Status Field
   
-  
    
+ 
   Scenario: Verifying the Copy Menu fields 
   Given User goes to Menu Section  
    Then  User Create full Menu
   And Validate the data Provided during Creation of Menu
+  
+  
+   @test
+    Scenario: Verifying the Copy Menu Status field 
+  Given User goes to Menu Section  
+   And  User Copies Menu 
+  And verify duplicate menu is not getting created
   
   

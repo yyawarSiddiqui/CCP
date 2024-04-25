@@ -1,5 +1,8 @@
 package StepDefinitions;
 
+import java.io.IOException;
+
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import PageObjects.CCPMenu;
 import PageObjects.DefineTheTarget;
@@ -16,6 +19,7 @@ public class Menus_Validation {
 	CCPMenu ccpmenu;
 	TraditionalMenu traditionalMenu;
 	DefineTheTarget definethetarget;
+	 public JSONObject Value;
 	
 	
  private WebDriver driver;
@@ -27,7 +31,7 @@ public class Menus_Validation {
 	 
 	 @Then("User Creates and validates the Created Menu")
 	 public void user_creates_and_validates_the_created_menu() {
-		 traditionalMenu=new TraditionalMenu(driver);
+		traditionalMenu=new TraditionalMenu(driver );
 		 traditionalMenu.Validate_Menucreated();
 		
 	 }
@@ -35,27 +39,27 @@ public class Menus_Validation {
 	 
 	 @Then("User Creates and validates RulePage Title")
 	 public void user_creates_and_validates_rule_page_title() {
-		 traditionalMenu=new TraditionalMenu(driver);
+		 traditionalMenu=new TraditionalMenu(driver );
 		 TestBase.result("Validate Rules page displayed ",  traditionalMenu.Validate_RulePage_Title());
 		
 	 }
 	 
 	 @Then("User Verify Rules are successfully saved")
 	 public void user_verify_rules_are_successfully_saved() {
-		 traditionalMenu=new TraditionalMenu(driver);
+		 traditionalMenu=new TraditionalMenu(driver );
 		 TestBase.result("Validate Rules are saved",   traditionalMenu.Validate_rules_are_saved());
 		
 	 }
 	 
 	 @Then("User Verify Menu Grid Screen Title")
 	 public void user_verify_menu_grid_screen_Title() throws InterruptedException {
-		 traditionalMenu=new TraditionalMenu(driver);
+		 traditionalMenu=new TraditionalMenu(driver );
 		TestBase.result("Validate Menu Grid Screen is Displayed", traditionalMenu.Validate_EditMenu_Title()); 
 	 }
 	 
 	 @And("User Verify RulePage Screen Title")
 	 public void user_verify_rule_page_screen_title()  {
-		 traditionalMenu=new TraditionalMenu(driver);
+		 traditionalMenu=new TraditionalMenu(driver );
 		 TestBase.result("Validate Menu Grid Screen is Displayed", traditionalMenu.Validate_EditRules_Page()); 
 			
 	 }
@@ -64,22 +68,23 @@ public class Menus_Validation {
 	 @Given("User Copies Menu")
 	 public void user_copies_menu() throws InterruptedException {
 		 
-		 traditionalMenu=new TraditionalMenu(driver);
+		 traditionalMenu=new TraditionalMenu(driver );
 		 TestBase.result("Validate DTT screen should get displayed for Copy Menu", traditionalMenu.User_Move_to_EditDTT()); 
 	 }
 	 
 	 
-	 @And("validates The name field should display the same name as the copied menu")
+	 @And("validates The name field should displ"
+	 		+ "ay the same name as the copied menu")
 	 public void validates_the_name_field_should_display_the_same_name_as_the_copied_menu() {
 	  
-		 traditionalMenu=new TraditionalMenu(driver);
+		 traditionalMenu=new TraditionalMenu(driver );
 		 TestBase.result("validates The name field should display the same name as the copied menu", traditionalMenu.User_Validates_Copied_Menu_Name()); 
 	 }
 	 
 	 @And("validates The Description field should display the same Description as the copied menu")
 	 public void validates_the_description_field_should_display_the_same_description_as_the_copied_menu()  {
 	     
-		 traditionalMenu=new TraditionalMenu(driver);
+		 traditionalMenu=new TraditionalMenu(driver );
 		 try {
 			TestBase.result("validates The Description field should display the same Description as the copied menu", traditionalMenu.User_Validates_Copied_Description_Name());
 		} catch (Exception e) {
@@ -90,7 +95,7 @@ public class Menus_Validation {
 	 }
 	 
 	 @Given("Validate Status Field")
-	 public void validate_status_field() {
+	 public void validate_status_field() throws IOException {
 	     
 		 traditionalMenu=new TraditionalMenu(driver);
 		 TestBase.result("validates Status Field on the Opened copied menu", traditionalMenu.User_validate_Status_on_Copymenu()); 
@@ -111,6 +116,14 @@ public class Menus_Validation {
 		 traditionalMenu=new TraditionalMenu(driver);
 		 TestBase.result("validates the data Provided during Creation of Menu is Same in Copy Menu", traditionalMenu.User_validate_Fields_on_Copymenu());
 		 
-	     
+	 }
+	 
+	 @Given("verify duplicate menu is not getting created")
+	 public void verify_duplicate_menu_is_not_getting_created() {
+	    
+		 traditionalMenu=new TraditionalMenu(driver);
+		 TestBase.result("validates the data Provided during Creation of Menu is Same in Copy Menu", traditionalMenu);
+			
+		 
 	 }
 }

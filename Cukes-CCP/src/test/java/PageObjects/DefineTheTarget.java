@@ -1,5 +1,11 @@
 package PageObjects;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -17,7 +23,7 @@ public class DefineTheTarget extends TestBase {
 
 	}
 
-
+//	(//span[@class='text-danger' and text()='*'])[3]
 	String Input_Name="!@#$%^&*()_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ujhfgfgjfjgfjgjfgrirtrhjgfjj";
 
 
@@ -38,8 +44,9 @@ public class DefineTheTarget extends TestBase {
 	private static final String Select_Cycle_Weeks="(//select[@class=\"form-control\"])[2]";
 	private static final String Gender="(//select[@class='form-control' ])[3]";
 	private static final String Population_Type="//select[@id='mySelect1']";
-
-
+	private static final String Status_DropDown="(//select[@class='form-control'])[1]";
+	private static final String Text_Value_for_Status="//option[@value='1'and text()='Recently Added']";
+	
 
 	public boolean VerifyDTTScreenVisibility() {
 
@@ -56,7 +63,7 @@ public class DefineTheTarget extends TestBase {
 		VisibilityofELement(Meal_Period, 20);
 		jsClick(Meal_Period);
 		jsClick(Close_Meal_Period);
-		SelectDropDown(SelectRDAType, "M74");
+		SelectDropDown(SelectRDAType, prop.getProperty("value"));
 		jsClick(Create_Button);
 		Boolean val=VisibilityofELement(Warning_Banner,3);
 		return val;
@@ -68,7 +75,7 @@ public class DefineTheTarget extends TestBase {
 		SendText(Name);
 		Thread.sleep(10000);
 		VisibilityofELement(SelectRDAType,20);
-		SelectDropDown(SelectRDAType, "M74");
+		SelectDropDown(SelectRDAType,prop.getProperty("value") );
 		jsClick(Create_Button);
 		Boolean val=VisibilityofELement(Warning_Banner,3);
 		return val;
@@ -96,7 +103,7 @@ public class DefineTheTarget extends TestBase {
 		SendText(Name);
 		Element(Name);
 		VisibilityofELement(SelectRDAType,20);
-		SelectDropDown(SelectRDAType, "M74");
+		SelectDropDown(SelectRDAType, prop.getProperty("value"));
 		jsClick(Create_Button);
 		Boolean val=VisibilityofELement(Success_Msg,20);
 		return val;
@@ -156,7 +163,7 @@ public class DefineTheTarget extends TestBase {
 		jsClick(Close_Meal_Period);
 		SendText(Name);
 		VisibilityofELement(SelectRDAType,20);
-		SelectDropDown(SelectRDAType, "M74");
+		SelectDropDown(SelectRDAType, prop.getProperty("value"));
 		String Menu_Name=Element(Name).getAttribute("value");
 		jsClick(Create_Button);
 		return Menu_Name;
@@ -184,15 +191,69 @@ public class DefineTheTarget extends TestBase {
 		jsClick(Close_Meal_Period);
 		SendText(Name);
 		SelectDropDown(Select_Cycle_Weeks, "5");
-		SelectDropDown(SelectRDAType, "M74");
-		SelectDropDown(Gender, "75");
-		SelectDropDown(Population_Type, "72");
+		SelectDropDown(SelectRDAType, prop.getProperty("value"));
+		SelectDropDown(Gender, prop.getProperty("GenderValue"));
+		SelectDropDown(Population_Type, prop.getProperty("PopulationValue"));
 		jsClick(Create_Button);
 		InvisibilityofElement(Loader, 20);
 
 		return true;
 
 	}
+	
+	public  boolean User_validate_Status_on_DTT()   {
 
+		InvisibilityofElement(Loader, 20);
+		Boolean val=Element(Status_DropDown).isEnabled();
+		String text=Element(Text_Value_for_Status).getText();
+		System.out.println(text);
+		Boolean val2 =GetAsterickElement(3).isDisplayed();
+		if(val==false && text.equalsIgnoreCase(Value.getJSONObject("TraditionalMenu").getString("status"))&& val2==true ){ ///Put  Status_Text here from above
+
+			return true;
+		}
+
+		return false;
 
 }
+	
+	public  boolean User_Validate_the_functionality_of_the_Number_of_Cycle_Weeks_dropdown ()   {
+
+		InvisibilityofElement(Loader, 20);
+		Boolean val=Element(Select_Cycle_Weeks).isEnabled();
+		Boolean val2 =GetAsterickElement(4).isDisplayed();
+		String dropDownValue=GetSelectedDropDown(Select_Cycle_Weeks).getText();
+		List<String> Options=GetDropDownOptions(Select_Cycle_Weeks);
+		List<String> Validation_Option=new ArrayList<String>(Arrays.asList("1","2","3","4","5","6","7","8"));
+		
+		boolean Allvaluesvalid=true;
+		Collections.sort(Options);
+		
+		
+		for(String opt:Options) {
+			
+			if(!Validation_Option.contains(opt)) {
+				
+				Allvaluesvalid=false;
+				break;
+			}
+		}
+		
+		if(val==true && val2==true && dropDownValue.equalsIgnoreCase("4") && Allvaluesvalid==true ) { 
+
+			return true;
+		}
+
+		return false;
+
+}
+	
+	public WebElement GetAsterickElement( int i)  {
+	 String Asterik="(//span[@class='text-danger' and text()='*'])["+i+"]";
+	 WebElement Ele=driver.findElement(By.xpath(Asterik));
+		return Ele;
+		
+	}
+
+}
+
