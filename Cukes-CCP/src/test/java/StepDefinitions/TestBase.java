@@ -111,6 +111,17 @@ public void setup() throws Exception {
 	}
 
 	
+public void  Sleep(int i) {
+		
+		try {
+			Thread.sleep(i);
+			
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
 	public static void result(String msg,Boolean data) {
 	
 		try {
@@ -239,7 +250,7 @@ public static List<WebElement>  ListWebElement(String Ele) {
 	
 public WebElement GetSelectedDropDown(String Elem )  {
 		
-		VisibilityofELement(Elem, 5);
+		VisibilityofELement(Elem, 20);
 		WebElement Element=driver.findElement(By.xpath(Elem));
 		Select sc=new Select(Element);
 		WebElement SelctedElement=sc.getFirstSelectedOption();
@@ -268,10 +279,12 @@ public List<String> GetDropDownOptions(String Elem )  {
 		
 }
 
-	public void SendText(String Elem) throws InterruptedException {
+	public String SendText(String Elem) throws InterruptedException {
 		
-		driver.findElement(By.xpath(Elem)).sendKeys(RandaomName());
-		
+		String Name=RandaomName();
+		VisibilityofELement(Elem, 10);
+		driver.findElement(By.xpath(Elem)).sendKeys(Name);
+		return Name;
 		
 	}
 	

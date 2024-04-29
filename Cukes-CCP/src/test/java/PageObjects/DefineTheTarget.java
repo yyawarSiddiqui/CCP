@@ -46,6 +46,10 @@ public class DefineTheTarget extends TestBase {
 	private static final String Population_Type="//select[@id='mySelect1']";
 	private static final String Status_DropDown="(//select[@class='form-control'])[1]";
 	private static final String Text_Value_for_Status="//option[@value='1'and text()='Recently Added']";
+	private static final String Copy_Warning_Msg="//div[contains(text(),'Master Menu with the same name already exists.')]";
+	private static final String Loader_CreateMenu="//span[@class='pwm-spinner-message']//span[contains(text(),'Validating and Creating New Menu...')]";
+	
+	
 	
 
 	public boolean VerifyDTTScreenVisibility() {
@@ -254,6 +258,42 @@ public class DefineTheTarget extends TestBase {
 		return Ele;
 		
 	}
+	
+public  boolean User_Click_Create_On_Copy()   {
+		
+		InvisibilityofElement(Loader, 20);
+		click(Create_Button);
+		Boolean Val=Element(Copy_Warning_Msg).isDisplayed();
+		
+		return Val;
 
+		
+	}
+
+
+public  String User_Update_CopyMenuName()   {
+	
+	String Name_Value=null;
+	InvisibilityofElement(Loader, 20);
+	try {
+		
+	     Element(Name).clear();
+		 Name_Value=SendText(Name);
+		click(Create_Button);
+		InvisibilityofElement(Loader_CreateMenu, 20);
+		
+		
+	} catch (InterruptedException e) {
+		
+		e.printStackTrace();
+	}
+	
+	
+	
+	
+	return Name_Value;
+
+	
+}
 }
 

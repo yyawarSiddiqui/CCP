@@ -74,10 +74,17 @@ Scenario: Verifying the Menu Created
   And Validate the data Provided during Creation of Menu
   
   
-   @test
-    Scenario: Verifying the Copy Menu Status field 
+ 
+    Scenario: Verifying the Duplicate Check while Copying Menu 
   Given User goes to Menu Section  
    And  User Copies Menu 
   And verify duplicate menu is not getting created
+  
+  
+    
+    Scenario: Verifying User Updates CopyMenu Name and Checks it
+  Given User goes to Menu Section  
+   And  User Copies Menu 
+  And verify User Updates the MenuName and Check it
   
   

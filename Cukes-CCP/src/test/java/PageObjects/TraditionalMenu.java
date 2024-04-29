@@ -48,9 +48,10 @@ public class TraditionalMenu extends TestBase{
 	private static final String Population_Type="//select[@id='mySelect1']";
 	private static final String Selected_Meal="//div[@class=\"meal-period-btn-container pl-3 pt-3 pb-3\"]//div[@class='row mb-2']//div[@class='pl-3']//h4";
 	private static final String Edit_Meal="(//*[name()='svg'])[1]";
+	private static final String Update_DateFilter="//button[@type='button' and text()='Update Date']";
 
-
-
+	
+	
 	public  boolean clickonAdd() {
 
 		
@@ -59,13 +60,14 @@ public class TraditionalMenu extends TestBase{
 		return true;
 
 	}
+	
 
 	public  boolean clickCopyIcon(int i) {
 
 		driver.findElement(By.xpath("(//i[@class='pwm-icon fas fa-copy table-icon-copy menu-search-icon link'])["+i+"]")).click();
 		return true;
 
-
+				
 
 	}
 
@@ -179,7 +181,8 @@ public class TraditionalMenu extends TestBase{
 		InvisibilityofElement(Loader, 10);
 		click(Serach);
 		InvisibilityofElement(Loader, 10);
-		click(Copy_Icon);
+		//click(Update_DateFilter);
+		clickCopyIcon(1);
 		InvisibilityofElement(Loader, 20);
 		return true;
 
@@ -281,5 +284,15 @@ public class TraditionalMenu extends TestBase{
 
 
 	}
+	
+	public  boolean Verify_Updated_Copy_MenuName() throws InterruptedException {
 
+		DefineTheTarget dtt=new DefineTheTarget(driver);
+		String Menuname=dtt.User_Update_CopyMenuName();
+	WebElement Elem=Element("//h2[text()="+"'"+Menuname+"'"+"]");
+	Boolean val=Elem.isDisplayed();
+			return val;
+
+		}
+	
 }

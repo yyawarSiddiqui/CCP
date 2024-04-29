@@ -31,7 +31,7 @@ public class Menus_Validation {
 	 
 	 @Then("User Creates and validates the Created Menu")
 	 public void user_creates_and_validates_the_created_menu() {
-		traditionalMenu=new TraditionalMenu(driver );
+		traditionalMenu=new TraditionalMenu(driver);
 		 traditionalMenu.Validate_Menucreated();
 		
 	 }
@@ -118,12 +118,21 @@ public class Menus_Validation {
 		 
 	 }
 	 
-	 @Given("verify duplicate menu is not getting created")
+	 @Then("verify duplicate menu is not getting created")
 	 public void verify_duplicate_menu_is_not_getting_created() {
 	    
-		 traditionalMenu=new TraditionalMenu(driver);
-		 TestBase.result("validates the data Provided during Creation of Menu is Same in Copy Menu", traditionalMenu);
+		 definethetarget=new DefineTheTarget(driver);
+		 TestBase.result("validates that user is unable to create Menu with Duplicate Name", definethetarget.User_Click_Create_On_Copy());
 			
+	 }
+	 
+	 @Then("verify User Updates the MenuName and Check it")
+	 public void verify_user_updates_the_menu_name_and_check_it() throws InterruptedException {
+	   
+		 traditionalMenu=new TraditionalMenu(driver);
+		 TestBase.result("validates that User Updates the MenuName and Verify it on Rules Page ", traditionalMenu.Verify_Updated_Copy_MenuName());
+			
+		 
 		 
 	 }
 }
