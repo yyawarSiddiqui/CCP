@@ -44,7 +44,7 @@ public class DTTVAlidation {
 	@Then("User goes to Menu Section")
 	public void user_goes_to_menu_section() throws InterruptedException {
 		
-		TestBase.Logger = startTest("User goes to DTT page ", "Validate the different field validation");
+		TestBase.Logger = startTest("User goes to Traditional Menu page ", "Validate the different field validation");
 		
 		modules=new Modules(driver);
 		TestBase.result("Click on Menu" , modules.clickonMenu());
@@ -56,8 +56,11 @@ public class DTTVAlidation {
 	
 	@Then("User Move to  DTT page")
 	public void user_move_to_dtt_page() {
+		
 		traditionalMenu=new TraditionalMenu(driver);
-		TestBase.result("Click on ADD", traditionalMenu.clickonAdd());	
+		
+		
+		TestBase.result("Click on Add", traditionalMenu.clickonAdd());	
 	}
 	
 	@And("validates the ScreenTitle")

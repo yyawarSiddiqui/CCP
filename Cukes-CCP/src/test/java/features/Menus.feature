@@ -11,7 +11,7 @@ Scenario: Verifying the Menu Created
   Then User Move to  DTT page  
   And User Creates and validates the Created Menu
   
-  
+ 
   Scenario: Verifying the RulePage Title
   Given User goes to Menu Section
   Then User Move to  DTT page  

@@ -130,9 +130,10 @@ public class Menus_Validation {
 	 public void verify_user_updates_the_menu_name_and_check_it() throws InterruptedException {
 	   
 		 traditionalMenu=new TraditionalMenu(driver);
-		 TestBase.result("validates that User Updates the MenuName and Verify it on Rules Page ", traditionalMenu.Verify_Updated_Copy_MenuName());
-			
-		 
+		 TestBase.result("validates that User Updates the MenuName and Verify it on Rules Page ", traditionalMenu.Verify_Updated_Copy_MenuName());	
 		 
 	 }
+	 
+	
+	 
 }

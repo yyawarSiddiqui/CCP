@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-04-29T18:32:35 IST" name="Default suite" finished-at="2024-04-29T18:33:43 IST" duration-ms="67997">
+  <suite started-at="2024-05-03T17:19:27 IST" name="Default suite" finished-at="2024-05-03T17:20:35 IST" duration-ms="67950">
     <groups>
       <group name="cucumber">
         <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2024-04-29T18:32:35 IST" name="Default test" finished-at="2024-04-29T18:33:43 IST" duration-ms="67997">
+    <test started-at="2024-05-03T17:19:27 IST" name="Default test" finished-at="2024-05-03T17:20:35 IST" duration-ms="67950">
       <class name="cucumberOptions.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" started-at="2024-04-29T18:32:35 IST" name="setUpClass" finished-at="2024-04-29T18:32:35 IST" duration-ms="366" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" started-at="2024-05-03T17:19:27 IST" name="setUpClass" finished-at="2024-05-03T17:19:28 IST" duration-ms="505" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@a2df0d5]]>
+                <![CDATA[org.testng.TestRunner@47ffdbba]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" started-at="2024-04-29T18:32:35 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-04-29T18:33:43 IST" duration-ms="67576" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" started-at="2024-05-03T17:19:28 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-05-03T17:20:03 IST" duration-ms="35072" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Verifying the KPI Values on Copying"]]>
+                <![CDATA["Verifying the ClosestMenu Page"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Menu Grid Page and it's Validation"]]>
+                <![CDATA["Closest MenuPage and its Validation"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" started-at="2024-04-29T18:33:43 IST" name="tearDownClass" finished-at="2024-04-29T18:33:43 IST" duration-ms="26" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" started-at="2024-05-03T17:20:03 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-05-03T17:20:35 IST" duration-ms="32294" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verifying the ClosestMenu Page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Closest MenuPage and its Validation"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:cucumberOptions.TestRunner@1e66f1f5]" started-at="2024-05-03T17:20:35 IST" name="tearDownClass" finished-at="2024-05-03T17:20:35 IST" duration-ms="40" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

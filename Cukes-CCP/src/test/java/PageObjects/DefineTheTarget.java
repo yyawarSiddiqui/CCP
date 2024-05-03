@@ -23,7 +23,7 @@ public class DefineTheTarget extends TestBase {
 
 	}
 
-//	(//span[@class='text-danger' and text()='*'])[3]
+	//	(//span[@class='text-danger' and text()='*'])[3]
 	String Input_Name="!@#$%^&*()_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ujhfgfgjfjgfjgjfgrirtrhjgfjj";
 
 
@@ -41,16 +41,19 @@ public class DefineTheTarget extends TestBase {
 	private static final String Service_Channel="//p[@class='mb-0' ]";
 	private static final String Calorie_Level="//input[@name='calorie']";
 	private static final String Taget_Type="(//select[@class='form-control' ])[4]";
-	private static final String Select_Cycle_Weeks="(//select[@class=\"form-control\"])[2]";
+	private static final String Select_Cycle_Weeks="(//select[@class='form-control'])[2]";
 	private static final String Gender="(//select[@class='form-control' ])[3]";
 	private static final String Population_Type="//select[@id='mySelect1']";
 	private static final String Status_DropDown="(//select[@class='form-control'])[1]";
 	private static final String Text_Value_for_Status="//option[@value='1'and text()='Recently Added']";
 	private static final String Copy_Warning_Msg="//div[contains(text(),'Master Menu with the same name already exists.')]";
 	private static final String Loader_CreateMenu="//span[@class='pwm-spinner-message']//span[contains(text(),'Validating and Creating New Menu...')]";
-	
-	
-	
+	private static final String Cost_Bucket="(//select[@class='form-control'])[5]";
+	private static final String Production_Type="//span[@class='Select-value-label']";
+	private static final String Meal_Heading="//div[@class='row mb-2']//h4";
+	private static final String Unselected_Meals="//input[@class='styled-checkbox selectedId' and @value='false']/following-sibling::*";
+
+
 
 	public boolean VerifyDTTScreenVisibility() {
 
@@ -59,8 +62,8 @@ public class DefineTheTarget extends TestBase {
 		return value;
 
 	}
-	
-	
+
+
 	public boolean validate_Name_Field() throws InterruptedException  {
 
 
@@ -170,11 +173,38 @@ public class DefineTheTarget extends TestBase {
 		SelectDropDown(SelectRDAType, prop.getProperty("value"));
 		String Menu_Name=Element(Name).getAttribute("value");
 		jsClick(Create_Button);
+		InvisibilityofElement(Loader_CreateMenu, 10);
 		return Menu_Name;
 
 
+	}
+	
+	public String Create_Menu_For_Closest() throws InterruptedException {
+
+
+		VisibilityofELement(Meal_Period, 20);
+		jsClick(Meal_Period);
+		
+		
+		for(WebElement Element_meal:ListWebElement(Unselected_Meals)) {
+			
+			Element_meal.click();
+		}
+		
+		
+		jsClick(Close_Meal_Period);
+		SendText(Name);
+		VisibilityofELement(SelectRDAType,20);
+		SelectDropDown(SelectRDAType, prop.getProperty("value"));
+		String Menu_Name=Element(Name).getAttribute("value");
+		jsClick(Create_Button);
+		InvisibilityofElement(Loader_CreateMenu, 10);
+		return Menu_Name;
+
 
 	}
+	
+	
 
 	public String getDescriptionText() {
 
@@ -204,7 +234,7 @@ public class DefineTheTarget extends TestBase {
 		return true;
 
 	}
-	
+
 	public  boolean User_validate_Status_on_DTT()   {
 
 		InvisibilityofElement(Loader, 20);
@@ -219,8 +249,8 @@ public class DefineTheTarget extends TestBase {
 
 		return false;
 
-}
-	
+	}
+
 	public  boolean User_Validate_the_functionality_of_the_Number_of_Cycle_Weeks_dropdown ()   {
 
 		InvisibilityofElement(Loader, 20);
@@ -229,20 +259,20 @@ public class DefineTheTarget extends TestBase {
 		String dropDownValue=GetSelectedDropDown(Select_Cycle_Weeks).getText();
 		List<String> Options=GetDropDownOptions(Select_Cycle_Weeks);
 		List<String> Validation_Option=new ArrayList<String>(Arrays.asList("1","2","3","4","5","6","7","8"));
-		
+
 		boolean Allvaluesvalid=true;
 		Collections.sort(Options);
-		
-		
+
+
 		for(String opt:Options) {
-			
+
 			if(!Validation_Option.contains(opt)) {
-				
+
 				Allvaluesvalid=false;
 				break;
 			}
 		}
-		
+
 		if(val==true && val2==true && dropDownValue.equalsIgnoreCase("4") && Allvaluesvalid==true ) { 
 
 			return true;
@@ -250,50 +280,119 @@ public class DefineTheTarget extends TestBase {
 
 		return false;
 
-}
-	
-	public WebElement GetAsterickElement( int i)  {
-	 String Asterik="(//span[@class='text-danger' and text()='*'])["+i+"]";
-	 WebElement Ele=driver.findElement(By.xpath(Asterik));
-		return Ele;
-		
 	}
-	
-public  boolean User_Click_Create_On_Copy()   {
-		
+
+	public WebElement GetAsterickElement( int i)  {
+		String Asterik="(//span[@class='text-danger' and text()='*'])["+i+"]";
+		WebElement Ele=driver.findElement(By.xpath(Asterik));
+		return Ele;
+
+	}
+
+	public  boolean User_Click_Create_On_Copy()   {
+
 		InvisibilityofElement(Loader, 20);
 		click(Create_Button);
 		Boolean Val=Element(Copy_Warning_Msg).isDisplayed();
-		
+
 		return Val;
 
-		
+
 	}
 
 
-public  String User_Update_CopyMenuName()   {
-	
-	String Name_Value=null;
-	InvisibilityofElement(Loader, 20);
-	try {
+	public  String User_Update_CopyMenuName()   {
+
+		String Name_Value=null;
+		InvisibilityofElement(Loader, 20);
+		try {
+
+			Element(Name).clear();
+			Name_Value=SendText(Name);
+			click(Create_Button);
+			InvisibilityofElement(Loader_CreateMenu, 40);
+
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+
+
+
+		return Name_Value;
+
+
+	}
+
+	public  List<String> User_getCopyMenu_TargetValues()   {
+
+		List<String> newlist=new ArrayList<String>();
+		InvisibilityofElement(Loader, 20);
+		Element(Name).clear();
+		try {
+			SendText(Name);
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+		String DTT_CycleWeeks=GetSelectedDropDown(Select_Cycle_Weeks).getText();
+		String DTT_CalorieValue=Element(Calorie_Level).getAttribute("value");
+		String DTT_Targettype=GetSelectedDropDown(Taget_Type).getText();
+		String DTT_CostBucketValue=GetSelectedDropDown(Cost_Bucket).getText();
 		
-	     Element(Name).clear();
-		 Name_Value=SendText(Name);
+		List<String> Server_Type=ListStringElements(Production_Type);
+		
+		String text_with_nbsp =Element(Production_Type).getText();
+		
+		String text_without_nbsp=text_with_nbsp.replaceAll("&nbsp", "");
+		
+		System.out.println(text_without_nbsp);
+		
+		for(String l1:Server_Type) {
+			
+			//newlist.add(l1);
+            
+		}
+
+		List<String>Meal_Type=ListStringElements(Meal_Heading);
+
+		for(String l2:Meal_Type) {
+			newlist.add(l2);
+
+		}
+
+		newlist.add(DTT_CostBucketValue);
+		//  newlist.add(DTT_CalorieValue);
+		// newlist.add(DTT_Targettype);        
+		newlist.add(DTT_CycleWeeks);
+
+		Collections.sort(newlist);
+
+		for(String val:newlist) {
+
+			System.out.println(val);
+		}
+
+
+
+		//     System.out.println(DTT_CycleWeeks +" "+DTT_CalorieValue+" "+DTT_Targettype+" "+DTT_CostBucketValue+" "+ServiceType+" "+MealsType);
+
 		click(Create_Button);
-		InvisibilityofElement(Loader_CreateMenu, 20);
-		
-		
-	} catch (InterruptedException e) {
-		
-		e.printStackTrace();
-	}
-	
-	
-	
-	
-	return Name_Value;
+		InvisibilityofElement(Loader_CreateMenu, 40);
 
-	
-}
+
+
+
+		return newlist;
+
+	}
+
+
+
+
+
 }
 

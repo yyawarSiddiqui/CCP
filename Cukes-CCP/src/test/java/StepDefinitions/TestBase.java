@@ -111,15 +111,9 @@ public void setup() throws Exception {
 	}
 
 	
-public void  Sleep(int i) {
+public void  Sleep(int i) throws InterruptedException {
 		
-		try {
-			Thread.sleep(i);
-			
-		} catch (InterruptedException e) {
-			
-			e.printStackTrace();
-		}
+		Thread.sleep(i);
 	}
 	
 	public static void result(String msg,Boolean data) {
@@ -168,13 +162,13 @@ public void  Sleep(int i) {
 	}
 	public static void jsClick(String Elem) {
 	
-		VisibilityofELement(Elem, 8);
+		VisibilityofELement(Elem, 15);
 		WebElement Ele =driver.findElement(By.xpath(Elem));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Ele);
-		
+	         	
 	}
 	
-	public static boolean click(String Ele) {
+	public  boolean click(String Ele) {
 		
 		VisibilityofELement(Ele, 8);
 		driver.findElement(By.xpath(Ele)).click();
@@ -189,6 +183,14 @@ public static WebElement Element(String Ele) {
 		return Element;
 		
 	}
+
+public static List<WebElement> Elements(String Ele) {
+	
+	VisibilityofELement(Ele, 7);
+	List<WebElement> Elements=driver.findElements(By.xpath(Ele));
+	return Elements;
+	
+}
 
 public static List<String> ListStringElements(String Ele) {
 	

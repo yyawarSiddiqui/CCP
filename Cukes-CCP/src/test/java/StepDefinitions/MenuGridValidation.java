@@ -26,12 +26,20 @@ public class MenuGridValidation {
 	 }
 	 
 	 @Then("User Validates Current KPI Values")
-	 public void user_validates_current_kpi_values() {
+	 public void user_validates_current_kpi_values() throws InterruptedException {
 	     
 		 menugrid =new MenuGrid(driver);
 		 TestBase.result("Validate KPI Values",menugrid. User_Verify_KPI_Values());
 		 
 		 
+	 }
+	 
+	 @Given("verify User Validates the Target Value")
+	 public void verify_user_validates_the_target_value() throws InterruptedException {
+	     
+		 menugrid =new MenuGrid(driver);
+		 TestBase.result("validates User verify the Target Values by DTT Values ",menugrid.User_validate_TargetValues());	
+			
 	 }
 }
 
