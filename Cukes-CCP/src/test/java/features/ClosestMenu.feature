@@ -5,14 +5,14 @@ Feature: Closest MenuPage and its Validation
   When USer login to the portal
 
 
-   @test
+   
    Scenario: Verifying the ClosestMenu Page
   Given User goes to Menu Section
   Then User Move to  DTT page 
   Then User Creates the menu and Moves to Closest Menu
   
   
-  @test
+ @test
    Scenario: Verifying the ClosestMenu Page
   Given User goes to Menu Section
   Then User Move to  DTT page 

@@ -49,12 +49,12 @@ public class DefineTheTarget extends TestBase {
 	private static final String Copy_Warning_Msg="//div[contains(text(),'Master Menu with the same name already exists.')]";
 	private static final String Loader_CreateMenu="//span[@class='pwm-spinner-message']//span[contains(text(),'Validating and Creating New Menu...')]";
 	private static final String Cost_Bucket="(//select[@class='form-control'])[5]";
-	private static final String Production_Type="//span[@class='Select-value-label']";
+	private static final String Production_Type="//div[@id='react-select-7--value']//span[@class='Select-value-label']";
 	private static final String Meal_Heading="//div[@class='row mb-2']//h4";
 	private static final String Unselected_Meals="//input[@class='styled-checkbox selectedId' and @value='false']/following-sibling::*";
+	private static final String Cost_PerMeal_Target="//input[@name='costPerMeal']";
 
-
-
+	
 	public boolean VerifyDTTScreenVisibility() {
 
 
@@ -342,18 +342,46 @@ public class DefineTheTarget extends TestBase {
 		String DTT_CalorieValue=Element(Calorie_Level).getAttribute("value");
 		String DTT_Targettype=GetSelectedDropDown(Taget_Type).getText();
 		String DTT_CostBucketValue=GetSelectedDropDown(Cost_Bucket).getText();
+		String DTT_Cost_PerMeal_Target =Element(Cost_PerMeal_Target).getAttribute("value");
+	 
+		if(DTT_Targettype.equalsIgnoreCase("Select")) {
+			
+			DTT_Targettype="NA";
+			
+		}
+		
+		String[] Cost_PerMeal =DTT_Cost_PerMeal_Target.split(" .");
+		String Trimmed_CostPer_Meal=Cost_PerMeal[0];
+		/*
+		 * System.out.println(Trimmed_CostPer_Meal);
+		 * System.out.println("=============");
+		 */
+		String dd=Trimmed_CostPer_Meal.substring(0);
+		
+		if(dd.equalsIgnoreCase("0.0000")) {
+			
+			dd="0.00";
+		}
+		
+		
+		if(DTT_CalorieValue.isEmpty()) {
+			
+			DTT_CalorieValue="0";
+		}
 		
 		List<String> Server_Type=ListStringElements(Production_Type);
 		
-		String text_with_nbsp =Element(Production_Type).getText();
+		/*
+		 * String text_with_nbsp =Element(Production_Type).getText();
+		 * 
+		 * String Server_Type_without_nbsp=text_with_nbsp.trim();
+		 */
 		
-		String text_without_nbsp=text_with_nbsp.replaceAll("&nbsp", "");
-		
-		System.out.println(text_without_nbsp);
+		//System.out.println(text_without_nbsp);
 		
 		for(String l1:Server_Type) {
 			
-			//newlist.add(l1);
+			newlist.add(l1.trim());
             
 		}
 
@@ -365,10 +393,10 @@ public class DefineTheTarget extends TestBase {
 		}
 
 		newlist.add(DTT_CostBucketValue);
-		//  newlist.add(DTT_CalorieValue);
-		// newlist.add(DTT_Targettype);        
+		  newlist.add(DTT_CalorieValue);
+		 newlist.add(DTT_Targettype);        
 		newlist.add(DTT_CycleWeeks);
-
+      //  newlist.add(dd);
 		Collections.sort(newlist);
 
 		for(String val:newlist) {

@@ -59,7 +59,7 @@ public class DTTVAlidation {
 		
 		traditionalMenu=new TraditionalMenu(driver);
 		
-		
+		TestBase.Logger = startTest("User goes to DTT Page", "Validate the different field validation");
 		TestBase.result("Click on Add", traditionalMenu.clickonAdd());	
 	}
 	
@@ -67,6 +67,8 @@ public class DTTVAlidation {
 	public void validates_the_screen_title()   {
 
 		definethetarget=new DefineTheTarget(driver);
+		
+		TestBase.Logger = startTest("User goes to create new Menu", "Validate the different field validation");
 		TestBase.result("Verify the DTTPage_Title" , definethetarget.VerifyDTTScreenVisibility());	
 		
 	}
@@ -75,6 +77,8 @@ public class DTTVAlidation {
 	public void validate_name_is_required_field() throws InterruptedException {
         
 		definethetarget=new DefineTheTarget(driver);
+		
+		TestBase.Logger = startTest("User validates Name field Functionality ", "Validate the different field validation");
 		TestBase.result("Should show message as Fields marked with * are required" , definethetarget.validate_Name_Field());
 		
 	}
@@ -83,18 +87,23 @@ public class DTTVAlidation {
 	public void validate_meal_period_is_required_field() throws InterruptedException {
 	    
 		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validates Meal field Functionality ", "Validate the different field validation");
 	TestBase.result("Should show message as Fields marked with * are required", definethetarget.Validate_Meal_Period());	
 		
 	}
+	
 	@And("Validate RDAtype is Required field")
 	public void validate_rd_atype_is_required_field() throws InterruptedException {
 	   
 		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validates RDA field Functionality ", "Validate the different field validation");
 		TestBase.result("Should show message as Fields marked with * are required", definethetarget.Validate_RDAType());
 	}
+	
 	@And("Validate Description is Non-MAndatory field")
 	public void validate_description_is_non_m_andatory_field() throws InterruptedException {
 		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validates Creation of Menu", "Validate the Menu creation functionality");
 	TestBase.result("Should show Message : Menu created Successfully", definethetarget.Validate_Description());	
 		
 	}
@@ -103,6 +112,7 @@ public class DTTVAlidation {
 	public void validate_name_field_should_accept_only_hundered_characters() throws InterruptedException {
 	   
 		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validates Length of Name field", "Validate the Name field validation");
 	TestBase.result("Name field should accept only 100 characters", definethetarget.Validate_NameFIeld_Limit());	
 	}
 	
@@ -110,6 +120,7 @@ public class DTTVAlidation {
 	public void validate_service_channel_should_be_corrections_and_auto_populated_always() {
 	   
 		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validates Service channel Functionality", "Validate the Service channel Functionality");
 		TestBase.result("Service channel should be Corrections and auto populated ", definethetarget.Service_Channel_Validation());
 		
 	}
@@ -118,6 +129,7 @@ public class DTTVAlidation {
 	public void validate_calorie_level_functionality() {
 	   
 		definethetarget=new DefineTheTarget(driver);
+		
 		definethetarget.Verify_Calorie_Level();
 		
 	}
@@ -126,6 +138,7 @@ public class DTTVAlidation {
 	public void verify_the_functionality_of_the_status_dropdown() {
 	    
 		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validates Status DropDown Functionality", "Validate the Status DropDown Functionality");
 		TestBase.result("Validate the functionality of the Status dropdown" , definethetarget.User_validate_Status_on_DTT());
 		
 	}
@@ -134,6 +147,7 @@ public class DTTVAlidation {
 	public void verify_the_functionality_of_the_number_of_cycle_weeks_dropdown() {
 		
 		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validatesNumber of Cycle Weeks dropdown Functionality", "Validate the Number of Cycle Weeks dropdown Functionality");
 		TestBase.result("Validate the functionality Number of Cycle Weeks dropdown" , definethetarget.User_Validate_the_functionality_of_the_Number_of_Cycle_Weeks_dropdown());
 		
 	}

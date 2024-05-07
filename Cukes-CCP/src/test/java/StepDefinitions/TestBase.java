@@ -292,6 +292,7 @@ public List<String> GetDropDownOptions(String Elem )  {
 	
 public void Sendval(String Elem, String Values) throws InterruptedException {
 		
+	    VisibilityofELement(Elem, 10);
 		driver.findElement(By.xpath(Elem)).sendKeys(Values);;
 		
 		
@@ -310,6 +311,28 @@ public void Sendval(String Elem, String Values) throws InterruptedException {
 
 		}
 	}	
+	
+	
+
+	    public static boolean compareLists(List<String> list1, List<String> list2) {
+	        // Check if lists have the same size
+	        if (list1.size() == list2.size()) {
+	            // Iterate through elements and compare them
+	            for (int i = 0; i < list1.size(); i++) {
+	                if (!list1.get(i).equals(list2.get(i))) {
+	                    // If elements are not equal, return false
+	                    return false;
+	                }
+	            }
+	            // If all elements are equal, return true
+	            return true;
+	        } else {
+	            // If sizes are different, return false
+	            return false;
+	        }
+	    }
+
+
 
 	
 }

@@ -113,22 +113,23 @@ public class MenuGrid extends TestBase {
 		}
 		
 		String Cost_Per_Meal_Target_Grid_Raw= Target_values.get(3);
-		//System.out.println(Cost_Per_Meal_Target_Grid);
-		String[] Cost_Per_Meal =Cost_Per_Meal_Target_Grid_Raw.split(".00");
-		String Cost_Per_Meal_Target_Grid=Cost_Per_Meal[0];
-	     String Cost_Per_Meal_Target_Grid_Actual =Cost_Per_Meal_Target_Grid.substring(1);
-	     
+		
+		  String[] Cost_Per_Meal =Cost_Per_Meal_Target_Grid_Raw.split(" ."); String
+		  Cost_Per_Meal_Target_Grid=Cost_Per_Meal[0]; String
+		  Cost_Per_Meal_Target_Grid_Actual =Cost_Per_Meal_Target_Grid.substring(1);
+		 
 	     
 		String Cost_Bucket_Grid= Target_values.get(4);
 		
-		String Service_Type_Grid= Target_values.get(5);
+		String Service_Type_Grid=Target_values.get(5).trim();
+
 		
 		Final.add(CycleWeeks_Grid);
-	//	Final.add(Calories_Grid1);
-	//	Final.add(Calorie_Targettype_Grid);
-	  //Final.add(Cost_Per_Meal_Target_Grid_Actual);
+		Final.add(Calories_Grid1);
+		Final.add(Calorie_Targettype_Grid);
+	 //   Final.add(Cost_Per_Meal_Target_Grid_Actual);
 		Final.add(Cost_Bucket_Grid);
-		//Final.add(Service_Type_Grid);
+		Final.add(Service_Type_Grid);
 		
 		Collections.sort(Final);
 		

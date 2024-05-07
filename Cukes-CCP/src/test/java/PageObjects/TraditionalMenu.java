@@ -49,6 +49,8 @@ public class TraditionalMenu extends TestBase{
 	private static final String Selected_Meal="//div[@class=\"meal-period-btn-container pl-3 pt-3 pb-3\"]//div[@class='row mb-2']//div[@class='pl-3']//h4";
 	private static final String Edit_Meal="(//*[name()='svg'])[1]";
 	private static final String Update_DateFilter="//button[@type='button' and text()='Update Date']";
+	
+	
 
 	
 	
@@ -61,7 +63,29 @@ public class TraditionalMenu extends TestBase{
 
 	}
 	
+public  boolean clickonSearch() {
 
+		
+		VisibilityofELement(Serach, 8);
+		jsClick(Serach);
+		return true;
+
+	}
+
+public  WebElement GetFirst_Menu_Name(int i) {
+
+	
+	
+	 String Get_MenuName_SearchPage="//table//tbody//tr["+i+"]//td//p";
+     
+	 WebElement val=Element(Get_MenuName_SearchPage);
+	 
+	 return val;
+
+}
+
+
+	
 	public  boolean clickCopyIcon(int i) {
 
 		driver.findElement(By.xpath("(//i[@class='pwm-icon fas fa-copy table-icon-copy menu-search-icon link'])["+i+"]")).click();
