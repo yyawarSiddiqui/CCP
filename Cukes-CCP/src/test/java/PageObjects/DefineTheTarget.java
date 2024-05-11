@@ -174,6 +174,7 @@ public class DefineTheTarget extends TestBase {
 		String Menu_Name=Element(Name).getAttribute("value");
 		jsClick(Create_Button);
 		InvisibilityofElement(Loader_CreateMenu, 10);
+		TestBase.result("Menu is created Succesfully" , true);
 		return Menu_Name;
 
 

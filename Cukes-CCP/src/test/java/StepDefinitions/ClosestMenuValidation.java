@@ -39,5 +39,32 @@ public class ClosestMenuValidation {
 	 }
 	 
 	 
+	 @Then("User Verify Filters are reset to there default filters")
+	 public void user_verify_filters_are_reset_to_there_default_filters() {
+	    
+			
+		 TestBase.Logger = startTest(" Check after clicking on 'Reset' button all the filters should get cleared and enabled ", "Validate the Reset Filter");
+		 closestMenuObj =new ClosestMenuObj(driver);
+			 TestBase.result("Check Functionality of Resest Filters" , closestMenuObj.Verify_Filters_are_reset_to_there_default_filters());
+	 }
+	 
+	 @Then("User Verify  Search button functionality")
+	 public void user_verify_search_button_functionality() {
+	  
+		 TestBase.Logger = startTest(" Check Functionality of Search Buttons  ", "Validate the Search button functionality");
+		 closestMenuObj =new ClosestMenuObj(driver);
+			 TestBase.result("Check Functionality of Search Filter" , closestMenuObj.Verify_Search_Filter_Result());
+	 }
+	 
+	 @Then("User Verify CLosestMenu CopyFunctionality")
+	 public void user_verify_c_losest_menu_copy_functionality() {
+	    
+		 TestBase.Logger = startTest(" Check ClosestMenu Copy Function ", "Validate the Copy Menu functionality");
+		 closestMenuObj =new ClosestMenuObj(driver);
+			 TestBase.result("Check User is able to Copy Closest Menu" , closestMenuObj.Verify_CLosestMenu_CopyFunctionality());
+	 }
+
+	 
+	 
 
 }

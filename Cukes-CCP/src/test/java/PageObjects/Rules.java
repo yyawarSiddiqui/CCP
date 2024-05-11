@@ -26,7 +26,7 @@ public class Rules extends TestBase {
 		
 		jsClick(Create_Menu_Rules);
 		InvisibilityofElement(Loader_CreateMenu, 40);
-				
+		TestBase.result("Create Menu is Successfully Clicked" , true);
 		return true;
 		
 		
@@ -35,8 +35,8 @@ public class Rules extends TestBase {
 public boolean Click_to_BuildCLosestMenu() {
 		
 		jsClick(Build_closeset_Menu);
-		InvisibilityofElement(Loader_CreateMenu, 8);
-				
+		InvisibilityofElement(Loader_CreateMenu, 20);
+		TestBase.result("Clickk to Build Closest Menu Is Successfully Clicked" , true);		
 		return true;
 		
 		

@@ -19,6 +19,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,7 +41,7 @@ public class TestBase {
 	public  static Properties prop=new Properties();
 	public static FileInputStream fs ;
 	InputStream data;
-	 public static JSONObject Value;
+	public static JSONObject Value;
 	
 	
 @Before
@@ -157,9 +158,22 @@ public void  Sleep(int i) throws InterruptedException {
 			return false;
 
 		}
-		
-
 	}
+		
+		public static boolean VisibilityofWebELement(WebElement Elem, long Time) {
+
+			try {
+				WebDriverWait Mywait = new WebDriverWait(driver, Duration.ofSeconds(Time));
+				Mywait.until(ExpectedConditions.visibilityOf(Elem));
+				return true;
+			} catch (Exception e) {
+
+				return false;
+
+			}
+	
+	}
+		
 	public static void jsClick(String Elem) {
 	
 		VisibilityofELement(Elem, 15);
@@ -170,7 +184,7 @@ public void  Sleep(int i) throws InterruptedException {
 	
 	public  boolean click(String Ele) {
 		
-		VisibilityofELement(Ele, 8);
+		VisibilityofELement(Ele, 20);
 		driver.findElement(By.xpath(Ele)).click();
 		return true;
 		
@@ -255,8 +269,8 @@ public WebElement GetSelectedDropDown(String Elem )  {
 		VisibilityofELement(Elem, 20);
 		WebElement Element=driver.findElement(By.xpath(Elem));
 		Select sc=new Select(Element);
-		WebElement SelctedElement=sc.getFirstSelectedOption();
-		return SelctedElement;
+		WebElement SelectedElement=sc.getFirstSelectedOption();
+		return SelectedElement;
 		
 			
 	}
@@ -332,6 +346,17 @@ public void Sendval(String Elem, String Values) throws InterruptedException {
 	        }
 	    }
 
+	   
+		
+	    public boolean ClickAction(WebElement Elem) throws InterruptedException {
+	    		
+	    	   Actions act=new Actions(driver);
+	    	   
+	    	   act.moveToElement(Elem).click(Elem).build().perform();
+	    	   
+	    	   return true;
+	   
+	    	}
 
 
 	

@@ -12,10 +12,30 @@ Feature: Closest MenuPage and its Validation
   Then User Creates the menu and Moves to Closest Menu
   
   
- @test
+ 
    Scenario: Verifying the ClosestMenu Page
   Given User goes to Menu Section
   Then User Move to  DTT page 
   Then  User Creates the menu and Check list of filters on Closest Menu screen
   
+  
+   Scenario: Verifying the ClosestMenu Page
+  Given User goes to Menu Section
+  Then User Move to  DTT page 
+  Then  User Verify Filters are reset to there default filters
+  
+  
+  
+  
+   Scenario: Verifying the ClosestMenu Page
+  Given User goes to Menu Section
+  Then User Move to  DTT page 
+  Then  User Verify  Search button functionality
+  
+  
+  @test
+   Scenario: Verifying the ClosestMenu Page
+  Given User goes to Menu Section
+  Then User Move to  DTT page 
+  Then  User Verify CLosestMenu CopyFunctionality
   
