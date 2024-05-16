@@ -33,9 +33,22 @@ Feature: Closest MenuPage and its Validation
   Then  User Verify  Search button functionality
   
   
-  @test
+  
    Scenario: Verifying the ClosestMenu Page
   Given User goes to Menu Section
   Then User Move to  DTT page 
   Then  User Verify CLosestMenu CopyFunctionality
   
+  
+ 
+   Scenario: Verifying the ClosestMenu Page
+  Given User goes to Menu Section
+  Then User Move to  DTT page 
+  Then  User Verify after creating new menu from the Closest menu screen , after editing targets and Menu name it is getting updated 
+  
+  
+  
+  Scenario: Verifying the ClosestMenu Page
+  Given User goes to Menu Section
+  Then User Move to  DTT page 
+  Then  User Verify the closest Menu pagination Functionality

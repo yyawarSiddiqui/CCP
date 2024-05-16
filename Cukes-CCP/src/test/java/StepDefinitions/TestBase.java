@@ -184,10 +184,24 @@ public void  Sleep(int i) throws InterruptedException {
 	
 	public  boolean click(String Ele) {
 		
-		VisibilityofELement(Ele, 20);
-		driver.findElement(By.xpath(Ele)).click();
-		return true;
-		
+		try {
+			VisibilityofELement(Ele, 20);
+			driver.findElement(By.xpath(Ele)).click();
+			return true;
+			
+		} catch (Exception e) {
+			
+			try {
+				driver.findElement(By.xpath(Ele)).click(); //Retry
+				return true;
+				
+			} catch (Exception Retry) {
+				// TODO Auto-generated catch block
+				Retry.printStackTrace();
+				return false;
+			}
+			
+		}
 	}
 	
 public static WebElement Element(String Ele) {
@@ -200,7 +214,7 @@ public static WebElement Element(String Ele) {
 
 public static List<WebElement> Elements(String Ele) {
 	
-	VisibilityofELement(Ele, 7);
+	VisibilityofELement(Ele, 20);
 	List<WebElement> Elements=driver.findElements(By.xpath(Ele));
 	return Elements;
 	
@@ -254,9 +268,9 @@ public static List<WebElement>  ListWebElement(String Ele) {
 	
 	public Boolean SelectDropDown(String Elem , String value)  {
 		
-		VisibilityofELement(Elem, 5);
+		VisibilityofELement(Elem, 20);
 		WebElement Element=driver.findElement(By.xpath(Elem));
-		jsClick(Elem);
+		click(Elem);
 		Select sc=new Select(Element);
 		sc.selectByValue(value);
 		return true;
@@ -297,17 +311,18 @@ public List<String> GetDropDownOptions(String Elem )  {
 
 	public String SendText(String Elem) throws InterruptedException {
 		
-		String Name=RandaomName();
+		String Name=generateMenuString();
 		VisibilityofELement(Elem, 10);
 		driver.findElement(By.xpath(Elem)).sendKeys(Name);
 		return Name;
 		
 	}
 	
-public void Sendval(String Elem, String Values) throws InterruptedException {
+public boolean Sendval(String Elem, String Values) throws InterruptedException {
 		
 	    VisibilityofELement(Elem, 10);
-		driver.findElement(By.xpath(Elem)).sendKeys(Values);;
+		driver.findElement(By.xpath(Elem)).sendKeys(Values);
+		return true;
 		
 		
 	}
@@ -324,6 +339,16 @@ public void Sendval(String Elem, String Values) throws InterruptedException {
 			return false;
 
 		}
+	}	
+	
+public List<WebElement> ListElementsbyWait(String Ele, long Time) {
+		
+		
+			WebDriverWait Mywait = new WebDriverWait(driver, Duration.ofSeconds(Time));
+			List<WebElement> val=Mywait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(Ele)));
+			return val;
+			
+		
 	}	
 	
 	

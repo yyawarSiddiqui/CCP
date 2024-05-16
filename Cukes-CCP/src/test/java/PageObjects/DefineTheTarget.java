@@ -53,8 +53,15 @@ public class DefineTheTarget extends TestBase {
 	private static final String Meal_Heading="//div[@class='row mb-2']//h4";
 	private static final String Unselected_Meals="//input[@class='styled-checkbox selectedId' and @value='false']/following-sibling::*";
 	private static final String Cost_PerMeal_Target="//input[@name='costPerMeal']";
-
+	private static final String SeleCt_PopulationType="//label[text()='Production Type:']/following::*//span[@class='Select-arrow-zone']";
+	private static final String Select_FirstOption="//div[@class='Select-menu']//div[@class='Select-option is-focused']";
+	private static final String Save="//button[@type='button' and text()='Save']";
+	private static final String EditItems="//button[@type='button' and text()='Edit Items']";
+	private static final String LoaderEditItems="//span[@class='pwm-spinner-message']//span[contains(text(),'Validating and Editing Menu Changes...')]";
+	private static final String LoaderMenuItems="//span[@class='pwm-spinner-message']//span[contains(text(),'Loading Menu Items...')]";
 	
+	
+
 	public boolean VerifyDTTScreenVisibility() {
 
 
@@ -179,20 +186,20 @@ public class DefineTheTarget extends TestBase {
 
 
 	}
-	
+
 	public String Create_Menu_For_Closest() throws InterruptedException {
 
 
 		VisibilityofELement(Meal_Period, 20);
 		jsClick(Meal_Period);
-		
-		
+
+
 		for(WebElement Element_meal:ListWebElement(Unselected_Meals)) {
-			
+
 			Element_meal.click();
 		}
-		
-		
+
+
 		jsClick(Close_Meal_Period);
 		SendText(Name);
 		VisibilityofELement(SelectRDAType,20);
@@ -204,8 +211,8 @@ public class DefineTheTarget extends TestBase {
 
 
 	}
-	
-	
+
+
 
 	public String getDescriptionText() {
 
@@ -344,46 +351,40 @@ public class DefineTheTarget extends TestBase {
 		String DTT_Targettype=GetSelectedDropDown(Taget_Type).getText();
 		String DTT_CostBucketValue=GetSelectedDropDown(Cost_Bucket).getText();
 		String DTT_Cost_PerMeal_Target =Element(Cost_PerMeal_Target).getAttribute("value");
-	 
+
+
+
 		if(DTT_Targettype.equalsIgnoreCase("Select")) {
-			
+
 			DTT_Targettype="NA";
-			
+
 		}
-		
-		String[] Cost_PerMeal =DTT_Cost_PerMeal_Target.split(" .");
+
+		String[] Cost_PerMeal =DTT_Cost_PerMeal_Target.split("\\.");
 		String Trimmed_CostPer_Meal=Cost_PerMeal[0];
-		/*
-		 * System.out.println(Trimmed_CostPer_Meal);
-		 * System.out.println("=============");
-		 */
-		String dd=Trimmed_CostPer_Meal.substring(0);
-		
-		if(dd.equalsIgnoreCase("0.0000")) {
-			
-			dd="0.00";
-		}
-		
-		
+
+
+
+
 		if(DTT_CalorieValue.isEmpty()) {
-			
+
 			DTT_CalorieValue="0";
 		}
-		
+
 		List<String> Server_Type=ListStringElements(Production_Type);
-		
+
 		/*
 		 * String text_with_nbsp =Element(Production_Type).getText();
 		 * 
 		 * String Server_Type_without_nbsp=text_with_nbsp.trim();
 		 */
-		
+
 		//System.out.println(text_without_nbsp);
-		
+
 		for(String l1:Server_Type) {
-			
+
 			newlist.add(l1.trim());
-            
+
 		}
 
 		List<String>Meal_Type=ListStringElements(Meal_Heading);
@@ -394,31 +395,133 @@ public class DefineTheTarget extends TestBase {
 		}
 
 		newlist.add(DTT_CostBucketValue);
-		  newlist.add(DTT_CalorieValue);
-		 newlist.add(DTT_Targettype);        
+		newlist.add(DTT_CalorieValue);
+		newlist.add(DTT_Targettype);        
 		newlist.add(DTT_CycleWeeks);
-      //  newlist.add(dd);
+		newlist.add(Trimmed_CostPer_Meal);
 		Collections.sort(newlist);
 
-		for(String val:newlist) {
-
-			System.out.println(val);
-		}
-
-
-
-		//     System.out.println(DTT_CycleWeeks +" "+DTT_CalorieValue+" "+DTT_Targettype+" "+DTT_CostBucketValue+" "+ServiceType+" "+MealsType);
-
+		/*
+		 * for(String val:newlist) {
+		 * 
+		 * System.out.println(val); }
+		 */
 		click(Create_Button);
 		InvisibilityofElement(Loader_CreateMenu, 40);
-
-
 
 
 		return newlist;
 
 	}
 
+	
+	
+	public List<String> User_Update_ClosestMenu_EditValues() {
+		
+		
+		List<String> newlist=new ArrayList<String>();
+		InvisibilityofElement(Loader, 20);
+		Element(Name).clear();
+		
+		try {
+			
+			SendText(Name);
+			SelectDropDown(Select_Cycle_Weeks, "5");
+			Element(Calorie_Level).clear();
+			Sendval(Calorie_Level, "334");
+			SelectDropDown(Taget_Type, "108");
+			SelectDropDown(Cost_Bucket, "31");
+			SelectDropDown(SelectRDAType, "M92");
+			Sendval(Cost_PerMeal_Target, "33.8");
+			click(SeleCt_PopulationType);
+			jsClick(Select_FirstOption);
+			
+		
+			
+			
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		String DTT_CycleWeeks=GetSelectedDropDown(Select_Cycle_Weeks).getText();
+		String DTT_CalorieValue=Element(Calorie_Level).getAttribute("value");
+		String DTT_Targettype=GetSelectedDropDown(Taget_Type).getText();
+		String DTT_CostBucketValue=GetSelectedDropDown(Cost_Bucket).getText();
+		String DTT_Cost_PerMeal_Target =Element(Cost_PerMeal_Target).getAttribute("value");
+        String DTT_MenuName=Element(Name).getAttribute("value");
+
+
+		if(DTT_Targettype.equalsIgnoreCase("Select")) {
+
+			DTT_Targettype="NA";
+
+		}
+
+		String[] Cost_PerMeal =DTT_Cost_PerMeal_Target.split("\\.");
+		String Trimmed_CostPer_Meal=Cost_PerMeal[0];
+
+
+
+
+		if(DTT_CalorieValue.isEmpty()) {
+
+			DTT_CalorieValue="0";
+		}
+
+		List<String> Server_Type=ListStringElements(Production_Type);
+
+		/*
+		 * String text_with_nbsp =Element(Production_Type).getText();
+		 * 
+		 * String Server_Type_without_nbsp=text_with_nbsp.trim();
+		 */
+
+		//System.out.println(text_without_nbsp);
+
+		for(String l1:Server_Type) {
+
+			newlist.add(l1.trim());
+
+		}
+
+		List<String>Meal_Type=ListStringElements(Meal_Heading);
+
+		for(String l2:Meal_Type) {
+			newlist.add(l2);
+
+		}
+
+		newlist.add(DTT_CostBucketValue);
+		newlist.add(DTT_CalorieValue);
+		newlist.add(DTT_Targettype);        
+		newlist.add(DTT_CycleWeeks);
+		newlist.add(Trimmed_CostPer_Meal);
+		newlist.add(DTT_MenuName);
+		
+		
+		Collections.sort(newlist);
+
+		/*
+		 * for(String val:newlist) {
+		 * 
+		 * System.out.println(val); }
+		 */
+		click(Save);
+		InvisibilityofElement(LoaderEditItems, 50);
+		InvisibilityofElement(Loader, 40);
+		click(EditItems);
+		InvisibilityofElement(LoaderMenuItems, 40);
+
+		return newlist;		
+		
+		
+		
+		
+	}
 
 
 

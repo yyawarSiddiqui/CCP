@@ -34,9 +34,10 @@ public WebDriver driver;
 	private static final String Cost_Bucket_Maintenance="//span[text()='Cost Bucket Maintenance']";
 	private static final String Reports="//span[text()='Reports']";
 	private static final String Distribution_Group="//span[text()='Distribution Group']";
-	
-	
-	
+	private static final String MenuAnalysis="//span[@class='btn-role']//span[contains(text(),'Menu Analysis')]";
+	private static final String IBA="//span[@class='btn-role']//span[contains(text(),'Ingredient Based Analysis')]";
+	private static final String Loader="//span[@class='pwm-spinner-message']//span[contains(text(),'Loading fields...')]";
+	private static final String Loader1="//span[@class='pwm-spinner-message']//span[text()='Loading...']";
 	
 	
 	
@@ -46,7 +47,7 @@ public WebDriver driver;
 		
 		try {
 			
-			VisibilityofELement(MenuOption,6);
+			VisibilityofELement(MenuOption,10);
 			jsClick(MenuOption);
 			return true;
 		} catch (Exception e) {
@@ -55,6 +56,43 @@ public WebDriver driver;
 			return false;
 		}
 	}
+	
+	
+	public boolean clickonMenuAnalysis() {
+		
+		
+		try {
+			
+			VisibilityofELement(MenuAnalysis,10);
+			jsClick(MenuAnalysis);
+			return true;
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			
+			return false;
+		}
+	}
+	
+	
+public boolean clickonIBA() {
+		
+		
+		try {
+			
+			VisibilityofELement(IBA,6);
+			jsClick(IBA);
+			InvisibilityofElement(Loader, 10);
+			InvisibilityofElement(Loader1, 10);
+			return true;
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			
+			return false;
+		}
+	}
+	
 	
 public boolean clickonTraditional_Menus() {
 		

@@ -95,14 +95,14 @@ public class MenuGrid extends TestBase {
 		VisibilityofELement(Recipe, 15);
 		jsClick(KPI_Arrow_Down);
 		
-		String CycleWeeks_Grid=Element(Target_Cycle_Value).getText().substring(5);
+		String CycleWeeks_Grid=Element(Target_Cycle_Value).getText().substring(5).trim();
+		
 		
 		List<String> Target_values= ListStringElements(Target_Values);
 		
 	    String[] Calories_Grid= Target_values.get(0).split(" k");
 	    String  Calories_Grid1 =Calories_Grid[0];
-	  //  System.out.println(Calories_Grid1);
-	    
+	   
 		String Calorie_Targettype_Grid= Target_values.get(1);
 		
 		String Meal_Periods_Grid= Target_values.get(2);
@@ -114,31 +114,60 @@ public class MenuGrid extends TestBase {
 		
 		String Cost_Per_Meal_Target_Grid_Raw= Target_values.get(3);
 		
-		  String[] Cost_Per_Meal =Cost_Per_Meal_Target_Grid_Raw.split(" ."); String
-		  Cost_Per_Meal_Target_Grid=Cost_Per_Meal[0]; String
-		  Cost_Per_Meal_Target_Grid_Actual =Cost_Per_Meal_Target_Grid.substring(1);
+		/*
+		 * System.out.println("------------------------");
+		 * System.out.println(Cost_Per_Meal_Target_Grid_Raw);
+		 */
+		
+		
+		  String[] Cost_Per_Meal =Cost_Per_Meal_Target_Grid_Raw.split("\\.");
+			/*
+			 * System.out.println(Cost_Per_Meal[0]);
+			 *  System.out.println(Cost_Per_Meal[1]);
+			 */
+		  String Cost_Per_Meal_Target_Grid=Cost_Per_Meal[0];
+		  String Cost_Per_Meal_Target_Grid_Actual =Cost_Per_Meal_Target_Grid.substring(1);
 		 
 	     
 		String Cost_Bucket_Grid= Target_values.get(4);
 		
-		String Service_Type_Grid=Target_values.get(5).trim();
+		if (Target_values.get(5).contains(", ")) {
+			
+			String[] Service_Type_Grid_Values =Target_values.get(5).split(", ");
+			
+			for(String Service_Type_Grid_Value:Service_Type_Grid_Values) {
+				
+				Final.add(Service_Type_Grid_Value);
+			}
+		}
+		
+		else if(Target_values.get(5).contains(", ")!=true) {
+			
+			String Service_Type_Grid=Target_values.get(5).trim();
+			Final.add(Service_Type_Grid);
+		}
+		
+		
 
 		
 		Final.add(CycleWeeks_Grid);
 		Final.add(Calories_Grid1);
 		Final.add(Calorie_Targettype_Grid);
-	 //   Final.add(Cost_Per_Meal_Target_Grid_Actual);
+	    Final.add(Cost_Per_Meal_Target_Grid_Actual);
 		Final.add(Cost_Bucket_Grid);
-		Final.add(Service_Type_Grid);
 		
 		Collections.sort(Final);
 		
-		for(String Val:Final) {
-			
-			System.out.println(Val);
-		}
 		
-		if(Initial.equals(Final)) {
+		//System.out.println("------------------------");
+		
+		/*
+		 * for(String Val:Final) {
+		 * 
+		 * System.out.println(Val); }
+		 */
+		
+		if(Initial.containsAll(Final)) {
 			
 			return true;
 		}

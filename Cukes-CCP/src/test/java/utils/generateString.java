@@ -1,22 +1,17 @@
 package utils;
-import com.github.javafaker.Faker;
+import java.util.Random;
 
 public class generateString {
 
-	public static void main(String[] args) {
-	System.out.println(RandaomName());
-	
-	}
-	
-	
-	public static String RandaomName()
-	{
-		
-		Faker faker = new Faker();
-        String fullName = faker.regexify("^[A-Za-z][A-Z]{7,29}$");
-        return fullName;
-		
-	}     
-		
+    public static void main(String[] args) {
+        System.out.println(generateMenuString());
+    }
+
+    public static String generateMenuString() {
+        String menuName = "MenuCreation";
+        Random random = new Random();
+        int randomNumber = random.nextInt(9000) + 1000; // Generates a random 2-digit number
+        return menuName + randomNumber;
+    }
 
 }

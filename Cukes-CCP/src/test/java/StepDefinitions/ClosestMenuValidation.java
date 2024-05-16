@@ -64,7 +64,22 @@ public class ClosestMenuValidation {
 			 TestBase.result("Check User is able to Copy Closest Menu" , closestMenuObj.Verify_CLosestMenu_CopyFunctionality());
 	 }
 
+	 @Then("User Verify after creating new menu from the Closest menu screen , after editing targets and Menu name it is getting updated")
+	 public void user_verify_after_creating_new_menu_from_the_closest_menu_screen_after_editing_targets_and_menu_name_it_is_getting_updated() {
+	    
+		 TestBase.Logger = startTest(" Check ClosestMenu Edit Target Functionality ", "Validate the Closest Menu's Edit Target functionality");
+		 closestMenuObj =new ClosestMenuObj(driver);
+		TestBase.result("Check User Create new menu from the Closest menu screen and  editing targets and Menu name  is getting updated" , closestMenuObj.Editing_targets_and_Menu_name_it_is_getting_updated());
+		 
+	 }
 	 
-	 
+	
+	 @Then("User Verify the closest Menu pagination Functionality")
+	 public void user_verify_the_closest_menu_pagination_functionality() {
+		 TestBase.Logger = startTest(" Check ClosestMenu Pagination Functionality ", "Validate the Closest Menu's Pagiantion Test Case");
+		 closestMenuObj =new ClosestMenuObj(driver);
+		 TestBase.result("Check User  is able to Navigate to different pages and Verify Other Pagination Features" , closestMenuObj.Verify_Pagination_closestMenu());
+		 
+	 }
 
 }

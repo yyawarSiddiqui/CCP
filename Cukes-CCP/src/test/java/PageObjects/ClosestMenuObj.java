@@ -2,8 +2,10 @@ package PageObjects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -42,9 +44,14 @@ public class ClosestMenuObj extends TestBase {
 	private static final String Closest_Confirm_PopUp_No="//button[@type='button' ]//a[text()='No']";
 	private static final String LoaderCreateMenu="//span[@class='pwm-spinner-message']//span[text()='Creating closest menu...']";
 	private static final String MenuGrid_FirstValue="(//div[@class='selected-div']/following-sibling::*)[1]";
-	
+	private static final String Edit_Targets="//button[@type='button' and text()='Edit Targets']";
+	private static final String KPI_Arrow_Down= "//div[@class='top-side-arrow']//i[@class='side-btn fa fa-angle-double-down radius-c']";
+	private static final String MenuNameClosest="(//span[text()='Menu Name:']/following::*)[1]";
+	private static final String Target_Values="//div[@class='details dash']//p//span";
+	private static final String Target_Cycle_Value="(//div//p)[3]";
+	private static final String PageSize_and_Click="//div[@class='pwm-custom-dropdown pagination-size inline pwm-custom-dropdown-default']/*//span";
+	private static final String Number_Of_Rows="//table//tbody//tr";
 
-	
 
 	public WebElement GetClosestMenuFilter(int i) {
 
@@ -134,9 +141,9 @@ public class ClosestMenuObj extends TestBase {
 		List<String> MorningSnackWeek_Actual=new ArrayList<String>(Arrays.asList("0","1","2","3","4","5","6","7"));
 		List<String> AfterNoonSnackWeek_Actual=new ArrayList<String>(Arrays.asList("0","1","2","3","4","5","6","7"));
 		List<String> EveningSnackWeek_Actual=new ArrayList<String>(Arrays.asList("0","1","2","3","4","5","6","7"));
-		
-		
-		
+
+
+
 		defineTheTarget=new DefineTheTarget(driver); 
 		rules=new Rules(driver);
 		traditionalMenu=new TraditionalMenu(driver);
@@ -212,7 +219,7 @@ public class ClosestMenuObj extends TestBase {
 			String MorningSnack_Week=GetValuesFilter(19);//MorningSnack_Week
 			String AfterNoonSnack_Week=GetValuesFilter(20);//Afternoon-Snack
 			String EveningSnack_Week=GetValuesFilter(21);//Eve-Snack
-			
+
 			List<String> NumberofCycleWeeksDropDown = GetDropDownOptions(NumberofCycleWeeks);  
 
 			Boolean Vale= compareLists(NumberofCycleWeeksDropDown, NumberofCycleWeeksDropDownActual);
@@ -294,7 +301,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> Dinner_Values=GetDropDownOptions(Dinner);
 			Boolean Vale8=compareLists(Dinner_Values, Dinner_Actual);
 
@@ -305,7 +312,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> Brunch_Values=GetDropDownOptions(Brunch);
 			Boolean Vale9=compareLists(Brunch_Values, Brunch_Actual);
 
@@ -316,7 +323,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> Menu_Anamolies_Values=GetDropDownOptions(Menu_Anamolies);
 			Boolean Vale10=compareLists(Menu_Anamolies_Values, MenuAnamolies_Actual);
 
@@ -324,25 +331,25 @@ public class ClosestMenuObj extends TestBase {
 
 				TestBase.result(" Menu_Anamolies_Values is verified", true); 
 			}
-			
+
 			else {
 				return false;
 			} 
-			
+
 			List<String> BreakFastWeek_Values=GetDropDownOptions(BreakFast_Week);
-			
-			
+
+
 			Boolean Vale11=compareLists(BreakFastWeek_Values, BreakFast_Week_Actual);
 
 			if(Vale11==true) {
 
 				TestBase.result("BreakFastWeek_Values is verified", true); 
 			}
-			
+
 			else {
 				return false;
 			} 
-			
+
 			List<String> BrunchWeek_Values=GetDropDownOptions(Brunch_Week);
 			Boolean Vale12=compareLists(BrunchWeek_Values, Brunch_Week_Actual);
 
@@ -353,7 +360,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> LunchWeek_Values=GetDropDownOptions(Lunch_Week);
 			Boolean Vale13=compareLists(LunchWeek_Values, Lunch_Week_Actual);
 
@@ -364,7 +371,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> DinnerWeek_Values=GetDropDownOptions(Dinner_Week);
 			Boolean Vale14=compareLists(DinnerWeek_Values, Dinner_Week_Actual);
 
@@ -375,7 +382,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> MorningSnackWeek_Values=GetDropDownOptions(MorningSnack_Week);
 			Boolean Vale15=compareLists(MorningSnackWeek_Values, MorningSnackWeek_Actual);
 
@@ -386,7 +393,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> AfternoonSnackWeek_Values=GetDropDownOptions(AfterNoonSnack_Week);
 			Boolean Vale16=compareLists(AfternoonSnackWeek_Values, AfterNoonSnackWeek_Actual);
 
@@ -397,7 +404,7 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			List<String> EveningSnackWeek_Values=GetDropDownOptions(EveningSnack_Week);
 			Boolean Vale17=compareLists(EveningSnackWeek_Values, EveningSnackWeek_Actual);
 
@@ -408,39 +415,39 @@ public class ClosestMenuObj extends TestBase {
 			else {
 				return false;
 			} 
-			
+
 			WebElement BaselineCost=GetClosestMenuFilter(13);
 			Boolean isBaselineCostdisplayed=BaselineCost.isDisplayed();
 			Sendval(Baseline_Cost_Max, prop.getProperty("BaselineMaxValue"));
 			jsClick(Search_Closeset);
 			Boolean isWarningVisible=Element(Warning_Banner).isDisplayed();
-			
+
 			if(isBaselineCostdisplayed==true && isWarningVisible==true) {
-				
+
 				TestBase.result("BaselineCost Filter and Range is verified", true); 
-				
+
 			}
-			
-			
+
+
 			else {
 				return false;
 			} 
-			
+
 			Boolean IsRemoveClickable=click(Remove_Filter);
-			
+
 			Boolean	IsAddClickable=click(Add_Filter);
-		    
+
 			if(IsRemoveClickable==true && IsAddClickable==true) {
-			
+
 				TestBase.result("Add & Remove Filter is verified", true);
 			}
-			
+
 			else {
 				return false;
 			} 
-			
+
 		} 
-		
+
 
 		catch (Exception e) {
 
@@ -452,7 +459,7 @@ public class ClosestMenuObj extends TestBase {
 		return true;
 
 	}
-	
+
 
 	public boolean Verify_Filters_are_reset_to_there_default_filters() {
 
@@ -462,31 +469,31 @@ public class ClosestMenuObj extends TestBase {
 			defineTheTarget.Create_Menu();
 			rules.Click_On_CreateMenu();
 			rules.Click_to_BuildCLosestMenu();
-		    VisibilityofELement(Search_Closeset, 10);
-            
-		    String NumberofCycleWeeks= GetValuesFilter(0);
-		    String Original_Text_CycleWeeks=GetSelectedDropDown(NumberofCycleWeeks).getText();
-		    
-             SelectDropDown(NumberofCycleWeeks, "7" );	
-             
-             String Target_Type=GetValuesFilter(3); 
-             String Original_Text_Target_Type=GetSelectedDropDown(Target_Type).getText();
-             
-             SelectDropDown(Target_Type, "109" );
-             click(Reset);
-             
-             String Reset_Text_CycleWeeks=GetSelectedDropDown(NumberofCycleWeeks).getText();
-             
-             String Reset_Text_Target_Type=GetSelectedDropDown(Target_Type).getText();
-             
-             if(Original_Text_CycleWeeks.equalsIgnoreCase(Reset_Text_CycleWeeks)&& Original_Text_Target_Type.equalsIgnoreCase(Reset_Text_Target_Type)) {
-            	 
-            	 
-            	 TestBase.result("Verify Filter Reset Functionality is working", true);
-            	 
-             }
-             
-			
+			VisibilityofELement(Search_Closeset, 10);
+
+			String NumberofCycleWeeks= GetValuesFilter(0);
+			String Original_Text_CycleWeeks=GetSelectedDropDown(NumberofCycleWeeks).getText();
+
+			SelectDropDown(NumberofCycleWeeks, "7" );	
+
+			String Target_Type=GetValuesFilter(3); 
+			String Original_Text_Target_Type=GetSelectedDropDown(Target_Type).getText();
+
+			SelectDropDown(Target_Type, "109" );
+			click(Reset);
+
+			String Reset_Text_CycleWeeks=GetSelectedDropDown(NumberofCycleWeeks).getText();
+
+			String Reset_Text_Target_Type=GetSelectedDropDown(Target_Type).getText();
+
+			if(Original_Text_CycleWeeks.equalsIgnoreCase(Reset_Text_CycleWeeks)&& Original_Text_Target_Type.equalsIgnoreCase(Reset_Text_Target_Type)) {
+
+
+				TestBase.result("Verify Filter Reset Functionality is working", true);
+
+			}
+
+
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
@@ -496,7 +503,7 @@ public class ClosestMenuObj extends TestBase {
 
 		return false;
 	}
-	
+
 	public boolean Verify_Search_Filter_Result() {
 
 		defineTheTarget=new DefineTheTarget(driver);
@@ -505,50 +512,50 @@ public class ClosestMenuObj extends TestBase {
 			defineTheTarget.Create_Menu();
 			rules.Click_On_CreateMenu();
 			rules.Click_to_BuildCLosestMenu();
-		
-		    jsClick(Search_Closeset);
-		   
-		    
-		    String NumberofCycleWeeks= GetValuesFilter(0);
-		    
-             SelectDropDown(NumberofCycleWeeks, "5" );	
-             
-             InvisibilityofElement(LoaderChangeFilter, 10);
-             
-             click(Search_Closeset);
-             
-             Boolean Val1=VisibilityofELement(CycleValueinTable, 20);
-             
-		    List<WebElement> elems= Elements(RemoveAll_Filter); 
-		    
-           
-		     for(int i=elems.size()-1; i>=0;i--) {
-            	
-		    	 elems.get(i).click();
-		    	 
-            }
-		     jsClick(Search_Closeset);
-             
-		     InvisibilityofElement(LoaderChangeFilter, 10);
-		     
-		    Boolean Val2= VisibilityofELement(Table_Values, 10);
-		     
-		    
-		    if(Val1==true && Val2==true) {
-		    	
-		    	 TestBase.result("Check 'Search' button functionality", true);
-		    	
-		    }
-		    
-		    else {
-		    	
+
+			jsClick(Search_Closeset);
+
+
+			String NumberofCycleWeeks= GetValuesFilter(0);
+
+			SelectDropDown(NumberofCycleWeeks, "5" );	
+
+			InvisibilityofElement(LoaderChangeFilter, 10);
+
+			click(Search_Closeset);
+
+			Boolean Val1=VisibilityofELement(CycleValueinTable, 20);
+
+			List<WebElement> elems= Elements(RemoveAll_Filter); 
+
+
+			for(int i=elems.size()-1; i>=0;i--) {
+
+				elems.get(i).click();
+
+			}
+			jsClick(Search_Closeset);
+
+			InvisibilityofElement(LoaderChangeFilter, 10);
+
+			Boolean Val2= VisibilityofELement(Table_Values, 10);
+
+
+			if(Val1==true && Val2==true) {
+
+				TestBase.result("Check 'Search' button functionality", true);
+
+			}
+
+			else {
+
 				return false;
 			} 
-		    
-             }
-             
-			
-		 catch (InterruptedException e) {
+
+		}
+
+
+		catch (InterruptedException e) {
 
 			e.printStackTrace();
 		}
@@ -558,7 +565,7 @@ public class ClosestMenuObj extends TestBase {
 		return false;
 	}
 
-	
+
 	public boolean Verify_CLosestMenu_CopyFunctionality() {
 
 		defineTheTarget=new DefineTheTarget(driver);
@@ -567,61 +574,283 @@ public class ClosestMenuObj extends TestBase {
 			defineTheTarget.Create_Menu();
 			rules.Click_On_CreateMenu();
 			rules.Click_to_BuildCLosestMenu();
-		
-		    jsClick(Search_Closeset);
-		    
-		    click(Table_Menu_CopyIcon);    
-		    
-		    Boolean Val1=VisibilityofELement(Closest_Confirm_PopUp, 20);
-		    
-		    click(Closest_Confirm_PopUp_No);
-		    
-		   Boolean Val2= InvisibilityofElement(Closest_Confirm_PopUp, 20);
-		    
-	       
-		   if(Val1==true && Val2==true) {
-			   
-			   TestBase.result("Verfied Copy Closest Menu Functionality With 'No' Option", true);
-		   }
-		   
-		   else {
-		    	
+
+			jsClick(Search_Closeset);
+
+			click(Table_Menu_CopyIcon);    
+
+			Boolean Val1=VisibilityofELement(Closest_Confirm_PopUp, 20);
+
+			click(Closest_Confirm_PopUp_No);
+
+			Boolean Val2= InvisibilityofElement(Closest_Confirm_PopUp, 20);
+
+
+			if(Val1==true && Val2==true) {
+
+				TestBase.result("Verfied Copy Closest Menu Functionality With 'No' Option", true);
+			}
+
+			else {
+
 				return false;
 			} 
-		   
-		   Thread.sleep(2000);
-		   jsClick(Table_Menu_CopyIcon); 
-		   
-		    Boolean Val3=VisibilityofELement(Closest_Confirm_PopUp, 10);
-		    
-		    click(Closest_Confirm_PopUp_Yes);
-		    
-		    InvisibilityofElement(LoaderCreateMenu, 600);
-		    
-		    Boolean Val4=VisibilityofELement(MenuGrid_FirstValue, 80);
-		    
-		    if(Val3==true && Val4==true) {
-				   
-				   TestBase.result("Veried Copy Closest Menu Functionality With 'Yes' Option", true);
-			   }
-		    
-			   
-			   else {
-			    	
-					return false;
-				} 
-		   
-		}
-		
-		    catch (InterruptedException e) {
 
-				e.printStackTrace();
-				return false;
+			Thread.sleep(2000);
+			jsClick(Table_Menu_CopyIcon); 
+
+			Boolean Val3=VisibilityofELement(Closest_Confirm_PopUp, 10);
+
+			click(Closest_Confirm_PopUp_Yes);
+
+			InvisibilityofElement(LoaderCreateMenu, 600);
+
+			//   Boolean Val4=VisibilityofELement(MenuGrid_FirstValue, 80);
+
+
+			if(Val3==true ) {
+
+				TestBase.result("Verifed Copy Closest Menu Functionality With 'Yes' Option", true);
 			}
 
 
-      return false;
-			
+			else {
+
+				return false;
+			} 
+
 		}
+
+		catch (InterruptedException e) {
+
+			e.printStackTrace();
+			return false;
+		}
+
+
+		return false;
+
+	}
+
+
+
+	public boolean Editing_targets_and_Menu_name_it_is_getting_updated() {
+
+		List<String> Final=new ArrayList<String>();
+		defineTheTarget=new DefineTheTarget(driver);
+		Verify_CLosestMenu_CopyFunctionality();
+		jsClick(KPI_Arrow_Down);
+		click(Edit_Targets);
+
+		List<String> Target_Values_DTT=defineTheTarget.User_Update_ClosestMenu_EditValues();
+
+		/*
+		 * for(String data:Target_Values_DTT) { System.out.println(data); }
+		 */
+
+		String MenuName_onGrid=Element(MenuNameClosest).getText().trim();
+
+		jsClick(KPI_Arrow_Down);
+
+		String CycleWeeks_Grid=Element(Target_Cycle_Value).getText().substring(5).trim();
+
+
+		List<String> Target_values= ListStringElements(Target_Values);
+
+		String[] Calories_Grid= Target_values.get(0).split(" k");
+		String  Calories_Grid1 =Calories_Grid[0];
+
+		String Calorie_Targettype_Grid= Target_values.get(1);
+
+		String Meal_Periods_Grid= Target_values.get(2);
+		String[] Meal_Periods_Grid_Actual=Meal_Periods_Grid.split(", ");
+
+		for(String Value:Meal_Periods_Grid_Actual) {		
+			Final.add(Value);
+		}
+
+		String Cost_Per_Meal_Target_Grid_Raw= Target_values.get(3);
+
+		/*
+		 * System.out.println("------------------------");
+		 * System.out.println(Cost_Per_Meal_Target_Grid_Raw);
+		 */
+
+
+		String[] Cost_Per_Meal =Cost_Per_Meal_Target_Grid_Raw.split("\\.");
+		/*
+		 * System.out.println(Cost_Per_Meal[0]);
+		 *  System.out.println(Cost_Per_Meal[1]);
+		 */
+		String Cost_Per_Meal_Target_Grid=Cost_Per_Meal[0];
+		String Cost_Per_Meal_Target_Grid_Actual =Cost_Per_Meal_Target_Grid.substring(1);
+
+
+		String Cost_Bucket_Grid= Target_values.get(4);
+
+		if (Target_values.get(5).contains(", ")) {
+
+			String[] Service_Type_Grid_Values =Target_values.get(5).split(", ");
+
+			for(String Service_Type_Grid_Value:Service_Type_Grid_Values) {
+
+				Final.add(Service_Type_Grid_Value);
+			}
+		}
+
+		else if(Target_values.get(5).contains(", ")!=true) {
+
+			String Service_Type_Grid=Target_values.get(5).trim();
+			Final.add(Service_Type_Grid);
+		}
+
+
+
+
+		Final.add(CycleWeeks_Grid);
+		Final.add(Calories_Grid1);
+		Final.add(Calorie_Targettype_Grid);
+		Final.add(Cost_Per_Meal_Target_Grid_Actual);
+		Final.add(Cost_Bucket_Grid);
+		Final.add(MenuName_onGrid);
+		Collections.sort(Final);
+
+
+		/*
+		 * System.out.println("------------------------");
+		 * 
+		 * 
+		 * for(String Val:Final) {
+		 * 
+		 * System.out.println(Val); }
+		 */
+
+
+		if(Target_Values_DTT.containsAll(Final)) {
+
+			return true;
+		}
+
+
+		return true;
+	}
+
+
+	public boolean Verify_Pagination_closestMenu() {
+
+		defineTheTarget=new DefineTheTarget(driver);
+		rules=new Rules(driver);
+		try {
+			defineTheTarget.Create_Menu();
+			rules.Click_On_CreateMenu();
+			rules.Click_to_BuildCLosestMenu();
+
+			List<WebElement> elems= Elements(RemoveAll_Filter); 
+
+
+			for(int i=elems.size()-1; i>=0;i--) {
+
+				try {
+					elems.get(i).click();
+
+				} catch (StaleElementReferenceException e) {
+
+					try {
+
+						elems.get(i).click();
+
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					e.printStackTrace();
+				}
+
+			}
+			jsClick(Search_Closeset);
+
+			InvisibilityofElement(LoaderChangeFilter, 20);
+
+			VisibilityofELement(Table_Values, 10);
+
+			Boolean Val=PageSizeValidation(1);
+             
+			if (Val==true) {
+				return true;
+			}
+			
+			else {
+				
+				return false;
+			}
+		}
+
+
+		catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+
+
+		return false;
+	}
+
+
+	public boolean PageSizeValidation(int i) {
+
+		try {
+
+			String PageSize=Element(PageSize_and_Click).getText();
+
+			int Number_of_Rows=ListWebElement(Number_Of_Rows).size();
+			int PageSizeInt=Integer.parseInt(PageSize);
+
+			if(Number_of_Rows==PageSizeInt) {
+
+				TestBase.result("Verifed Page Size "+Number_of_Rows+" is showing Correct data as Expected", true);
+			}
+
+			else {
+
+				return false;
+			}
+
+			for(int j=0; j<=1; j++) {
+
+				
+				click(PageSize_and_Click);
+				String Select_Page="(//div[@class='pwm-custom-dropdown-content pwm-custom-dropdown-content-default']//div[@class='pwm-custom-dropdown-item'])["+i+"]";
+				Element(Select_Page).click();
+				InvisibilityofElement(LoaderChangeFilter, 5);
+				PageSize=Element(PageSize_and_Click).getText();
+
+				Number_of_Rows=ListWebElement(Number_Of_Rows).size();
+				PageSizeInt=Integer.parseInt(PageSize);
+
+				if(Number_of_Rows==PageSizeInt) {
+
+					TestBase.result("Verifed Page Size "+Number_of_Rows+" is showing Correct data as Expected", true);
+				}
+
+				else {
+
+					return false;
+				}
+
+				i++;
+			}
+			
+		} 
+		
+		catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+
+		return true;
+
+	}
 
 }
