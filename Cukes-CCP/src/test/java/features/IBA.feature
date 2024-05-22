@@ -17,7 +17,13 @@ Feature: IBA and its Validation
   Then Validate General Item Search Functionality
   
   
-   @test
    Scenario: Verifying the IBA Page
   Given User goes to IBA Section
   Then Validate Menu lIst Items on RHS
+  
+  
+  @test
+  Scenario: Verifying the IBA Page
+  Given User goes to IBA Section
+  Then User is able to search menu by Search By Menu Name/Distribution/Notes
+  

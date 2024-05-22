@@ -551,6 +551,7 @@ public class ClosestMenuObj extends TestBase {
 
 				return false;
 			} 
+			return true;
 
 		}
 
@@ -618,13 +619,15 @@ public class ClosestMenuObj extends TestBase {
 
 				return false;
 			} 
+			
+			return true;
 
 		}
 
 		catch (InterruptedException e) {
 
 			e.printStackTrace();
-			return false;
+		
 		}
 
 

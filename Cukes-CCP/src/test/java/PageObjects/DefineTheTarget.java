@@ -157,15 +157,23 @@ public class DefineTheTarget extends TestBase {
 		if(val==true) {
 			TestBase.result("Verify Calorie Level is initailly Empty", val);
 		}
+		else {
+			return false;
+		}
 
 		if(Element(Taget_Type).isEnabled()==false) {
 
 			TestBase.result("Verify Target_Type is Initially disabled", val);
-			return true;
+			
 
 		}
+		
+		else {
+			return false;
+		}
 
-		return false;
+
+		return true;
 
 	}
 

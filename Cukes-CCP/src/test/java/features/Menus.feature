@@ -67,7 +67,6 @@ Scenario: Verifying the Menu Created
   And Validate Status Field
   
    
- 
   Scenario: Verifying the Copy Menu fields 
   Given User goes to Menu Section  
    Then  User Create full Menu

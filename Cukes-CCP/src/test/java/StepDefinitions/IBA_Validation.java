@@ -75,5 +75,14 @@ public class IBA_Validation {
 		ibaobj=new IBAobj(driver);
 		TestBase.result("Validate Menu List Search on Right hand Panel" , ibaobj.VerifyStatusDropDownFunctionality());
 	}
+	
+	@Then("User is able to search menu by Search By Menu Name\\/Distribution\\/Notes")
+	public void user_is_able_to_search_menu_by_search_by_menu_name_distribution_notes() {
+		
+		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Validate  ", "Validate the different field validation");
+		ibaobj=new IBAobj(driver);
+		TestBase.result("Validate Search filter on RHS" , ibaobj.VerifyMenuSearchIBA());
+	    
+	}
 
 }

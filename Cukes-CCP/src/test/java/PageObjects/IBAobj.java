@@ -36,9 +36,11 @@ public class IBAobj extends TestBase {
 	private static final String SelectedGI="//h3";
 	private static final String SelectStatusDropDown="(//span/following-sibling::*//option/..)[2]";
 	private static final String StatusValues="//table//tbody//tr//td[3]";
-	
-	
-	
+	private static final String GI_NoMenu="//li//span[text()='-EGG OMELET PLAIN 5.5\" 3 OZ CKD FZ CAGE FREE']";
+	private static final String NoMenuFoundText="//table/following::*/..//span[contains(text(),'No Menu Found')]";
+	private static final String SearchMenuIBA="//input[@type='text' and @placeholder='Search by Menu Name/Distribution/Notes']";
+	private static final String CrossIconMenuSearch="//input[@type='text']/following-sibling::*//i";
+
 	
 
 	public WebElement GetCheckboxGI(int i) {
@@ -228,7 +230,8 @@ public class IBAobj extends TestBase {
 			else {	
 				return false;
 			}
-			
+
+
 			return true;
 
 		} catch (Exception e) {
@@ -242,51 +245,186 @@ public class IBAobj extends TestBase {
 
 
 	public boolean VerifyStatusDropDownFunctionality() {
-		
-		
+
+
 		MenuCheckRightPanel();
 		List<String> FinalizedDropDown=new ArrayList<String>(Arrays.asList("Finalized"));
 		List<String> RecentlyAddedDropDown=new ArrayList<String>(Arrays.asList("Recently Added"));
 		List<String> AllAddedDropDown=new ArrayList<String>(Arrays.asList("Recently Added","Finalized"));
-		
+
+		String Deafault_Selected_Option=GetSelectedDropDown(SelectStatusDropDown).getText();
+
+		if (Deafault_Selected_Option.contains(prop.getProperty("InitailDropDownValue"))) {
+
+			TestBase.result("Check on right hand side, Status dropdown is getting displayed by default option as Finalized", true);
+
+		} else {
+
+			return false;
+		}
+
+
+
 		Boolean VerifedFinalizedDropDown=ListStringElements(StatusValues).containsAll(FinalizedDropDown);// Selected Finalized and Compared
-		
-		
-		
-		
+
 		SelectDropDown(SelectStatusDropDown, "1");// Selected Recently Added
-		
+
 		InvisibilityofElement(Loader, 20);
-		
+
 		Boolean VerifedRecentlyAddedDropDown=ListStringElements(StatusValues).containsAll(RecentlyAddedDropDown);
-		
+
 		InvisibilityofElement(Loader, 20);
-		
-		
-		
-		
+
+
+
+
 		SelectDropDown(SelectStatusDropDown, "0");// Selected all values
-		
-        InvisibilityofElement(Loader, 20);
-		
-        Boolean VerifedALLDropDown=ListStringElements(StatusValues).containsAll(AllAddedDropDown);
-		
+
 		InvisibilityofElement(Loader, 20);
-		
+
+		Boolean VerifedALLDropDown=ListStringElements(StatusValues).containsAll(AllAddedDropDown);
+
+		InvisibilityofElement(Loader, 20);
+
+		Element(GI_NoMenu).click();
+		InvisibilityofElement(Loader, 20);
+		Boolean IsMenuVisible=Element(NoMenuFoundText).isDisplayed();
+
+		if (IsMenuVisible==true) {
+
+			TestBase.result("Validate if there is no relevant menu found then it is showing message as 'No Menu Found'", true);
+
+		} else {
+
+			return false;
+		}
+
+
 		if (VerifedALLDropDown==true && VerifedRecentlyAddedDropDown==true &&  VerifedFinalizedDropDown==true) {
-			
+
 			TestBase.result("Verified  Filter by Status functionality", true);
 			return true;
-			
+
 		} else {
-			
+
 			return false;
-			
+
 		}
-		
-		
-		
+
 	}
+
+	public Boolean  VerifyMenuSearchIBA() {
+
+		String SearchValue=prop.getProperty("GeneralItemValue");
+
+		try {
+			Sendval(General_Item, SearchValue);
+			InvisibilityofElement(Loader, 10);
+			VisibilityofELement(SearchListText, 10);
+			List<WebElement> Complete_Element_List=ListWebElement(SearchListText);
+
+			Complete_Element_List.get(0).click();
+			InvisibilityofElement(Loader, 10);
+            
+			VisibilityofELement(SearchMenuTable, 10);
+			String FirstMenuName=GetTableValueByIndex(1, 2);
+            
+			Sendval(SearchMenuIBA, FirstMenuName);
+
+			ClickActionEnter(SearchMenuIBA);
+			InvisibilityofElement(Loader, 10);
+			VisibilityofELement(SearchMenuTable, 10);
+			String SearchMenu=GetTableValueByIndex(1, 2);
+
+			if (FirstMenuName.equalsIgnoreCase(SearchMenu)) {
+
+				TestBase.result("Verified User is able to search by Menu Name ", true);
+
+			} else {
+
+				return false;
+			}
+
+			Element(SearchMenuIBA).clear();
+			String DistributionId=GetTableValueByIndex(1, 1);
+			Sendval(SearchMenuIBA, DistributionId);
+			ClickActionEnter(SearchMenuIBA);
+			InvisibilityofElement(Loader, 10);
+			VisibilityofELement(SearchMenuTable, 10);
+			String SearchMenuByDistributionID=GetTableValueByIndex(1, 1);
+
+
+			if (DistributionId.equalsIgnoreCase(SearchMenuByDistributionID)) {
+
+				TestBase.result("Verified User is able to search by DistributionId ", true);
+
+			} else {
+
+				return false;
+
+			}
+			
+			Element(SearchMenuIBA).clear();
+			String Notes=GetTableValueByIndex(1, 4);
+			Sendval(SearchMenuIBA, Notes);
+			ClickActionEnter(SearchMenuIBA);
+			InvisibilityofElement(Loader, 10);
+			VisibilityofELement(SearchMenuTable, 10);
+			String NotesSearched=GetTableValueByIndex(1, 1);
+			
+			if (Notes.equalsIgnoreCase(NotesSearched)) {
+
+				TestBase.result("Verified User is able to search by Notes ", true);
+
+			} else {
+
+				return false;
+
+			}
+			
+			
+			Element(SearchMenuIBA).clear();
+			Sendval(SearchMenuIBA, prop.getProperty("MenuName"));
+			ClickActionEnter(SearchMenuIBA);
+			InvisibilityofElement(Loader, 10);
+			Boolean isTableVisible=VisibilityofELement(SearchMenuTable, 10);
+			if (isTableVisible==true) {
+
+				TestBase.result("Verified User is able to Partialsearch ", true);
+
+			} else {
+
+				return false;
+
+			}
+			
+			Element(CrossIconMenuSearch).click();
+			InvisibilityofElement(Loader, 10);
+			Boolean isPlaceholderEmpty=Element(SearchMenuIBA).getAttribute("value").isEmpty();
+			if (isPlaceholderEmpty==true) {
+
+				TestBase.result("Verified Clicking on cross icon for Search By Menu/Distribution/Notes  should clear the text  ", true);
+
+			} else {
+
+				return false;
+
+			}
+			
+			
+			
+			return true;
+			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+
+		return false;
+
+
+	}
+
 
 
 }
