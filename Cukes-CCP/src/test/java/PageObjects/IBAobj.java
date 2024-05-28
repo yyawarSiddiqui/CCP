@@ -3,24 +3,28 @@ package PageObjects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import StepDefinitions.TestBase;
+import utils.ReadExcelFile;
 import utils.RegularExpression;
 
 
 
 public class IBAobj extends TestBase {
 
-	public  WebDriver driver;
+	public static  WebDriver driver;
 	DefineTheTarget defineTheTarget;
 	Rules rules;
 	TraditionalMenu traditionalMenu;
 	RegularExpression regularExpression;
 
+
 	public  IBAobj(WebDriver driver) {
 
-		this.driver=driver;
+		IBAobj.driver=driver;
 
 	}
 
@@ -40,8 +44,12 @@ public class IBAobj extends TestBase {
 	private static final String NoMenuFoundText="//table/following::*/..//span[contains(text(),'No Menu Found')]";
 	private static final String SearchMenuIBA="//input[@type='text' and @placeholder='Search by Menu Name/Distribution/Notes']";
 	private static final String CrossIconMenuSearch="//input[@type='text']/following-sibling::*//i";
+	private static final String DropDownPagination="//label/following::*//Select[@class='form-control pagination-size']";
+	private static final String ExportToExcel="//div[@class='d-flex exprtExcel_btn ibaExp-btn']//div[text()='Export to Excel']";
+	private static final String Totalofoccurrences ="//table//tbody//tr//td[7]";
 
-	
+
+
 
 	public WebElement GetCheckboxGI(int i) {
 
@@ -57,10 +65,11 @@ public class IBAobj extends TestBase {
 		try {
 
 			InvisibilityofElement(Loader1, 8);
+
 			if( (VisibilityofELement(IBATitle, 10)==true &&
-					VisibilityofELement(General_Item, 10)==true ))
+					VisibilityofELement(General_Item, 10)==true && InvisibilityofElement(ExportToExcel, 10)==true))
 			{
-				TestBase.result("Verifed IBA Page and General_Item Serach is visible", true);
+				TestBase.result("Verifed IBA Page and General_Item Serach is visible and ExportToExcel is Invisible " , true);
 			}
 
 			else {
@@ -325,10 +334,10 @@ public class IBAobj extends TestBase {
 
 			Complete_Element_List.get(0).click();
 			InvisibilityofElement(Loader, 10);
-            
+
 			VisibilityofELement(SearchMenuTable, 10);
 			String FirstMenuName=GetTableValueByIndex(1, 2);
-            
+
 			Sendval(SearchMenuIBA, FirstMenuName);
 
 			ClickActionEnter(SearchMenuIBA);
@@ -363,7 +372,7 @@ public class IBAobj extends TestBase {
 				return false;
 
 			}
-			
+
 			Element(SearchMenuIBA).clear();
 			String Notes=GetTableValueByIndex(1, 4);
 			Sendval(SearchMenuIBA, Notes);
@@ -371,7 +380,7 @@ public class IBAobj extends TestBase {
 			InvisibilityofElement(Loader, 10);
 			VisibilityofELement(SearchMenuTable, 10);
 			String NotesSearched=GetTableValueByIndex(1, 1);
-			
+
 			if (Notes.equalsIgnoreCase(NotesSearched)) {
 
 				TestBase.result("Verified User is able to search by Notes ", true);
@@ -381,8 +390,8 @@ public class IBAobj extends TestBase {
 				return false;
 
 			}
-			
-			
+
+
 			Element(SearchMenuIBA).clear();
 			Sendval(SearchMenuIBA, prop.getProperty("MenuName"));
 			ClickActionEnter(SearchMenuIBA);
@@ -397,7 +406,7 @@ public class IBAobj extends TestBase {
 				return false;
 
 			}
-			
+
 			Element(CrossIconMenuSearch).click();
 			InvisibilityofElement(Loader, 10);
 			Boolean isPlaceholderEmpty=Element(SearchMenuIBA).getAttribute("value").isEmpty();
@@ -410,17 +419,159 @@ public class IBAobj extends TestBase {
 				return false;
 
 			}
-			
-			
-			
+
+
+
 			return true;
-			
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
 
 		return false;
+
+
+	}
+
+
+	public Boolean Check_PaginationFunctionalityIBA() {
+
+
+
+		try {
+			prop.load(fs);
+
+			String SearchValue=prop.getProperty("GeneralItemValue2");
+
+			Sendval(General_Item, SearchValue);
+
+			InvisibilityofElement(Loader, 10);
+
+			String GiItemToClickText=prop.getProperty("GIitemToClickForPagination");
+			VisibilityofELement(SearchListText, 20);
+			List<WebElement> Complete_Element_List=ListElementsbyWait(SearchListText, 20);
+
+
+			for(int i=0; i<Complete_Element_List.size();i++) {
+
+
+				Boolean isElementAvailable=Complete_Element_List.get(i).getText().trim().equalsIgnoreCase(GiItemToClickText);
+
+				if (isElementAvailable==true) {
+					ClickAction(Complete_Element_List.get(i));
+					InvisibilityofElement(Loader, 10);
+					break;
+				}
+
+			}
+
+			SelectDropDown(SelectStatusDropDown, "0");// Selected all values
+			InvisibilityofElement(Loader, 20);
+
+			String initiallySelectedDropDown=GetSelectedDropDown(DropDownPagination).getText();
+			int NoofMenus=ListWebElement(StatusValues).size();
+
+			if (initiallySelectedDropDown.equals("20")&& NoofMenus==20) {
+
+				TestBase.result("Verified initial page Drop down Value Should be 20 and Menu Showed are 20", true);
+
+			} else {
+
+				return false;
+
+			}
+
+			SelectDropDown(DropDownPagination, "10");
+			InvisibilityofElement(Loader, 10);
+			String NewSelectedDropDown=GetSelectedDropDown(DropDownPagination).getText();
+			int NoofMenusfor10=ListWebElement(StatusValues).size();	
+
+			if (NewSelectedDropDown.equals("10")&& NoofMenusfor10==10) {
+
+				TestBase.result("Verified  page Drop down Value Should be 10 and Menu Showed are 10", true);
+
+			} else {
+
+				return false;
+
+			}
+
+			SelectDropDown(DropDownPagination, "50");
+			InvisibilityofElement(Loader, 10);
+			String NewSelectedDropDownfor50=GetSelectedDropDown(DropDownPagination).getText();
+			int NoofMenusfor50=ListWebElement(StatusValues).size();	
+
+			if (NewSelectedDropDownfor50.equals("50")&& NoofMenusfor50==50) {
+
+				TestBase.result("Verified  page Drop down Value Should be 50 and Menu Showed are 50", true);
+
+			} else {
+
+				return false;
+
+			}
+
+
+			return true;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+
+
+		return true;
+	}	
+
+
+	public Boolean CheckExportTableData() throws InterruptedException {
+
+		MenuCheckRightPanel();
+		//click(ExportToExcel);
+		//Thread.sleep(10000);
+		Boolean Val=ReadExcelFile.ReadTabledata(FileDownloadPath);
+
+		if(Val==true) {
+			TestBase.result("Verified Table values are coming same as in Exported Table ", true);
+		}
+
+		else {
+
+			return false;
+		}
+		return Val;
+
+	}
+
+	public static  List<String> getIBATabledata(int i) {
+		List<String> data=new ArrayList<String>();
+		List<WebElement> elem=driver.findElements(By.xpath("//table//tr["+i+"]//td"));
+		for(WebElement e:elem) {
+			String Textvalue=e.getText();
+			data.add(Textvalue);
+		}
+		return data;
+
+	}
+
+	public Boolean TotalOccurenceOrder()  {
+
+		MenuCheckRightPanel();
+		Boolean val=isDescendingOrder(ListIntElements(Totalofoccurrences));
+
+		if(val==true) {
+			TestBase.result("Verified Totalofoccurrences are coming  in descending order", true); 
+			return true;
+		}
+
+		else {
+
+			return false;
+		}
+
+
 
 
 	}

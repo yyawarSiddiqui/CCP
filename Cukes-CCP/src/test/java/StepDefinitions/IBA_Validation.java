@@ -84,5 +84,31 @@ public class IBA_Validation {
 		TestBase.result("Validate Search filter on RHS" , ibaobj.VerifyMenuSearchIBA());
 	    
 	}
+	
+	
+	@Then("User is able to Check Pagination Functionality")
+	public void user_is_able_to_check_pagination_functionality() {
+	   
+		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Check Pagination Functionality ", "Validate the different field validation");
+		ibaobj=new IBAobj(driver);
+		TestBase.result("Validate Pagination on MenuIBA" , ibaobj.Check_PaginationFunctionalityIBA());
+	}
+	
+	@Then("User Checks the Export IBA and Its data")
+	public void user_checks_the_export_iba_and_its_data() throws InterruptedException {
+	   
+
+		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Check Export Data", "Validate the different field validation");
+		ibaobj=new IBAobj(driver);
+		TestBase.result("Validate Export File data  on MenuIBA" , ibaobj.CheckExportTableData());
+	}
+	
+	@Then("Total occurrences in descending order")
+	public void total_occurrences_in_descending_order() {
+		
+		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Check TotalOccurence order", "Validate the different field validation");
+		ibaobj=new IBAobj(driver);
+		TestBase.result("Validate Export File data  on MenuIBA" , ibaobj.TotalOccurenceOrder());
+	}
 
 }
