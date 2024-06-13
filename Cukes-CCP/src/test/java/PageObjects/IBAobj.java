@@ -3,7 +3,6 @@ package PageObjects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +19,8 @@ public class IBAobj extends TestBase {
 	Rules rules;
 	TraditionalMenu traditionalMenu;
 	RegularExpression regularExpression;
+	MenuGrid menuGrid;
+	RecipesSearch recipesSearch;
 
 
 	public  IBAobj(WebDriver driver) {
@@ -47,9 +48,17 @@ public class IBAobj extends TestBase {
 	private static final String DropDownPagination="//label/following::*//Select[@class='form-control pagination-size']";
 	private static final String ExportToExcel="//div[@class='d-flex exprtExcel_btn ibaExp-btn']//div[text()='Export to Excel']";
 	private static final String Totalofoccurrences ="//table//tbody//tr//td[7]";
+	private static final String tablevaluetoclick="//table//tr[2]";
+	private static final String NewRecipes="//button[@type='button']//span[text()='New Recipes']";
+	private static final String Recipes="//a[@class='page-header-option2']//span[text()='Recipes']";
+	private static final String LoaderFetchRecipe="//span[@class='pwm-spinner-message']//span[text()='Fetching Recipes']";
 
 
 
+
+
+
+	//table//th/following::*//tr//td[4]
 
 	public WebElement GetCheckboxGI(int i) {
 
@@ -547,6 +556,7 @@ public class IBAobj extends TestBase {
 
 	public static  List<String> getIBATabledata(int i) {
 		List<String> data=new ArrayList<String>();
+
 		List<WebElement> elem=driver.findElements(By.xpath("//table//tr["+i+"]//td"));
 		for(WebElement e:elem) {
 			String Textvalue=e.getText();
@@ -576,6 +586,138 @@ public class IBAobj extends TestBase {
 
 	}
 
+	public Boolean Verify_GI_For_IBA_on_Menurgrid()  {
+
+		Boolean val;
+		try {
+			menuGrid=new MenuGrid(driver);
+			MenuCheckRightPanel();
+			click(tablevaluetoclick);
+			InvisibilityofElement(Loader, 40);
+			val = menuGrid.User_MoveTo_GI_Overview();
+
+			if(val==true) {
+
+				TestBase.result("Verified all the UI is available on IBA Page  ", true); 
+				return true;
+			}
+
+			else {
+
+				return false;
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return false;
+
+	}
 
 
+	@SuppressWarnings("unlikely-arg-type")
+	public Boolean VerifySubstituteItem() {
+
+		menuGrid=new MenuGrid(driver);
+		recipesSearch=new RecipesSearch(driver);
+		MenuCheckRightPanel();
+		click(tablevaluetoclick);
+		InvisibilityofElement(Loader, 40);
+		menuGrid.User_AddRecipe();
+
+		try {
+			String url=getCurrentURL();
+			OpenNewWindowTab();
+			SwitchWindow(1);
+
+			driver.get(url);
+			InvisibilityofElement(Loader1, 40);
+			jsClick(NewRecipes);
+			jsClick(Recipes);
+
+			InvisibilityofElement(Loader1, 30);
+			InvisibilityofElement(LoaderFetchRecipe, 20);
+			VisibilityofELement(Loader, 20);
+			InvisibilityofElement(Loader, 15);		
+
+			recipesSearch.SearchRecipes();
+			List<String> Recipies=recipesSearch.getSubsituteRecipies();
+			
+			List<String> NewRecipiesList=new ArrayList<String>();
+			
+			for(String Recipe:Recipies) {
+
+				String[] RecipeArray=Recipe.split("Substitute - ");
+				String ActualSubRecipesRaw=RecipeArray[1];
+
+				if (ActualSubRecipesRaw.contains(", DICED /")) {
+
+					String [] c= ActualSubRecipesRaw.split(" /");
+
+					String OptionalPart=c[1]; //cooked
+					String FirstPart=c[0];//
+					String SecondPart= FirstPart.substring(0, FirstPart.lastIndexOf(","))+","+OptionalPart;
+					NewRecipiesList.add(FirstPart);
+					NewRecipiesList.add(SecondPart);
+
+				}
+
+				else if (ActualSubRecipesRaw.contains("(SYSCO) /")) {
+					String [] c= ActualSubRecipesRaw.split("/");
+					String OptionalPart=c[1]; //cooked
+					String FirstPart=c[0];//
+					String SecondPart= FirstPart.substring(0, FirstPart.lastIndexOf("("))+OptionalPart;
+					NewRecipiesList.add(FirstPart);
+					NewRecipiesList.add(SecondPart);
+
+				}
+				
+				else if (ActualSubRecipesRaw.contains("DICED /")) {
+					String [] c= ActualSubRecipesRaw.split("/");
+					String OptionalPart=c[1]; //cooked
+					String FirstPart=c[0];//
+					String SecondPart= FirstPart.substring(0, FirstPart.lastIndexOf("DICED"))+OptionalPart;
+					NewRecipiesList.add(FirstPart);
+					NewRecipiesList.add(SecondPart);
+
+				}
+				
+				else if (!ActualSubRecipesRaw.contains("/")) {
+					
+					NewRecipiesList.add(ActualSubRecipesRaw);
+				}
+				
+				
+			}
+			
+			SwitchWindow(0);
+			menuGrid.User_MoveTo_GI_Overview();
+			List<String> GIMenuInsights=menuGrid.getGIfromMenuInsight();
+			
+			if (!GIMenuInsights.contains(NewRecipiesList)==true) {
+				
+				TestBase.result("Verified Substitute item should not get displayed as GI under GI tab ", true); 
+				return true;
+				
+				
+			} else {
+
+				return false;
+			}
+			
+		}
+
+		catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
 }
+
+
+
+
+

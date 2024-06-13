@@ -8,9 +8,11 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -48,25 +50,25 @@ public class TestBase {
 	public static JSONObject Value;
 
 	public String FileDownloadPath=System.getProperty("user.dir")+File.separator+"src"+File.separator+"test"+File.separator+"resources"+File.separator+"data"+File.separator+"Downloads";
-	
+
 	@Before
 	public void setup() throws Exception { 
 
 		fs = null;
 		String QaURL = null;
-		
+
 		// Set up Chrome options
-        ChromeOptions options = new ChromeOptions();
-        
-     // Set custom download directory
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory",FileDownloadPath);
-        prefs.put("download.prompt_for_download", false);
-        options.setExperimentalOption("prefs", prefs);
-      
-        // Disable Safe Browsing 
-        options.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");
-		
+		ChromeOptions options = new ChromeOptions();
+
+		// Set custom download directory
+		Map<String, Object> prefs = new HashMap<>();
+		prefs.put("download.default_directory",FileDownloadPath);
+		prefs.put("download.prompt_for_download", false);
+		options.setExperimentalOption("prefs", prefs);
+
+		// Disable Safe Browsing 
+		options.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");
+
 		// System.out.println(Value.getJSONObject("TraditionalMenu").toString());		
 
 
@@ -76,7 +78,7 @@ public class TestBase {
 			data= getClass().getClassLoader().getResourceAsStream(dataFileName);
 			JSONTokener tokener=new JSONTokener(data);
 			Value=new JSONObject(tokener);
-			
+
 		}catch(Exception e) {
 
 			e.printStackTrace();
@@ -259,7 +261,7 @@ public class TestBase {
 		return list_Text;
 
 	}
-	
+
 	public static List<Integer> ListIntElements(String Ele) {
 
 		List<WebElement> Elements=driver.findElements(By.xpath(Ele));
@@ -423,6 +425,17 @@ public class TestBase {
 
 	}
 	
+	public boolean ScrollElement(WebElement Elem) throws InterruptedException {
+
+		Actions act=new Actions(driver);
+
+		act.scrollToElement(Elem).build().perform();
+
+		return true;
+
+	}
+
+
 	public boolean MoveAction(WebElement Elem) throws InterruptedException {
 
 		Actions act=new Actions(driver);
@@ -432,8 +445,8 @@ public class TestBase {
 		return true;
 
 	}
-	
-	
+
+
 
 	public boolean ClickActionEnter(String Elem) throws InterruptedException {
 
@@ -448,35 +461,74 @@ public class TestBase {
 
 	public String GetTableValueByIndex(int r, int c)  {
 
-		
+
 		String CellValue=driver.findElement(By.xpath("//table//tbody//tr["+r+"]//td["+c+"]")).getText();
 
 		return CellValue;
 
 	}
-	
 
-	    public  boolean isDescendingOrder(List<Integer> list) {
-	     
-	    	if (list == null || list.size() == 0) {
-	            return true; 
-	        }
+	public String getCurrentURL() throws InterruptedException {
 
-	        for (int i = 0; i < list.size() - 1; i++) {
-	            if (list.get(i) < list.get(i + 1)) {
-	                return false; 
-	            }
-	        }
+		return driver.getCurrentUrl();
 
-	        return true;
-	    }
-
-	    
-	       
-	    
 	}
 
+
+
+	public  boolean isDescendingOrder(List<Integer> list) {
+
+		if (list == null || list.size() == 0) {
+			return true; 
+		}
+
+		for (int i = 0; i < list.size() - 1; i++) {
+			if (list.get(i) < list.get(i + 1)) {
+				return false; 
+			}
+		}
+
+		return true;
+	}
+
+
+	public  boolean isAscendingOrder(List<Integer> list) {
+
+		if (list == null || list.size() == 0) {
+			return true; 
+		}
+
+		for (int i = 0; i < list.size() - 1; i++) {
+			if (list.get(i) > list.get(i + 1)) {
+				return false; 
+			}
+		}
+
+		return true;
+	}
+
+	public Boolean SwitchWindow(int i)  {
+
+	Set<String> Windows=driver.getWindowHandles();
+	List<String> WinList=new ArrayList<String>(Windows);
+	String Tab=WinList.get(i);
+	driver.switchTo().window(Tab);
+	return true;
 	
+	}
+	
+	public boolean OpenNewWindowTab()  {
+
+		((JavascriptExecutor) driver).executeScript("window.open();");
+		
+		return true;
+
+	} 
+
+
+}
+
+
 
 
 

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import PageObjects.CCPMenu;
 import PageObjects.DefineTheTarget;
 import PageObjects.IBAobj;
+import PageObjects.MenuGrid;
 import PageObjects.Modules;
 import PageObjects.TraditionalMenu;
 import PageObjects.loginpage;
@@ -23,7 +24,9 @@ public class IBA_Validation {
 	TraditionalMenu traditionalMenu;
 	DefineTheTarget definethetarget;
 	IBAobj ibaobj;
+	MenuGrid menuGrid;
 	public JSONObject Value;
+	
 
 	private WebDriver driver;
 
@@ -109,6 +112,24 @@ public class IBA_Validation {
 		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Check TotalOccurence order", "Validate the different field validation");
 		ibaobj=new IBAobj(driver);
 		TestBase.result("Validate Export File data  on MenuIBA" , ibaobj.TotalOccurenceOrder());
+	}
+	
+	@Then("User Verify the GI Overview Table")
+	public void user_verify_the_gi_overview_table() {
+	    
+		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Check GI Recipies ", "Validate the different field validation");
+		ibaobj=new IBAobj(driver);
+		TestBase.result("Validate Export File data  on MenuIBA" , ibaobj.Verify_GI_For_IBA_on_Menurgrid());
+		
+	}
+	
+	@Then("User Verify  Substitute item should not get displayed as GI under GI tab")
+	public void user_verify_substitute_item_should_not_get_displayed_as_gi_under_gi_tab() {
+	    
+		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Check GI Recipies ", "Validate the different field validation");
+		ibaobj=new IBAobj(driver);
+		TestBase.result("Validate Substitute item should not get displayed as GI under GI tab" , ibaobj.VerifySubstituteItem());
+				
 	}
 
 }
