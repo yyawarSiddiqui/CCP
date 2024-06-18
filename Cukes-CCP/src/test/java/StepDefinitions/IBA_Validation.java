@@ -123,12 +123,21 @@ public class IBA_Validation {
 		
 	}
 	
+	
 	@Then("User Verify  Substitute item should not get displayed as GI under GI tab")
 	public void user_verify_substitute_item_should_not_get_displayed_as_gi_under_gi_tab() {
 	    
 		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Check GI Recipies ", "Validate the different field validation");
 		ibaobj=new IBAobj(driver);
 		TestBase.result("Validate Substitute item should not get displayed as GI under GI tab" , ibaobj.VerifySubstituteItem());
+				
+	}
+	
+	@Then("User Swap Recipe manually and recommended")
+	public void user_swap_recipe_manually_and_recommended() {
+		TestBase.Logger = startTest("User goes to Ingredient Based Analysis page and Swap Recipies ", "Validate the Recipe Swap Functionality");
+		ibaobj=new IBAobj(driver);
+		TestBase.result("Validate User Swap Recipe manually and recommended method" , ibaobj.SwapRecipe());
 				
 	}
 

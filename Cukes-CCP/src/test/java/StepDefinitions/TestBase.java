@@ -65,6 +65,7 @@ public class TestBase {
 		prefs.put("download.default_directory",FileDownloadPath);
 		prefs.put("download.prompt_for_download", false);
 		options.setExperimentalOption("prefs", prefs);
+		//options.addArguments("--headless");
 
 		// Disable Safe Browsing 
 		options.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");

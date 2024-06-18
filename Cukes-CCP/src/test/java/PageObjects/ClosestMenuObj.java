@@ -186,6 +186,7 @@ public class ClosestMenuObj extends TestBase {
 
 			Sendval(Menu_Place, prop.getProperty("MenuName"));
 			click(Search_Closeset);
+			InvisibilityofElement(LoaderChangeFilter, 20);
 			Boolean Val2=Element(Total_Filters_Disabled).isDisplayed();
 			Boolean Val3=traditionalMenu.GetFirst_Menu_Name(1).isDisplayed();
 
@@ -747,16 +748,18 @@ public class ClosestMenuObj extends TestBase {
 			defineTheTarget.Create_Menu();
 			rules.Click_On_CreateMenu();
 			rules.Click_to_BuildCLosestMenu();
-
+            
+			Thread.sleep(5000);
 			List<WebElement> elems= Elements(RemoveAll_Filter); 
 
+			//System.out.println(elems.size());
 
 			for(int i=elems.size()-1; i>=0;i--) {
 
 				try {
 					elems.get(i).click();
 
-				} catch (StaleElementReferenceException e) {
+				} catch (Exception e) {
 
 					try {
 

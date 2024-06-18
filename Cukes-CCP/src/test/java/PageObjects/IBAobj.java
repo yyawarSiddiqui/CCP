@@ -52,8 +52,16 @@ public class IBAobj extends TestBase {
 	private static final String NewRecipes="//button[@type='button']//span[text()='New Recipes']";
 	private static final String Recipes="//a[@class='page-header-option2']//span[text()='Recipes']";
 	private static final String LoaderFetchRecipe="//span[@class='pwm-spinner-message']//span[text()='Fetching Recipes']";
-
-
+	private static final String FirstRecipeSwap="(//div[@title='Swap'])[1]";
+	private static final String LoaderRecipes="//span[@class='pwm-spinner-message']//span[text()='Loading Recipes...']";
+	private static final String SearchSwap="//input[@placeholder='Search by ID']";
+	private static final String FirsrRecipeonSwap="(//table[@class='table']//tr//td[1]//div/following-sibling::*)[1]";
+	private static final String Swapbutton="//span[@class='search-icon-input']/following-sibling::*";
+	private static final String SwapSucess="//span[text()='Recipe(s) has been swapped successfully.']";
+	private static final String SwapRadioButton="(//table[@class='table']//tr//td[1]//div//span)[1]";
+	private static final String SwapRecommendation="//span[@class='mr-4']/following-sibling::*";
+	private static final String SwappingRecipesLoader="//span[@class='pwm-spinner-message']//span[text()='Swapping Recipe...']";
+	private static final String CrossButtonSwapRecipe="//button[@type='button' and text()='✕']";
 
 
 
@@ -642,9 +650,9 @@ public class IBAobj extends TestBase {
 
 			recipesSearch.SearchRecipes();
 			List<String> Recipies=recipesSearch.getSubsituteRecipies();
-			
+
 			List<String> NewRecipiesList=new ArrayList<String>();
-			
+
 			for(String Recipe:Recipies) {
 
 				String[] RecipeArray=Recipe.split("Substitute - ");
@@ -671,7 +679,7 @@ public class IBAobj extends TestBase {
 					NewRecipiesList.add(SecondPart);
 
 				}
-				
+
 				else if (ActualSubRecipesRaw.contains("DICED /")) {
 					String [] c= ActualSubRecipesRaw.split("/");
 					String OptionalPart=c[1]; //cooked
@@ -681,33 +689,71 @@ public class IBAobj extends TestBase {
 					NewRecipiesList.add(SecondPart);
 
 				}
-				
+
 				else if (!ActualSubRecipesRaw.contains("/")) {
-					
+
 					NewRecipiesList.add(ActualSubRecipesRaw);
 				}
-				
-				
+
+
 			}
-			
+
 			SwitchWindow(0);
 			menuGrid.User_MoveTo_GI_Overview();
 			List<String> GIMenuInsights=menuGrid.getGIfromMenuInsight();
-			
+
 			if (!GIMenuInsights.contains(NewRecipiesList)==true) {
-				
+
 				TestBase.result("Verified Substitute item should not get displayed as GI under GI tab ", true); 
 				return true;
-				
-				
+
+
 			} else {
 
 				return false;
 			}
-			
+
 		}
 
 		catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
+	public Boolean SwapRecipe() {
+
+		try {
+			MenuCheckRightPanel();
+			click(tablevaluetoclick);
+			InvisibilityofElement(Loader, 40);
+			Element(FirstRecipeSwap).click();
+			InvisibilityofElement(LoaderRecipes, 20);
+			Sendval(SearchSwap, Element(FirsrRecipeonSwap).getText());
+			Element(Swapbutton).click();
+			Boolean isRecipeSwapped=VisibilityofELement(SwapSucess, 20);//
+			Element(CrossButtonSwapRecipe).click();
+			Element(FirstRecipeSwap).click();
+			InvisibilityofElement(LoaderRecipes, 20);
+			Element(SwapRadioButton).click();
+			Element(SwapRecommendation).click();
+			Boolean isRecipeSwappedRec=VisibilityofELement(SwapSucess, 20);//
+
+			if (isRecipeSwapped==true && isRecipeSwappedRec==true ) {
+				
+				TestBase.result("Check user can swap recipes- By manually and By Recommendation engine", true); 
+				return true;
+
+			} else {
+
+				return false;
+			}
+
+		} catch (Exception e) {
+
 
 			e.printStackTrace();
 		}
