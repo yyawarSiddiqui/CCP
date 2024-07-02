@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\mohd.yawar\AppData\Local\Temp\testng-eclipse-971014730\testng-customsuite.xml</span>
+                    <span>C:\Users\mohd.yawar\AppData\Local\Temp\testng-eclipse-1931935658\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -130,15 +130,13 @@
                   </a> <!-- runScenario("Verifying the IBA Page", "IBA and its Validation") -->
                   <span class="method-name">runScenario</span>
                   <span class="parameters">("Verifying the IBA Page","IBA and its Validation")</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;tile menus&apos;]&quot;}
-  (Session info: chrome=125.0.6422.176)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+                  <div class="stack-trace">org.openqa.selenium.NoSuchSessionException: Tried to run command without establishing a connection
 Build info: version: &apos;4.19.1&apos;, revision: &apos;abe0ee07dc&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;16.0.2&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [b4018c96513f2e9598f3f1d9857348b3, findElement {value=//div[@class=&apos;tile menus&apos;], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 125.0.6422.176, chrome: {chromedriverVersion: 125.0.6422.141 (4b1e8393712..., userDataDir: C:\Users\MOHD~1.YAW\AppData...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57315}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57315/devtoo..., se:cdpVersion: 125.0.6422.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: b4018c96513f2e9598f3f1d9857348b3
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [d97486bd-839e-4a51-9309-0b89009b8ba7, screenshot {}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 113.0.1, moz:accessibilityChecks: false, moz:buildID: 20230511191846, moz:debuggerAddress: 127.0.0.1:44404, moz:geckodriverVersion: 0.33.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 15248, moz:profile: C:\Users\MOHD~1.YAW\AppData..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:44404/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: d97486bd-839e-4a51-9309-0b89009b8ba7
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -151,12 +149,12 @@ Session ID: b4018c96513f2e9598f3f1d9857348b3
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
-	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:349)
-	at PageObjects.Modules.clickonMenu(Modules.java:36)
-	at StepDefinitions.IBA_Validation.user_goes_iba_section(IBA_Validation.java:45)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:591)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:595)
+	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:321)
+	at StepDefinitions.TestBase.getScreenshot(TestBase.java:177)
+	at StepDefinitions.TestBase.result(TestBase.java:166)
+	at StepDefinitions.IBA_Validation.user_goes_iba_section(IBA_Validation.java:51)
 	at ✽.User goes to IBA Section(file:///C:/Users/mohd.yawar/git/repository2/Cukes-CCP/src/test/java/features/IBA.feature:55)
 
 </div> <!-- stack-trace -->
@@ -169,7 +167,7 @@ Session ID: b4018c96513f2e9598f3f1d9857348b3
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\mohd.yawar\AppData\Local\Temp\testng-eclipse-971014730\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\mohd.yawar\AppData\Local\Temp\testng-eclipse-1931935658\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -230,12 +228,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'runScenario')
 data.setCell(0, 2, 'cucumberOptions.TestRunner')
-data.setCell(0, 3, 15669);
+data.setCell(0, 3, 11793);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 15 seconds</span>
+              <span class="suite-total-time">Total running time: 11 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -263,18 +261,18 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">cucumberOptions.TestRunner</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setUpClass(org.testng.TestRunner@411cd156)</span>
+                <span class="method-name">setUpClass(org.testng.TestRunner@7cfb0c4c)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">runScenario("Verifying the IBA Page", "IBA and its Validation")</span>
-                <span class="method-start">644 ms</span>
+                <span class="method-start">446 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">16319 ms</span>
+                <span class="method-start">12244 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

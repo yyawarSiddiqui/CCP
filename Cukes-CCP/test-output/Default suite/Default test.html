@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Jun 19 11:33:24 IST 2024</td>
+<td>Started on:</td><td>Fri Jun 28 18:50:41 IST 2024</td>
 </tr>
-<tr><td>Total time:</td><td>16 seconds (16396 ms)</td>
+<tr><td>Total time:</td><td>12 seconds (12297 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -77,15 +77,13 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='cucumberOptions.TestRunner.runScenario()'><b>runScenario</b><br>Test class: cucumberOptions.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verifying the IBA Page", "IBA and its Validation"</td>
-<td><div><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;tile menus&apos;]&quot;}
-  (Session info: chrome=125.0.6422.176)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+<td><div><pre>org.openqa.selenium.NoSuchSessionException: Tried to run command without establishing a connection
 Build info: version: &apos;4.19.1&apos;, revision: &apos;abe0ee07dc&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;16.0.2&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [b4018c96513f2e9598f3f1d9857348b3, findElement {value=//div[@class=&apos;tile menus&apos;], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 125.0.6422.176, chrome: {chromedriverVersion: 125.0.6422.141 (4b1e8393712..., userDataDir: C:\Users\MOHD~1.YAW\AppData...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57315}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57315/devtoo..., se:cdpVersion: 125.0.6422.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: b4018c96513f2e9598f3f1d9857348b3
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [d97486bd-839e-4a51-9309-0b89009b8ba7, screenshot {}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 113.0.1, moz:accessibilityChecks: false, moz:buildID: 20230511191846, moz:debuggerAddress: 127.0.0.1:44404, moz:geckodriverVersion: 0.33.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 15248, moz:profile: C:\Users\MOHD~1.YAW\AppData..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:44404/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: d97486bd-839e-4a51-9309-0b89009b8ba7
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -98,23 +96,21 @@ Session ID: b4018c96513f2e9598f3f1d9857348b3
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
-	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:349)
-	at PageObjects.Modules.clickonMenu(Modules.java:36)
-	at StepDefinitions.IBA_Validation.user_goes_iba_section(IBA_Validation.java:45)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:591)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:595)
+	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:321)
+	at StepDefinitions.TestBase.getScreenshot(TestBase.java:177)
+	at StepDefinitions.TestBase.result(TestBase.java:166)
+	at StepDefinitions.IBA_Validation.user_goes_iba_section(IBA_Validation.java:51)
 	at ?.User goes to IBA Section(file:///C:/Users/mohd.yawar/git/repository2/Cukes-CCP/src/test/java/features/IBA.feature:55)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1614992995", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1614992995'><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;tile menus&apos;]&quot;}
-  (Session info: chrome=125.0.6422.176)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+</pre></div><a href='#' onClick='toggleBox("stack-trace1839529707", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1839529707'><pre>org.openqa.selenium.NoSuchSessionException: Tried to run command without establishing a connection
 Build info: version: &apos;4.19.1&apos;, revision: &apos;abe0ee07dc&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;16.0.2&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [b4018c96513f2e9598f3f1d9857348b3, findElement {value=//div[@class=&apos;tile menus&apos;], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 125.0.6422.176, chrome: {chromedriverVersion: 125.0.6422.141 (4b1e8393712..., userDataDir: C:\Users\MOHD~1.YAW\AppData...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57315}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57315/devtoo..., se:cdpVersion: 125.0.6422.176, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: b4018c96513f2e9598f3f1d9857348b3
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [d97486bd-839e-4a51-9309-0b89009b8ba7, screenshot {}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 113.0.1, moz:accessibilityChecks: false, moz:buildID: 20230511191846, moz:debuggerAddress: 127.0.0.1:44404, moz:geckodriverVersion: 0.33.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 15248, moz:profile: C:\Users\MOHD~1.YAW\AppData..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:44404/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: d97486bd-839e-4a51-9309-0b89009b8ba7
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -127,15 +123,15 @@ Session ID: b4018c96513f2e9598f3f1d9857348b3
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
 	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
-	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:349)
-	at PageObjects.Modules.clickonMenu(Modules.java:36)
-	at StepDefinitions.IBA_Validation.user_goes_iba_section(IBA_Validation.java:45)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:591)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:595)
+	at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:321)
+	at StepDefinitions.TestBase.getScreenshot(TestBase.java:177)
+	at StepDefinitions.TestBase.result(TestBase.java:166)
+	at StepDefinitions.IBA_Validation.user_goes_iba_section(IBA_Validation.java:51)
 	at ?.User goes to IBA Section(file:///C:/Users/mohd.yawar/git/repository2/Cukes-CCP/src/test/java/features/IBA.feature:55)
 </pre></div></td>
-<td>15</td>
+<td>11</td>
 <td>cucumberOptions.TestRunner@5fbe4146</td></tr>
 </table><p>
 </body>

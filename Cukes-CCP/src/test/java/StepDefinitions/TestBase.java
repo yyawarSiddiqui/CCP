@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -25,6 +24,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -42,7 +45,7 @@ import static utils.generateString.*;
 
 public class TestBase {
 
-	private static WebDriver driver;
+	public static WebDriver driver;
 	static ExtentTest  Logger;
 	public  static Properties prop=new Properties();
 	public static FileInputStream fs ;
@@ -70,6 +73,28 @@ public class TestBase {
 		// Disable Safe Browsing 
 		options.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");
 
+		
+		
+		
+		// Set the custom download directory
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference("browser.download.dir", FileDownloadPath);
+        profile.setPreference("browser.download.folderList", 2);
+        profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf"); // Set MIME types you want to download automatically
+        profile.setPreference("pdfjs.disabled", true); // Disable PDF viewer
+
+        // Disable Safe Browsing
+        profile.setPreference("browser.safebrowsing.enabled", false);
+        profile.setPreference("browser.safebrowsing.malware.enabled", false);
+
+        // Add arguments
+        FirefoxOptions optionsfirefox = new FirefoxOptions();
+        optionsfirefox.setProfile(profile);
+        optionsfirefox.addPreference("network.trr.mode", 2);
+      //  options.addArguments("--headless"); // Uncomment this if you want to run in headless mode
+        optionsfirefox.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");
+
+		
 		// System.out.println(Value.getJSONObject("TraditionalMenu").toString());		
 
 
@@ -107,7 +132,7 @@ public class TestBase {
 
 			e.printStackTrace();
 		}
-		if(driver==null ) {
+		if(driver==null && "chrome".equalsIgnoreCase(prop.getProperty("browser"))) {
 
 			WebDriverManager.chromedriver().setup(); 
 			driver= new ChromeDriver(options); 
@@ -116,7 +141,24 @@ public class TestBase {
 
 		}
 
+		else if(driver==null && "firefox".equalsIgnoreCase(prop.getProperty("browser"))) {
+
+			WebDriverManager.firefoxdriver().setup(); 
+			driver= new FirefoxDriver(optionsfirefox); 
+			driver.get(QaURL);
+			driver.manage().window().maximize();
+		}
+
+		else if(driver==null && "edge".equalsIgnoreCase(prop.getProperty("browser"))) {
+
+			WebDriverManager.edgedriver().setup(); 
+			driver= new EdgeDriver(); 
+			driver.get(QaURL);
+			driver.manage().window().maximize();
+		}
 	}
+
+
 
 	@After
 	public void teardown() { 
@@ -425,7 +467,7 @@ public class TestBase {
 		return true;
 
 	}
-	
+
 	public boolean ScrollElement(WebElement Elem) throws InterruptedException {
 
 		Actions act=new Actions(driver);
@@ -510,18 +552,18 @@ public class TestBase {
 
 	public Boolean SwitchWindow(int i)  {
 
-	Set<String> Windows=driver.getWindowHandles();
-	List<String> WinList=new ArrayList<String>(Windows);
-	String Tab=WinList.get(i);
-	driver.switchTo().window(Tab);
-	return true;
-	
+		Set<String> Windows=driver.getWindowHandles();
+		List<String> WinList=new ArrayList<String>(Windows);
+		String Tab=WinList.get(i);
+		driver.switchTo().window(Tab);
+		return true;
+
 	}
-	
+
 	public boolean OpenNewWindowTab()  {
 
 		((JavascriptExecutor) driver).executeScript("window.open();");
-		
+
 		return true;
 
 	} 
