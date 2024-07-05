@@ -1,83 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-06-28T18:50:41 IST" name="Default suite" finished-at="2024-06-28T18:50:54 IST" duration-ms="12297">
+  <suite started-at="2024-07-04T18:45:43 IST" name="Default suite" finished-at="2024-07-04T18:46:48 IST" duration-ms="65093">
     <groups>
       <group name="cucumber">
         <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@5fbe4146]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2024-06-28T18:50:41 IST" name="Default test" finished-at="2024-06-28T18:50:54 IST" duration-ms="12297">
+    <test started-at="2024-07-04T18:45:43 IST" name="Default test" finished-at="2024-07-04T18:46:48 IST" duration-ms="65093">
       <class name="cucumberOptions.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:cucumberOptions.TestRunner@5fbe4146]" started-at="2024-06-28T18:50:41 IST" name="setUpClass" finished-at="2024-06-28T18:50:42 IST" duration-ms="437" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:cucumberOptions.TestRunner@5fbe4146]" started-at="2024-07-04T18:45:43 IST" name="setUpClass" finished-at="2024-07-04T18:45:43 IST" duration-ms="414" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@7cfb0c4c]]>
+                <![CDATA[org.testng.TestRunner@25d0b918]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@5fbe4146]" started-at="2024-06-28T18:50:42 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-06-28T18:50:54 IST" duration-ms="11793" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:cucumberOptions.TestRunner@5fbe4146]" started-at="2024-07-04T18:45:43 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-07-04T18:46:48 IST" duration-ms="64612" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Verifying the IBA Page"]]>
+                <![CDATA["Verify that  rules should triggered"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["IBA and its Validation"]]>
+                <![CDATA["Rules Page and it's Validation"]]>
               </value>
             </param>
           </params>
-          <exception class="org.openqa.selenium.NoSuchSessionException">
-            <message>
-              <![CDATA[Tried to run command without establishing a connection
-Build info: version: '4.19.1', revision: 'abe0ee07dc'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.2'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [d97486bd-839e-4a51-9309-0b89009b8ba7, screenshot {}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 113.0.1, moz:accessibilityChecks: false, moz:buildID: 20230511191846, moz:debuggerAddress: 127.0.0.1:44404, moz:geckodriverVersion: 0.33.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 15248, moz:profile: C:\Users\MOHD~1.YAW\AppData..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:44404/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: d97486bd-839e-4a51-9309-0b89009b8ba7]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchSessionException: Tried to run command without establishing a connection
-Build info: version: '4.19.1', revision: 'abe0ee07dc'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.2'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [d97486bd-839e-4a51-9309-0b89009b8ba7, screenshot {}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 113.0.1, moz:accessibilityChecks: false, moz:buildID: 20230511191846, moz:debuggerAddress: 127.0.0.1:44404, moz:geckodriverVersion: 0.33.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 15248, moz:profile: C:\Users\MOHD~1.YAW\AppData..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:44404/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: d97486bd-839e-4a51-9309-0b89009b8ba7
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
-at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
-at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:591)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:595)
-at org.openqa.selenium.remote.RemoteWebDriver.getScreenshotAs(RemoteWebDriver.java:321)
-at StepDefinitions.TestBase.getScreenshot(TestBase.java:177)
-at StepDefinitions.TestBase.result(TestBase.java:166)
-at StepDefinitions.IBA_Validation.user_goes_iba_section(IBA_Validation.java:51)
-at ✽.User goes to IBA Section(file:///C:/Users/mohd.yawar/git/repository2/Cukes-CCP/src/test/java/features/IBA.feature:55)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:cucumberOptions.TestRunner@5fbe4146]" started-at="2024-06-28T18:50:54 IST" name="tearDownClass" finished-at="2024-06-28T18:50:54 IST" duration-ms="34" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:cucumberOptions.TestRunner@5fbe4146]" started-at="2024-07-04T18:46:48 IST" name="tearDownClass" finished-at="2024-07-04T18:46:48 IST" duration-ms="36" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

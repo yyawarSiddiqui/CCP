@@ -7,6 +7,7 @@ import StepDefinitions.TestBase;
 public class Rules extends TestBase {
 	
 	public  WebDriver driver;
+	MenuGrid menugrid;
 	
 	public Rules(WebDriver driver) {
 
@@ -18,6 +19,20 @@ public class Rules extends TestBase {
 	private static final String Loader_CreateMenu="//span[@class='pwm-spinner-message']//span[text()='Loading Menu Items...']";
 	private static final String Build_closeset_Menu="//span[contains(text(),'I want to build a menu by using an existing menu, which is close to the target')]";
 	private static final String Loader="//span[@class='pwm-spinner-message']";
+	private static final String Beverages="//input[@id='beveragess']/following-sibling::*";
+	private static final String milkAny="//input[  @id='m1' ]/following-sibling::*";
+	private static final String milkAnyofServings="((//input[@id='m8']/following-sibling::*/following::*//select[@class=\"form-control w-100\"])[1]/following::*//input[@placeholder='# of servings'])[1]";
+	private static final String milkAnyFrequency="(//input[@id='m8']/following-sibling::*/following::*//select[@class=\"form-control w-100\"])[2]";
+	private static final String SaveRules="//button[@type='button' and text()='Save']";
+	private static final String LoaderSaveRules="//span[@class='pwm-spinner-message']//span[text()='Saving Menu Rules...']";
+	private static final String CreateMenuButton="//button[@type='button' and text()='Create Menu']";
+	private static final String BuildFromScratchButton="//span[@class='btn-role']//span[contains(text(),'I want to build from scratch')]";
+	private static final String LoadingMenuItems="//span[@class='pwm-spinner-message']//span[text()='Loading Menu Items...']";
+	private static final String Save_and_Checkrules="(//button[@type='button']//i)[2]";
+	private static final String LoaderValidatingRules="//span[@class='pwm-spinner-message']//span[text()='Validating Rules...']";
+	private static final String MorningAny="//input[@id='cofe511' ]/following-sibling::*";
+	private static final String MorningAnyofServing="(((//table[@class='table tlayout-fixed w-100'])[3]//tr)[4]//input)[9]";
+	private static final String MorningBeverageVegan="//input[@id='cofe51' ]/following-sibling::*";
 	
 	
 	
@@ -38,9 +53,154 @@ public boolean Click_to_BuildCLosestMenu() {
 		InvisibilityofElement(Loader, 30);
 		TestBase.result("Click to Build Closest Menu Is Successfully Clicked" , true);		
 		return true;
+			
+	}
+
+
+public boolean FillBeverage_Milk() {
+	
+	
+	try {
 		
+		menugrid=new MenuGrid(driver);
+		click(Beverages);
+		MoveAction(Element(milkAny));
+		jsClick(milkAny);
+		getallBeverageDropDown(17, "898");
+		Sendval(milkAnyofServings, "2");
+		SelectDropDown(milkAnyFrequency, "1");
+		Thread.sleep(4000);
+		click(SaveRules);
+		VisibilityofELement(LoaderSaveRules, 8);
+		InvisibilityofElement(LoaderSaveRules, 20);
+		click(CreateMenuButton);
+		click(BuildFromScratchButton);
+		VisibilityofELement(LoadingMenuItems, 8);
+		InvisibilityofElement(LoadingMenuItems, 20);
+		menugrid.AddStation();
+		menugrid.User_AddRecipe_Milk(prop.getProperty("recipemilk"));
+		menugrid.User_SaveAndCheckRules();
+		menugrid.User_AddRecipe_Milk2(prop.getProperty("recipemilk2"));
+		Boolean isTestVerified=menugrid.User_SaveAndCheckRules2();
+		
+		if (isTestVerified==true) {
+			
+			return true;
+			
+		} else {
+
+			return false;
+		}
+		
+		
+	} catch (Exception e) {
 		
 	}
+	
+	
+	return false;
+	
+}
+
+
+public boolean FillBeverage_Morning() {
+	
+	
+	try {
+		prop.load(fs);
+		menugrid=new MenuGrid(driver);
+		click(Beverages);
+		MoveAction(Element(MorningAny));
+		jsClick(MorningAny);
+		getallBeverageDropDown(25, "902");
+		Sendval(MorningAnyofServing, "2");
+		getallBeverageDropDown(26, "1");
+		Thread.sleep(4000);
+		click(SaveRules);
+		VisibilityofELement(LoaderSaveRules, 8);
+		InvisibilityofElement(LoaderSaveRules, 20);
+		click(CreateMenuButton);
+		click(BuildFromScratchButton);
+		VisibilityofELement(LoadingMenuItems, 8);
+		InvisibilityofElement(LoadingMenuItems, 20);
+		menugrid.AddStation();
+		menugrid.User_AddRecipe_Milk(prop.getProperty("recipemorning"));
+		menugrid.User_SaveAndCheckRules();
+		menugrid.User_AddRecipe_Milk2(prop.getProperty("recipemorning2"));
+		Boolean isTestVerified=menugrid.User_SaveAndCheckRules2();
+		
+		if (isTestVerified==true) {
+			
+			return true;
+			
+		} else {
+
+			return false;
+		}
+		
+		
+	} catch (Exception e) {
+		
+	}
+	
+	
+	return false;
+	
+}
+
+public boolean FillBeverage_MorningVegan() {
+	
+	
+	try {
+		prop.load(fs);
+		menugrid=new MenuGrid(driver);
+		click(Beverages);
+		MoveAction(Element(MorningBeverageVegan));
+		jsClick(MorningBeverageVegan);
+		getallBeverageDropDown(23, "903");
+		Sendval(MorningAnyofServing, "1");
+		getallBeverageDropDown(24, "1");
+		Thread.sleep(2000);
+		click(SaveRules);
+		VisibilityofELement(LoaderSaveRules, 8);
+		InvisibilityofElement(LoaderSaveRules, 20);
+		click(CreateMenuButton);
+		click(BuildFromScratchButton);
+		VisibilityofELement(LoadingMenuItems, 8);
+		InvisibilityofElement(LoadingMenuItems, 20);
+		menugrid.AddStation();
+		menugrid.User_AddRecipe_Milk(prop.getProperty("recipemorningvegan"));
+		Boolean isTestVerified=menugrid.User_SaveAndCheckRulesFinal();
+		
+		if (isTestVerified==true) {
+			
+			return true;
+			
+		} else {
+
+			return false;
+		}
+		
+		
+	} catch (Exception e) {
+		
+	}
+	
+	
+	return false;
+	
+}
+
+public boolean getallBeverageDropDown(int i, String Values) {
+	
+	
+	
+	String SelectPackagingType="(//input[@id='cofe18']/following-sibling::*/following::*//select[@class='form-control w-100'])["+i+"]";
+	SelectDropDown(SelectPackagingType,Values );
+	
+	return true;
+	
+}
 	
 	
 

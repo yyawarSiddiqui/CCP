@@ -468,6 +468,7 @@ public class TestBase {
 
 	}
 
+	
 	public boolean ScrollElement(WebElement Elem) throws InterruptedException {
 
 		Actions act=new Actions(driver);
@@ -567,6 +568,16 @@ public class TestBase {
 		return true;
 
 	} 
+	
+	public String getText(String Elem)  {
+
+		VisibilityofELement(Elem, 10);
+		String text=driver.findElement(By.xpath(Elem)).getText();
+
+		return text;
+
+	}
+
 
 
 }

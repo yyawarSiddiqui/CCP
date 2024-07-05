@@ -39,7 +39,6 @@ Feature: Closest MenuPage and its Validation
   Then  User Verify CLosestMenu CopyFunctionality
   
   
- # @test
    Scenario: Verifying the ClosestMenu Page
   Given User goes to Menu Section
   Then User Move to  DTT page 

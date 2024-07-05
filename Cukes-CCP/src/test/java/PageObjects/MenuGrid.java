@@ -44,6 +44,26 @@ public class MenuGrid extends TestBase {
 	private static final String Loadermenu="//span[@class='pwm-spinner-message']//span[text()='Loading Menu Items...']";
 	private static final String MenuInsights="//li//a[contains(text(),'Menu Insights')]";
 	private static final String GIName="//div[@id='generalItems']//table//tr//td[2]";
+	private static final String KpiArrowLeft="//div[@class='left-side-arrow']";
+	private static final String Dots_3="//i[@role='button' and @data-toggle='dropdown']";
+	private static final String Add_Station="(//i[@class='fa fa-plus ml-1']/following::*)[1]";
+	private static final String from_scratch="//label[@class='form-check-label ' and @for='inlineRadio_4']";
+	private static final String Station_Name="//input[@type='text' and @class='form-control form-control-sm']";
+	private static final String saveStation="//div[@class='button-wrap d-flex']//button[@type='button' and text()='Save']";
+	private static final String StationWeeks="//div[@class='week-list-sec row-flex pl-20']";
+	private static final String Selectalldays="(//span[@class='mr-1 ml-1']/following-sibling::*)[7]";
+	private static final String Selectallweek="(//div[@class='d-flex w-100']//a[text()='Select for all Weeks'])[3]";
+	private static final String Save_CheckRules="//button[@type='button' and @class='btn btn-save active mb-2 mr-2 mb-md-0']";
+	private static final String RulesValidattionCheck="(//div[@id='rulesWarning']//label//div[@class='acord-btn'])[1]/..";
+	private static final String RulesValidattionCheckTexttoseeRed="//div[@id='t1b1-0']";
+	private static final String Recipes_Red="//div[contains(@class,'selected-red')]";
+	private static final String RulesValidationText="//div[@id='t1b1-0']//p";
+	private static final String RulesWarning="//div[@id='rulesWarning']//p[text()=' No warnings for the defined Rules']";
+
+
+
+	
+
 
 
 
@@ -265,13 +285,222 @@ public class MenuGrid extends TestBase {
 
 			e.printStackTrace();
 			return null;
-			
+
+		}
+
+
+	}
+
+
+	public Boolean AddStation() {
+
+		try {
+			click(KpiArrowLeft);
+			click(Dots_3);
+			click(Add_Station);
+			jsClick(from_scratch);
+			Sendval(Station_Name, "main");
+			click(saveStation);
+			VisibilityofELement(Loadermenu, 3);
+			InvisibilityofElement(Loadermenu, 20);
+			Boolean isStationAvailable=VisibilityofELement(StationWeeks, 20);
+
+			if (isStationAvailable==true) {
+
+				TestBase.result("Verified User is able to add staion Succesfully " , true);
+				return true;
+
+			} else {
+
+				return false;
+			}
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();	
+			return false;
+
+
 		}
 
 
 
 
+	}
+
+	public boolean User_AddRecipe_Milk(String Recipe)   {
+
+
+		try {
+			
+			VisibilityofELement(Add_Recipe_Monday, 20);
+			click(Add_Recipe_Monday);
+			click(Selectalldays);
+			click(Selectallweek);
+			Sendval(InputRecipe, Recipe);
+			click(ADDRecipeButton);
+			VisibilityofELement(loader, 3);
+			InvisibilityofElement(loader, 100);
+			click(SaveAddedRecipe);
+			VisibilityofELement(Loadermenu, 10);
+			Boolean isloaderInvisble=InvisibilityofElement(Loadermenu, 20);
+
+			if (isloaderInvisble==true) {
+
+				return true;
+
+			} else {
+
+				return false;
+			}
+
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
 
 	}
+
+
+
+	public boolean User_SaveAndCheckRules()   {
+
+
+		try {
+
+			jsClick(KPI_Arrow_Down);
+			click(Save_CheckRules);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			click(RulesValidattionCheck);
+			click(RulesValidattionCheckTexttoseeRed);
+			String 	ValidationText=getText(RulesValidationText);
+			String TotalRecipe=ValidationText.substring(ValidationText.indexOf("(")+1, ValidationText.lastIndexOf(")"));	
+			int TotalRecipevalue=Integer.parseInt(TotalRecipe);
+			int TotalRecipeAvailable=ListElementsbyWait(Recipes_Red, 20).size();
+
+			if (TotalRecipevalue==TotalRecipeAvailable) {
+
+				TestBase.result("Verified Warning is displayed & all added recipes of milk are highlighted" , true);
+				return true;
+
+			} else {
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+	
+	
+	public boolean User_AddRecipe_Milk2(String Recipe)   {
+
+
+		try {
+
+			VisibilityofELement(Add_Recipe_Monday, 20);
+			click(Add_Recipe_Monday);
+			click(Selectalldays);
+			click(Selectallweek);
+			Sendval(InputRecipe, Recipe);
+			click(ADDRecipeButton);
+			VisibilityofELement(loader, 3);
+			InvisibilityofElement(loader, 20);
+			click(SaveAddedRecipe);
+			VisibilityofELement(Loadermenu, 10);
+			Boolean isloaderInvisble=InvisibilityofElement(Loadermenu, 20);
+			
+			if (isloaderInvisble==true) {
+
+				return true;
+
+			} else {
+
+				return false;
+			}
+
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+	
+	public boolean User_SaveAndCheckRules2()   {
+
+
+		try {
+
+			click(Save_CheckRules);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			int elements = ListElementsbyWait(RulesValidattionCheck, 20).size();
+		
+			if (elements==1 || Element(RulesWarning).isDisplayed()) {
+
+				TestBase.result("Verified Warning is not displayed & rules are validated succesfully" , true);
+				return true;
+
+			} else {
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+	
+	
+	public boolean User_SaveAndCheckRulesFinal()   {
+
+
+		try {
+
+			jsClick(KPI_Arrow_Down);
+			click(Save_CheckRules);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			int elements = ListElementsbyWait(RulesValidattionCheck, 20).size();
+		
+			if (elements==1 || Element(RulesWarning).isDisplayed()) {
+
+				TestBase.result("Verified Warning is not displayed & rules are validated succesfully" , true);
+				return true;
+
+			} else {
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+
+
 
 }
