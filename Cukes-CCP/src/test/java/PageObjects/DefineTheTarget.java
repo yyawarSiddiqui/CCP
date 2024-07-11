@@ -25,11 +25,11 @@ public class DefineTheTarget extends TestBase {
 
 	//	(//span[@class='text-danger' and text()='*'])[3]
 	String Input_Name="!@#$%^&*()_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ujhfgfgjfjgfjgjfgrirtrhjgfjj";
-
+	public  static String NewName="";
 
 	private static final String DTT_Title="//h2[@class='header-info-label' and text()='Define The Target']";
 	private static final String Meal_Period="//h3[@class='text-primary btn']";
-	private static final String Close_Meal_Period="	//p[@class='closes cursor-pointer' and text()='Close Meal Period']";
+	private static final String Close_Meal_Period="//p[@class='closes cursor-pointer' and text()='Close Meal Period']";
 	private static final String Name="//input[@placeholder='Write menu name']";
 	private static final String Comments="//div//textarea[@placeholder='Write your comments here']";
 	private static final String Description="//div//textarea[@placeholder='Write your description']";
@@ -59,8 +59,21 @@ public class DefineTheTarget extends TestBase {
 	private static final String EditItems="//button[@type='button' and text()='Edit Items']";
 	private static final String LoaderEditItems="//span[@class='pwm-spinner-message']//span[contains(text(),'Validating and Editing Menu Changes...')]";
 	private static final String LoaderMenuItems="//span[@class='pwm-spinner-message']//span[contains(text(),'Loading Menu Items...')]";
-	
-	
+	private static final String ProfitCenterRadioButton="//label//input[@value='profitCenter']/..//span[@class='radiobtn']";
+	private static final String ProfitCenterSelect="//div[@class='Select-placeholder']/..//input[@id='statusId']/../../..";
+	private static final String Loaderglobal="//span[@class='pwm-spinner-message']";
+	private static final String SelectedProfitCenter="//span[@id='react-select-5--value-item']";
+	private static final String SelectedMenuType="//label[text()='Menu Type:']/../..//select";
+	private static final String BaselineLink="//label//u[.='Add/Update Baseline']";
+	private static final String MealPeriodEdit="//*[name()='svg']/*";
+	private static final String Profitcenterlist="//div[@id='react-select-5--list']";
+	private static final String SelectEditRDA="//label[text()='RDA Type: ']/../..//select";
+	private static final String LoaderUpdateDTT="//span[@class='pwm-spinner-message']//span[contains(text(),'Validating and Editing Menu Changes...')]";
+	private static final String Back="//button[@type='button' and text()='Back']";
+
+
+
+
 
 	public boolean VerifyDTTScreenVisibility() {
 
@@ -69,6 +82,19 @@ public class DefineTheTarget extends TestBase {
 		return value;
 
 	}
+
+	public boolean selectProfitCenter(int i) {
+
+		String ProfitCenterSelect="(//div[@id='react-select-5--list']//div[@class='Select-option' and @role='option'])["+i+"]";
+
+		driver.findElement(By.xpath(ProfitCenterSelect)).click();
+
+		return true;
+
+
+
+	}
+
 
 
 	public boolean validate_Name_Field() throws InterruptedException  {
@@ -164,10 +190,10 @@ public class DefineTheTarget extends TestBase {
 		if(Element(Taget_Type).isEnabled()==false) {
 
 			TestBase.result("Verify Target_Type is Initially disabled", val);
-			
+
 
 		}
-		
+
 		else {
 			return false;
 		}
@@ -187,8 +213,10 @@ public class DefineTheTarget extends TestBase {
 		VisibilityofELement(SelectRDAType,20);
 		SelectDropDown(SelectRDAType, prop.getProperty("value"));
 		String Menu_Name=Element(Name).getAttribute("value");
+		Thread.sleep(2000);
 		jsClick(Create_Button);
-		InvisibilityofElement(Loader_CreateMenu, 10);
+		VisibilityofELement(Loader_CreateMenu, 10);
+		InvisibilityofElement(Loader_CreateMenu, 20);
 		TestBase.result("Menu is created Succesfully" , true);
 		return Menu_Name;
 
@@ -422,17 +450,17 @@ public class DefineTheTarget extends TestBase {
 
 	}
 
-	
-	
+
+
 	public List<String> User_Update_ClosestMenu_EditValues() {
-		
-		
+
+
 		List<String> newlist=new ArrayList<String>();
 		InvisibilityofElement(Loader, 20);
 		Element(Name).clear();
-		
+
 		try {
-			
+
 			SendText(Name);
 			SelectDropDown(Select_Cycle_Weeks, "5");
 			Element(Calorie_Level).clear();
@@ -443,24 +471,24 @@ public class DefineTheTarget extends TestBase {
 			Sendval(Cost_PerMeal_Target, "33.8");
 			click(SeleCt_PopulationType);
 			jsClick(Select_FirstOption);
-			
-		
-			
-			
+
+
+
+
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
+
+
+
 		String DTT_CycleWeeks=GetSelectedDropDown(Select_Cycle_Weeks).getText();
 		String DTT_CalorieValue=Element(Calorie_Level).getAttribute("value");
 		String DTT_Targettype=GetSelectedDropDown(Taget_Type).getText();
 		String DTT_CostBucketValue=GetSelectedDropDown(Cost_Bucket).getText();
 		String DTT_Cost_PerMeal_Target =Element(Cost_PerMeal_Target).getAttribute("value");
-        String DTT_MenuName=Element(Name).getAttribute("value");
+		String DTT_MenuName=Element(Name).getAttribute("value");
 
 
 		if(DTT_Targettype.equalsIgnoreCase("Select")) {
@@ -509,8 +537,8 @@ public class DefineTheTarget extends TestBase {
 		newlist.add(DTT_CycleWeeks);
 		newlist.add(Trimmed_CostPer_Meal);
 		newlist.add(DTT_MenuName);
-		
-		
+
+
 		Collections.sort(newlist);
 
 		/*
@@ -525,11 +553,137 @@ public class DefineTheTarget extends TestBase {
 		InvisibilityofElement(LoaderMenuItems, 40);
 
 		return newlist;		
-		
-		
-		
-		
+
+
+
+
 	}
+
+	public  boolean UserEditDttValues()   {
+
+		try {
+
+
+			tt=new TraditionalMenu(driver);
+			Element(Name).clear();
+			NewName=SendText(Name);
+			SelectDropDown(Status_DropDown, "3");
+			String UpdatedStatus=GetSelectedDropDown(Status_DropDown).getText();
+
+
+			VisibilityofELement(MealPeriodEdit, 5);
+			click(MealPeriodEdit);
+			for(WebElement Element_meal:ListWebElement(Unselected_Meals)) {
+
+				Element_meal.click();
+			}
+
+			List<String>Meal_Type_Selected=ListStringElements(Meal_Heading);
+
+			Element(Close_Meal_Period).click();
+			SelectDropDown(Cost_Bucket, "9");
+			String UpdatedCostBucket=GetSelectedDropDown(Cost_Bucket).getText();
+
+			click(ProfitCenterRadioButton);
+			click(ProfitCenterSelect);
+			VisibilityofELement(Profitcenterlist, 2);
+			selectProfitCenter(2);
+			VisibilityofELement(Loaderglobal, 1);
+			InvisibilityofElement(Loaderglobal, 4);
+			String UpdatedProfitCenter=Element(SelectedProfitCenter).getText();
+
+			SelectDropDown(SelectEditRDA, "M2");
+			String UpdatedRDA=GetSelectedDropDown(SelectEditRDA).getText();
+
+			SelectDropDown(SelectedMenuType, "80");
+			String UpdatedMenuType=GetSelectedDropDown(SelectedMenuType).getText();
+
+			Boolean isBaselinelinkEnable=Element(BaselineLink).isEnabled();
+
+			click(Save);
+			VisibilityofELement(LoaderUpdateDTT, 3);
+			InvisibilityofElement(LoaderUpdateDTT, 40);
+			VisibilityofELement(Loader, 2);
+			InvisibilityofElement(Loader, 40);
+			click(Back);
+			tt.Search_MenuCreated();
+
+			List<String> AllDTTValues=new ArrayList<String>(Arrays.asList(UpdatedMenuType,UpdatedRDA, UpdatedCostBucket, UpdatedStatus));
+
+
+			for (String MealSelected : Meal_Type_Selected) {
+
+				AllDTTValues.add(MealSelected);				
+			}
+
+			Collections.sort(AllDTTValues);
+
+//			for (String a : AllDTTValues) {
+//
+//				System.out.println(a);			
+//			}
+
+		//	System.out.println("=======================");
+
+			String CheckStatus=GetSelectedDropDown(Status_DropDown).getText();
+			String CheckCostBucket=GetSelectedDropDown(Cost_Bucket).getText();
+			String CheckRDA=GetSelectedDropDown(SelectEditRDA).getText();
+			String CheckMenuType=GetSelectedDropDown(SelectedMenuType).getText();
+
+			List<String> AllDTTValuesCheck=new ArrayList<String>(Arrays.asList(CheckStatus,CheckCostBucket, CheckRDA, CheckMenuType));
+
+
+			for (String MealSelected : Meal_Type_Selected) {
+
+				AllDTTValuesCheck.add(MealSelected);				
+			}
+
+
+			Collections.sort(AllDTTValuesCheck);
+//
+//			for (String b : AllDTTValuesCheck) {
+//
+//				System.out.println(b);			
+//			}
+
+			Boolean islistMatched=AllDTTValues.containsAll(AllDTTValuesCheck);
+			//System.out.println(islistMatched);
+			
+			if (islistMatched==true && isBaselinelinkEnable==true) {
+				
+				TestBase.result("Verified Edit DTT fields are matched", true);
+				
+			} else {
+
+			}
+
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();	
+		}
+
+
+		return true;
+
+
+	}
+
+
+	public  boolean User_Validate_Edit_valuesDTT()   {
+
+		InvisibilityofElement(Loader, 20);
+		click(Create_Button);
+		Boolean Val=Element(Copy_Warning_Msg).isDisplayed();
+
+		return Val;
+
+
+	}
+
+
+
+
 
 
 

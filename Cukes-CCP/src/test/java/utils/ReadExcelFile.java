@@ -2,6 +2,10 @@ package utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +36,8 @@ public class ReadExcelFile   {
 				int rows=Sheet.getLastRowNum();
 				int column=Sheet.getRow(1).getLastCellNum();
 
-				System.out.println(rows);
-				System.out.println(column);
+//				System.out.println(rows);
+//				System.out.println(column);
 
 				for(int r=1;r<=rows;r++) {
 					List<String> getdata=new ArrayList<String>();
@@ -89,6 +93,20 @@ public class ReadExcelFile   {
 
 
 	}
+	
+	
+	public static Boolean deleteFile( String FileDownloadPath) throws IOException {
+		String newpath=FileDownloadPath+File.separator+"INGREDIENT BASED ANALYSIS Report.xlsx";
+        Path path = Paths.get(newpath);
+        if (Files.exists(path)) {
+            Files.delete(path);
+            return true;
+        } else {
+            System.err.println("File not found: " + newpath);
+            return false;
+        }
+		
+    }
 
 
 

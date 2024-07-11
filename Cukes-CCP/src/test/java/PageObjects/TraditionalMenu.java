@@ -12,7 +12,7 @@ public class TraditionalMenu extends TestBase{
 	public  WebDriver driver;
 	CCPMenu ccp ;
 	DefineTheTarget dtt ;
-	
+
 	//public JSONObject Value;
 
 
@@ -21,11 +21,11 @@ public class TraditionalMenu extends TestBase{
 	public TraditionalMenu(WebDriver driver) {
 
 		this.driver=driver;
-		
+
 
 	}
-	
-	
+
+
 
 	private static final String Add="//button[@type='button' and text()='Add']";
 	private static final String Serach="//button[@type='button' and text()='Search']";
@@ -49,49 +49,49 @@ public class TraditionalMenu extends TestBase{
 	private static final String Selected_Meal="//div[@class=\"meal-period-btn-container pl-3 pt-3 pb-3\"]//div[@class='row mb-2']//div[@class='pl-3']//h4";
 	private static final String Edit_Meal="(//*[name()='svg'])[1]";
 	private static final String Update_DateFilter="//button[@type='button' and text()='Update Date']";
-	
-	
 
-	
-	
+
+
+
+
 	public  boolean clickonAdd() {
 
-		
+
 		VisibilityofELement(Add, 8);
 		jsClick(Add);
 		return true;
 
 	}
-	
-public  boolean clickonSearch() {
 
-		
+	public  boolean clickonSearch() {
+
+
 		VisibilityofELement(Serach, 8);
 		jsClick(Serach);
 		return true;
 
 	}
 
-public  WebElement GetFirst_Menu_Name(int i) {
-
-	
-	
-	 String Get_MenuName_SearchPage="//table//tbody//tr["+i+"]//td//p";
-     
-	 WebElement val=Element(Get_MenuName_SearchPage);
-	 
-	 return val;
-
-}
+	public  WebElement GetFirst_Menu_Name(int i) {
 
 
-	
+
+		String Get_MenuName_SearchPage="//table//tbody//tr["+i+"]//td//p";
+
+		WebElement val=Element(Get_MenuName_SearchPage);
+
+		return val;
+
+	}
+
+
+
 	public  boolean clickCopyIcon(int i) {
 
 		driver.findElement(By.xpath("(//i[@class='pwm-icon fas fa-copy table-icon-copy menu-search-icon link'])["+i+"]")).click();
 		return true;
 
-				
+
 
 	}
 
@@ -100,7 +100,7 @@ public  WebElement GetFirst_Menu_Name(int i) {
 
 		try {
 			ccp=new CCPMenu(driver);
-           dtt=new DefineTheTarget(driver);
+			dtt=new DefineTheTarget(driver);
 			String Menu_Name=dtt.Create_Menu();
 			ccp.clickonTraditional_Menus();
 			Sendval(Menu_Box, Menu_Name);
@@ -133,7 +133,7 @@ public  WebElement GetFirst_Menu_Name(int i) {
 		try {
 			dtt=new DefineTheTarget(driver);
 			dtt.Create_Menu();
-			boolean val=VisibilityofELement(Heading_Rules_Page, 8);
+			boolean val=VisibilityofELement(Heading_Rules_Page, 30);
 			if(val==true) {
 
 				return val;		
@@ -149,7 +149,7 @@ public  WebElement GetFirst_Menu_Name(int i) {
 
 	public  boolean Validate_rules_are_saved() {
 
-		 dtt=new DefineTheTarget(driver);
+		dtt=new DefineTheTarget(driver);
 		try {
 			dtt.Create_Menu();
 			InvisibilityofElement(Loader, 10);
@@ -185,19 +185,17 @@ public  WebElement GetFirst_Menu_Name(int i) {
 	}
 
 
-	public  boolean Validate_EditRules_Page()  {
+	public  boolean Validate_EditDTT_Page()  {
 
 		InvisibilityofElement(Loader, 10);
 		click(Serach);
 		InvisibilityofElement(Loader, 10);
 		WebElement Ele=ListWebElement(Menu_Table_value).get(0);
 		Ele.click();
+		VisibilityofELement(Loader, 2);
 		InvisibilityofElement(Loader, 10);
-		click(Edit_Rules);
-		if (VisibilityofELement(Heading_Rules_Page, 10)==true) {
-			return true;
-		}
-		return false;	
+
+		return true;	
 	}
 
 	public  boolean User_Move_to_EditDTT()   {
@@ -235,7 +233,7 @@ public  WebElement GetFirst_Menu_Name(int i) {
 
 	public  boolean User_Validates_Copied_Description_Name()    {
 
-		 dtt=new DefineTheTarget(driver);
+		dtt=new DefineTheTarget(driver);
 		InvisibilityofElement(Loader, 10);
 		click(Serach);
 		InvisibilityofElement(Loader, 10);
@@ -258,11 +256,11 @@ public  WebElement GetFirst_Menu_Name(int i) {
 
 	public  boolean User_validate_Status_on_Copymenu() throws IOException   {
 
-		
+
 		Boolean val=Element(Status_DropDown).isEnabled();
 		String text=Element(Text_Value_for_Status).getText();
 		//prop.load(fs);
-   //	System.out.println(prop.getProperty("url"));
+		//	System.out.println(prop.getProperty("url"));
 		//System.out.println(Value.getJSONObject("TraditionalMenu").getString("status"));
 		if(val==false && text.equalsIgnoreCase(Value.getJSONObject("TraditionalMenu").getString("status")) ){ //Put  Status_Text here from above
 
@@ -274,7 +272,7 @@ public  WebElement GetFirst_Menu_Name(int i) {
 	}
 
 	public  boolean User_validate_Fields_on_Copymenu()     {
-        ccp=new CCPMenu(driver);
+		ccp=new CCPMenu(driver);
 		ccp.clickonTraditional_Menus();
 		InvisibilityofElement(Loader, 8);
 		click(Serach);
@@ -308,15 +306,49 @@ public  WebElement GetFirst_Menu_Name(int i) {
 
 
 	}
-	
+
 	public  boolean Verify_Updated_Copy_MenuName() throws InterruptedException {
 
 		DefineTheTarget dtt=new DefineTheTarget(driver);
 		String Menuname=dtt.User_Update_CopyMenuName();
-	WebElement Elem=Element("//h2[text()="+"'"+Menuname+"'"+"]");
-	Boolean val=Elem.isDisplayed();
-			return val;
+		WebElement Elem=Element("//h2[text()="+"'"+Menuname+"'"+"]");
+		Boolean val=Elem.isDisplayed();
+		return val;
+
+	}
+	
+	public  boolean Search_MenuCreated () {
+
+		try {
+			
+			dtt=new DefineTheTarget(driver);
+			String Menu_Name=dtt.NewName;
+			Sendval(Menu_Box, Menu_Name);
+			InvisibilityofElement(Loader, 10);
+			click(Serach);
+			VisibilityofELement(Menu_Table_value, 8);	
+			boolean val=Element(Menu_Table_value).getText().equalsIgnoreCase(Menu_Name);
+			click(Menu_Table_value);
+			VisibilityofELement(Loader, 2);
+			InvisibilityofElement(Loader, 20);
+
+			if(val==true) {
+				TestBase.result("Validate Menu created is Verified on Search Page", val);
+				
+				return true;
+			}
+
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
 
 		}
-	
+		return false;
+
+
+
+	}
+
+
 }

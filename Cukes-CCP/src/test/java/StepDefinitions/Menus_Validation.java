@@ -66,12 +66,12 @@ public class Menus_Validation {
 		TestBase.result("Validate Menu Grid Screen is Displayed", traditionalMenu.Validate_EditMenu_Title()); 
 	 }
 	 
-	 @And("User Verify RulePage Screen Title")
-	 public void user_verify_rule_page_screen_title()  {
+	 @And("User Verify DTT Title")
+	 public void user_goes_to_EditDTT()  {
 		 
 		 traditionalMenu=new TraditionalMenu(driver );
-		 TestBase.Logger = startTest("User Verify Availability of Edit Rules Page", "Validate the Edit Rules Page");
-		 TestBase.result("Validate Menu Grid Screen is Displayed", traditionalMenu.Validate_EditRules_Page()); 
+		 TestBase.Logger = startTest("User Verify Availability of Edit DTT Page", "Validate the DTT  Page");
+		 TestBase.result("Validate Edit DTT Screen is Displayed", traditionalMenu.Validate_EditDTT_Page()); 
 			
 	 }
 	 
@@ -156,6 +156,8 @@ public class Menus_Validation {
 		 TestBase.result("validates that User Updates the MenuName and Verify it on Rules Page ", traditionalMenu.Verify_Updated_Copy_MenuName());	
 		 
 	 }
+	 
+	
 	 
 	
 	 

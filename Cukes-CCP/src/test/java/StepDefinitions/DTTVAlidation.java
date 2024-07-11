@@ -151,6 +151,16 @@ public class DTTVAlidation {
 		TestBase.result("Validate the functionality Number of Cycle Weeks dropdown" , definethetarget.User_Validate_the_functionality_of_the_Number_of_Cycle_Weeks_dropdown());
 		
 	}
+	
+	@Then("User Update and Verify Edit DTT Fields")
+	public void user_update_and_verify_edit_dtt_fields() {
+	
+		definethetarget=new DefineTheTarget(driver);
+		TestBase.Logger = startTest("User validates Edit DTT Fields update", "Validate the Edit DTT fields");
+		TestBase.result("Validate the updated fields in Edit DTT MEnu" , definethetarget.UserEditDttValues());
+		
+	}
+
 
 
 

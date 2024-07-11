@@ -12,7 +12,7 @@ import StepDefinitions.TestBase;
 public class MenuGrid extends TestBase {
 	DefineTheTarget dtt;
 	Rules rules;
-
+	IBAobj iBAobj;
 	public  WebDriver driver;
 
 	public MenuGrid(WebDriver driver) {
@@ -21,7 +21,7 @@ public class MenuGrid extends TestBase {
 
 	}
 
-	private static final String Recipe="(//div[@class='recipe-card w-full row-flex']//div[@class='sortable-part1 week-in']//div[@class='itemname'])[1]";
+	private static final String Recipe="//div[@class='recipe-card w-full row-flex']";
 	private static final String Meal_Period="(//select)[2]";
 	private static final String Days_Selected="//span[@id='react-select-9--value-0']//div[text()='All']";
 	private static final String Week_Selected="	//span[@id='react-select-8--value-0' and text()='1']";
@@ -55,14 +55,19 @@ public class MenuGrid extends TestBase {
 	private static final String Selectallweek="(//div[@class='d-flex w-100']//a[text()='Select for all Weeks'])[3]";
 	private static final String Save_CheckRules="//button[@type='button' and @class='btn btn-save active mb-2 mr-2 mb-md-0']";
 	private static final String RulesValidattionCheck="(//div[@id='rulesWarning']//label//div[@class='acord-btn'])[1]/..";
-	private static final String RulesValidattionCheckTexttoseeRed="//div[@id='t1b1-0']";
+	private static final String RulesValidattionCheckTexttoseeRed="//div[@id='t1b1-0']//p";
 	private static final String Recipes_Red="//div[contains(@class,'selected-red')]";
 	private static final String RulesValidationText="//div[@id='t1b1-0']//p";
 	private static final String RulesWarning="//div[@id='rulesWarning']//p[text()=' No warnings for the defined Rules']";
+	private static final String IgnoreMicroMacro="//div[@id='t1b1-0']//a[@class='ignorItem']";
+	private static final String loaderIgnoreRules="//span[@class='pwm-spinner-message']//span[text()='Rules Ignoring....']";
+	private static final String MacroRUlesCheck="(//div[@id='rulesWarning']//label//div[@class='acord-btn'])[1]/..//h3[.='Macro-Micro Nutrients']";
+	private static final String IgnoreRules="//a//div[@class='toltip']//i";
 
 
 
-	
+
+
 
 
 
@@ -332,7 +337,7 @@ public class MenuGrid extends TestBase {
 
 
 		try {
-			
+
 			VisibilityofELement(Add_Recipe_Monday, 20);
 			click(Add_Recipe_Monday);
 			click(Selectalldays);
@@ -344,7 +349,7 @@ public class MenuGrid extends TestBase {
 			click(SaveAddedRecipe);
 			VisibilityofELement(Loadermenu, 10);
 			Boolean isloaderInvisble=InvisibilityofElement(Loadermenu, 20);
-
+			Thread.sleep(10000);
 			if (isloaderInvisble==true) {
 
 				return true;
@@ -378,7 +383,8 @@ public class MenuGrid extends TestBase {
 			VisibilityofELement(LoaderOnSave,2);
 			InvisibilityofElement(LoaderOnSave, 20);
 			click(RulesValidattionCheck);
-			click(RulesValidattionCheckTexttoseeRed);
+			VisibilityofELement(RulesValidattionCheckTexttoseeRed, 8);
+			jsClick(RulesValidattionCheckTexttoseeRed);
 			String 	ValidationText=getText(RulesValidationText);
 			String TotalRecipe=ValidationText.substring(ValidationText.indexOf("(")+1, ValidationText.lastIndexOf(")"));	
 			int TotalRecipevalue=Integer.parseInt(TotalRecipe);
@@ -401,8 +407,8 @@ public class MenuGrid extends TestBase {
 		return false;
 
 	}
-	
-	
+
+
 	public boolean User_AddRecipe_Milk2(String Recipe)   {
 
 
@@ -419,7 +425,7 @@ public class MenuGrid extends TestBase {
 			click(SaveAddedRecipe);
 			VisibilityofELement(Loadermenu, 10);
 			Boolean isloaderInvisble=InvisibilityofElement(Loadermenu, 20);
-			
+
 			if (isloaderInvisble==true) {
 
 				return true;
@@ -438,7 +444,7 @@ public class MenuGrid extends TestBase {
 		return false;
 
 	}
-	
+
 	public boolean User_SaveAndCheckRules2()   {
 
 
@@ -450,7 +456,7 @@ public class MenuGrid extends TestBase {
 			VisibilityofELement(LoaderOnSave,2);
 			InvisibilityofElement(LoaderOnSave, 20);
 			int elements = ListElementsbyWait(RulesValidattionCheck, 20).size();
-		
+
 			if (elements==1 || Element(RulesWarning).isDisplayed()) {
 
 				TestBase.result("Verified Warning is not displayed & rules are validated succesfully" , true);
@@ -458,6 +464,7 @@ public class MenuGrid extends TestBase {
 
 			} else {
 
+				return false;
 			}
 
 		} catch (Exception e) {
@@ -468,8 +475,48 @@ public class MenuGrid extends TestBase {
 		return false;
 
 	}
-	
-	
+
+	public boolean User_SaveAndCheckRulesIgnored()   {
+
+
+		try {
+
+			jsClick(KPI_Arrow_Down);
+			click(Save_CheckRules);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			click(RulesValidattionCheck);
+			click(IgnoreMicroMacro);
+			VisibilityofELement(loaderIgnoreRules, 2);
+			Boolean val=InvisibilityofElement(loaderIgnoreRules, 9);
+
+			if (val==true) {
+
+				return true;
+
+			} else {
+
+				return false;
+
+			}
+
+
+
+
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+
+
+
 	public boolean User_SaveAndCheckRulesFinal()   {
 
 
@@ -482,7 +529,7 @@ public class MenuGrid extends TestBase {
 			VisibilityofELement(LoaderOnSave,2);
 			InvisibilityofElement(LoaderOnSave, 20);
 			int elements = ListElementsbyWait(RulesValidattionCheck, 20).size();
-		
+
 			if (elements==1 || Element(RulesWarning).isDisplayed()) {
 
 				TestBase.result("Verified Warning is not displayed & rules are validated succesfully" , true);
@@ -501,6 +548,131 @@ public class MenuGrid extends TestBase {
 
 	}
 
+	public boolean User_SaveAndCheckRulesIgnored2()   {
+
+
+		try {
+
+
+			click(Save_CheckRules);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			if (VisibilityofELement(MacroRUlesCheck,10)==true) {
+
+				ignoreMacro_Micro();
+				VisibilityofELement(LoaderOnSave,2);
+				InvisibilityofElement(LoaderOnSave, 20);
+			} 
+			else if ( Element(RulesWarning).isDisplayed()) {
+
+				TestBase.result("Verified Warning is not displayed & rules are validated succesfully" , true);
+				return true;
+
+			} else {
+				return false;
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+
+	public boolean User_SaveAndCheckRulesIgnored3()   {
+
+
+		try {
+
+			click(Save_CheckRules);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+
+			if ( Element(RulesValidattionCheck).isDisplayed()) {
+
+				TestBase.result("Verified Warning is displayed & rules are validated succesfully" , true);
+				return true;
+
+			} else {
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+
+	public boolean User_SaveAndCheckNoVerification()   {
+
+
+		try {
+
+			jsClick(KPI_Arrow_Down);
+			click(Save_CheckRules);
+			VisibilityofELement(LoaderOnSave,2);
+			InvisibilityofElement(LoaderOnSave, 20);
+			VisibilityofELement(LoaderOnSave,2);
+			Boolean val=InvisibilityofElement(LoaderOnSave, 20);
+
+			if (val==true) {
+
+				TestBase.result("Verified recipe is added" , true);
+				return true;
+
+			} else {
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+
+
+	public boolean ignoreMacro_Micro(){
+
+		click(MacroRUlesCheck);
+		click(IgnoreRules);
+		return true;
+
+	}
+
+	
+	public boolean SwapCopyRecipe(){
+
+		try {
+			iBAobj=new  IBAobj(driver);
+			rules=new Rules(driver);
+			rules.Click_On_CreateMenu();
+			VisibilityofELement(LoaderOnSave, 3);
+			InvisibilityofElement(LoaderOnSave, 40);
+			Boolean val=iBAobj.SwapRecipeCopyMenu();
+			return val;
+		
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		return true;
+
+	}
 
 
 }

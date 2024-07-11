@@ -73,28 +73,28 @@ public class TestBase {
 		// Disable Safe Browsing 
 		options.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");
 
-		
-		
-		
+
+
+
 		// Set the custom download directory
-        FirefoxProfile profile = new FirefoxProfile();
-        profile.setPreference("browser.download.dir", FileDownloadPath);
-        profile.setPreference("browser.download.folderList", 2);
-        profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf"); // Set MIME types you want to download automatically
-        profile.setPreference("pdfjs.disabled", true); // Disable PDF viewer
+		FirefoxProfile profile = new FirefoxProfile();
+		profile.setPreference("browser.download.dir", FileDownloadPath);
+		profile.setPreference("browser.download.folderList", 2);
+		profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/pdf"); // Set MIME types you want to download automatically
+		profile.setPreference("pdfjs.disabled", true); // Disable PDF viewer
 
-        // Disable Safe Browsing
-        profile.setPreference("browser.safebrowsing.enabled", false);
-        profile.setPreference("browser.safebrowsing.malware.enabled", false);
+		// Disable Safe Browsing
+		profile.setPreference("browser.safebrowsing.enabled", false);
+		profile.setPreference("browser.safebrowsing.malware.enabled", false);
 
-        // Add arguments
-        FirefoxOptions optionsfirefox = new FirefoxOptions();
-        optionsfirefox.setProfile(profile);
-        optionsfirefox.addPreference("network.trr.mode", 2);
-      //  options.addArguments("--headless"); // Uncomment this if you want to run in headless mode
-        optionsfirefox.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");
+		// Add arguments
+		FirefoxOptions optionsfirefox = new FirefoxOptions();
+		optionsfirefox.setProfile(profile);
+		optionsfirefox.addPreference("network.trr.mode", 2);
+	//	options.addArguments("--headless"); // Uncomment this if you want to run in headless mode
+		optionsfirefox.addArguments("--unsafely-treat-insecure-origin-as-secure=http://172.20.22.23:81/PRIMAWebMaster/Pages/Menus/MenuIngredientBasedAnalysis.aspx");
 
-		
+
 		// System.out.println(Value.getJSONObject("TraditionalMenu").toString());		
 
 
@@ -468,7 +468,7 @@ public class TestBase {
 
 	}
 
-	
+
 	public boolean ScrollElement(WebElement Elem) throws InterruptedException {
 
 		Actions act=new Actions(driver);
@@ -568,7 +568,7 @@ public class TestBase {
 		return true;
 
 	} 
-	
+
 	public String getText(String Elem)  {
 
 		VisibilityofELement(Elem, 10);

@@ -51,8 +51,16 @@ public class ClosestMenuObj extends TestBase {
 	private static final String Target_Cycle_Value="(//div//p)[3]";
 	private static final String PageSize_and_Click="//div[@class='pwm-custom-dropdown pagination-size inline pwm-custom-dropdown-default']/*//span";
 	private static final String Number_Of_Rows="//table//tbody//tr";
-
-
+	private static final String FirstMenu="//table//tr[1]//td[1]";
+	private static final String Casserole="//div[@class='col-4 d-flex pl-0']//option[@value='Casserole Protein']/../..//div[@class='removeIcon']";
+	private static final String CasseroleProteinDropDown="//div[@class='col-4 d-flex pl-0']//option[@value='Casserole Protein']/../..//div[@class='Select-placeholder']";
+	private static final String Casserole100msc="//div[@role='listbox']//div[text()='100% MSC']";
+	private static final String LoaderGlobal="//span[@class='pwm-spinner-message']";
+	private static final String CasseroleGroundTurkey="//div[@role='listbox']//div[text()='100% Turkey Gd']";
+	private static final String ClearFilterSubValue="//span[@title='Clear all']";
+	
+	
+	
 	public WebElement GetClosestMenuFilter(int i) {
 
 		String DropDownTitle="//select[@id='dropwown - "+i+"']";
@@ -541,7 +549,6 @@ public class ClosestMenuObj extends TestBase {
 
 			Boolean Val2= VisibilityofELement(Table_Values, 10);
 
-
 			if(Val1==true && Val2==true) {
 
 				TestBase.result("Check 'Search' button functionality", true);
@@ -858,5 +865,95 @@ public class ClosestMenuObj extends TestBase {
 		return true;
 
 	}
+	
+	public boolean VerifySummaryReportClosestMenu() {
 
+		defineTheTarget=new DefineTheTarget(driver);
+		rules=new Rules(driver);
+		try {
+			
+			click(FirstMenu);
+			Boolean val=SwitchWindow(1);
+			return val;
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+
+
+		return false;
+	}
+
+	
+	public boolean Verify_Casserrole_Filter_Result() {
+
+		defineTheTarget=new DefineTheTarget(driver);
+		rules=new Rules(driver);
+		try {
+			defineTheTarget.Create_Menu();
+			rules.Click_On_CreateMenu();
+			rules.Click_to_BuildCLosestMenu();
+
+			
+			jsClick(Search_Closeset);
+			InvisibilityofElement(LoaderGlobal, 20);
+
+			
+			List<WebElement> elems= Elements(RemoveAll_Filter); 
+
+			
+			for(int i=elems.size()-1; i>=0;i--) {
+
+				if (Element(Casserole).equals(elems.get(i))) {
+					
+					continue;
+				} else {
+					elems.get(i).click();
+				}
+				
+			}
+			
+			click(CasseroleProteinDropDown);
+			click(Casserole100msc);
+			jsClick(Search_Closeset);
+
+			InvisibilityofElement(LoaderChangeFilter, 10);
+
+			Boolean Val2= VisibilityofELement(Table_Values, 10);
+			
+			click(ClearFilterSubValue);
+			click(CasseroleProteinDropDown);
+			click(Casserole100msc);
+			jsClick(Search_Closeset);
+
+			InvisibilityofElement(LoaderChangeFilter, 20);
+
+			Boolean Val3= VisibilityofELement(Table_Values, 10);
+
+			if( Val2==true && Val3==true) {
+
+				TestBase.result("Check 'Casserole Search' button functionality", true);
+
+			}
+
+			else {
+
+				return false;
+			} 
+			return true;
+
+		}
+
+
+		catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+
+
+		return false;
+	}
 }

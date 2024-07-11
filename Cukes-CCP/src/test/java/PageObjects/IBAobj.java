@@ -1,5 +1,6 @@
 package PageObjects;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,10 +44,10 @@ public class IBAobj extends TestBase {
 	private static final String StatusValues="//table//tbody//tr//td[3]";
 	private static final String GI_NoMenu="//li//span[text()='-EGG OMELET PLAIN 5.5\" 3 OZ CKD FZ CAGE FREE']";
 	private static final String NoMenuFoundText="//table/following::*/..//span[contains(text(),'No Menu Found')]";
-	private static final String SearchMenuIBA="//input[@type='text' and @placeholder='Search by Menu Name/Distribution/Notes']";
+	private static final String SearchMenuIBA="//input[@type='text' and @placeholder='Menu Name/Distribution/Notes']";
 	private static final String CrossIconMenuSearch="//input[@type='text']/following-sibling::*//i";
 	private static final String DropDownPagination="//label/following::*//Select[@class='form-control pagination-size']";
-	private static final String ExportToExcel="//div[@class='d-flex exprtExcel_btn ibaExp-btn']//div[text()='Export to Excel']";
+	private static final String ExportToExcel="//div[text()='Export to Excel']";
 	private static final String Totalofoccurrences ="//table//tbody//tr//td[7]";
 	private static final String tablevaluetoclick="//table//tr[2]";
 	private static final String NewRecipes="//button[@type='button']//span[text()='New Recipes']";
@@ -191,7 +192,7 @@ public class IBAobj extends TestBase {
 
 	public Boolean MenuCheckRightPanel() {
 
-		List<String> ActualHeaderValues=new ArrayList<String>(Arrays.asList("DISTRIBUTION","MENU NAME","STATUS","NOTES","# OF RECIPES","TOTAL # OF OCCURRENCES"));
+		List<String> ActualHeaderValues=new ArrayList<String>(Arrays.asList("DISTRIBUTION","MENU NAME","REGION NAME","STATUS","NOTES","# OF RECIPES","TOTAL # OF OCCURRENCES"));
 
 
 
@@ -391,7 +392,7 @@ public class IBAobj extends TestBase {
 			}
 
 			Element(SearchMenuIBA).clear();
-			String Notes=GetTableValueByIndex(1, 4);
+			String Notes=GetTableValueByIndex(1, 5);
 			Sendval(SearchMenuIBA, Notes);
 			ClickActionEnter(SearchMenuIBA);
 			InvisibilityofElement(Loader, 10);
@@ -546,9 +547,15 @@ public class IBAobj extends TestBase {
 	public Boolean CheckExportTableData() throws InterruptedException {
 
 		MenuCheckRightPanel();
-		//click(ExportToExcel);
-		//Thread.sleep(10000);
+		click(ExportToExcel);
+		Thread.sleep(10000);
 		Boolean Val=ReadExcelFile.ReadTabledata(FileDownloadPath);
+		try {
+			ReadExcelFile.deleteFile(FileDownloadPath);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 
 		if(Val==true) {
 			TestBase.result("Verified Table values are coming same as in Exported Table ", true);
@@ -730,6 +737,42 @@ public class IBAobj extends TestBase {
 			MenuCheckRightPanel();
 			click(tablevaluetoclick);
 			InvisibilityofElement(Loader, 40);
+			Element(FirstRecipeSwap).click();
+			InvisibilityofElement(LoaderRecipes, 20);
+			Sendval(SearchSwap, Element(FirsrRecipeonSwap).getText());
+			Element(Swapbutton).click();
+			Boolean isRecipeSwapped=VisibilityofELement(SwapSucess, 20);//
+			Element(CrossButtonSwapRecipe).click();
+			Element(FirstRecipeSwap).click();
+			InvisibilityofElement(LoaderRecipes, 20);
+			Element(SwapRadioButton).click();
+			Element(SwapRecommendation).click();
+			Boolean isRecipeSwappedRec=VisibilityofELement(SwapSucess, 20);//
+
+			if (isRecipeSwapped==true && isRecipeSwappedRec==true ) {
+				
+				TestBase.result("Check user can swap recipes- By manually and By Recommendation engine", true); 
+				return true;
+
+			} else {
+
+				return false;
+			}
+
+		} catch (Exception e) {
+
+
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+	
+	public Boolean SwapRecipeCopyMenu() {
+
+		try {
+			
 			Element(FirstRecipeSwap).click();
 			InvisibilityofElement(LoaderRecipes, 20);
 			Sendval(SearchSwap, Element(FirsrRecipeonSwap).getText());
