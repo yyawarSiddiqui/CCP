@@ -45,7 +45,6 @@ Feature: Closest MenuPage and its Validation
     Then User Verify  Search button functionality
     Then User Verify Summary Report open in new tab
 
-  @test
   Scenario: Verifying the ClosestMenu Page
     Given User goes to Menu Section
     Then User Move to  DTT page

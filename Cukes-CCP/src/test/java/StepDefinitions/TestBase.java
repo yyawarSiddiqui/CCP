@@ -245,6 +245,16 @@ public class TestBase {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Ele);
 
 	}
+	
+	public static void jsSendVal(String Elem, String val) {
+
+		VisibilityofELement(Elem, 15);
+		WebElement Ele =driver.findElement(By.xpath(Elem));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("arguments[0].value='"+val+"';", Ele);
+
+	}
+	
 
 	public  boolean click(String Ele) {
 

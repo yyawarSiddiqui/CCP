@@ -66,6 +66,14 @@ public class Rules_Validation {
 	 
 		 
 	 }
+	 
+	 @Then("user Verify after selecting per day frequency for the fruit servings and Vegetable Servings should triggred")
+	 public void user_verify_after_selecting_per_day_frequency_for_the_fruit_servings_and_vegetable_servings_should_triggred() {
+		 rules=new Rules(driver);
+			TestBase.Logger = startTest("User validates PerDay funtionality of rules  ", "Validate Add 'Per day' to frequency option for fruit, vegetables, milk");
+		TestBase.result("Verify that user should only add recipe with defined serving size in the menu else rule should be triggred", rules.FruitsandVeg());
+	 
+	 }
 
 
 	 

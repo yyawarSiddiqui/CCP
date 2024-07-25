@@ -54,6 +54,9 @@ Feature: Login to ARAMARK CCP Portal and DTT Field Validation
     Then User Move to  DTT page
     And Verify the functionality of the Number of Cycle Weeks dropdown
 
+  Scenario: Verifying the Region Name
+    Given User goes to Menu Section
+    Then User Verify Region Name column on Traditional Menu Page
 
   Scenario: Verifying the EditDTT Title
     Given User goes to Menu Section

@@ -1,7 +1,6 @@
 package PageObjects;
 
 import org.openqa.selenium.WebDriver;
-
 import StepDefinitions.TestBase;
 
 public class Rules extends TestBase {
@@ -36,11 +35,10 @@ public class Rules extends TestBase {
 	private static final String OnepercentMilk="//input[@id='cofe11' ]/following-sibling::*";
 	private static final String OnepercentMilkofServing="(((//table[@class='table tlayout-fixed w-100'])[2]//tr)[4]//input)[9]";
 	private static final String OnepercentMilkServingSizeNumber="(((//table[@class='table tlayout-fixed w-100'])[2]//tr)[4]//input)[10]";
-
-
-
-
-
+	private static final String FruitsandVegetables="//input[@id='fav']/following-sibling::*";
+	private static final String FruitsServing="//table//tbody//strong[.='Fruit Servings']";
+	
+	
 	public boolean Click_On_CreateMenu() {
 
 		InvisibilityofElement(Loader, 30);
@@ -293,6 +291,55 @@ public class Rules extends TestBase {
 
 	}
 
+	
+	public boolean FruitsandVeg() {
+
+
+		try {
+			prop.load(fs);
+			menugrid=new MenuGrid(driver);
+			click(FruitsandVegetables);
+			MoveAction(Element(FruitsServing));
+			insertFruitVegofserving(1,"2");
+			selectFruitVegFrequency(1,"1");
+			
+			insertFruitVegofserving(2,"2");
+			selectFruitVegFrequency(2, "1");
+			Thread.sleep(2000);
+			click(SaveRules);
+			VisibilityofELement(LoaderSaveRules, 8);
+			InvisibilityofElement(LoaderSaveRules, 20);
+			click(CreateMenuButton);
+			click(BuildFromScratchButton);
+			VisibilityofELement(LoadingMenuItems, 8);
+			InvisibilityofElement(LoadingMenuItems, 20);
+			menugrid.AddStation();
+			menugrid.User_AddRecipe_Milk(prop.getProperty("recipefruit1"));
+			menugrid.User_AddRecipe_Milk(prop.getProperty("recipefruit2"));
+			menugrid.User_AddRecipe_Milk(prop.getProperty("recipefruit3"));
+			Boolean isTestVerified =menugrid.User_SaveAndCheckRulesFinal();
+
+			if (isTestVerified==true) {
+
+				return true;
+
+			} else {
+
+				return false;
+			}
+
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+
+		return false;
+
+	}
+
 	public boolean getallBeverageDropDown(int i, String Values) {
 
 
@@ -303,6 +350,42 @@ public class Rules extends TestBase {
 		return true;
 
 	}
+
+	public boolean insertFruitVegofserving(int i, String Values) {
+
+
+		String FruitOfServing="(//table//tbody//strong[.='Fruit Servings']/following::*//input)["+i+"]";
+
+		try {
+			Sendval(FruitOfServing, Values );
+			
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+		return true;
+
+	}
+
+	public boolean selectFruitVegFrequency(int i, String Values) {
+
+
+		String Frequency="(//table//tbody//strong[.='Fruit Servings']/following::*//select)["+i+"]";
+
+		SelectDropDown(Frequency, "1");
+
+		return true;
+
+	}
+	
+	
+
+
+	
+	
+
+
 
 
 

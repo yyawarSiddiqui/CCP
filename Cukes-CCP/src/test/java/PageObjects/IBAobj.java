@@ -63,7 +63,7 @@ public class IBAobj extends TestBase {
 	private static final String SwapRecommendation="//span[@class='mr-4']/following-sibling::*";
 	private static final String SwappingRecipesLoader="//span[@class='pwm-spinner-message']//span[text()='Swapping Recipe...']";
 	private static final String CrossButtonSwapRecipe="//button[@type='button' and text()='✕']";
-
+	private static final String LoaderGlobal="//span[@class='pwm-spinner-message']";
 
 
 
@@ -220,6 +220,7 @@ public class IBAobj extends TestBase {
 
 					Complete_Element_List.get(i).click();
 					InvisibilityofElement(Loader, 10);
+					break;
 
 				}
 
@@ -553,7 +554,7 @@ public class IBAobj extends TestBase {
 		try {
 			ReadExcelFile.deleteFile(FileDownloadPath);
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -630,7 +631,6 @@ public class IBAobj extends TestBase {
 	}
 
 
-	@SuppressWarnings("unlikely-arg-type")
 	public Boolean VerifySubstituteItem() {
 
 		menuGrid=new MenuGrid(driver);
@@ -750,7 +750,7 @@ public class IBAobj extends TestBase {
 			Boolean isRecipeSwappedRec=VisibilityofELement(SwapSucess, 20);//
 
 			if (isRecipeSwapped==true && isRecipeSwappedRec==true ) {
-				
+
 				TestBase.result("Check user can swap recipes- By manually and By Recommendation engine", true); 
 				return true;
 
@@ -768,11 +768,11 @@ public class IBAobj extends TestBase {
 		return false;
 
 	}
-	
+
 	public Boolean SwapRecipeCopyMenu() {
 
 		try {
-			
+
 			Element(FirstRecipeSwap).click();
 			InvisibilityofElement(LoaderRecipes, 20);
 			Sendval(SearchSwap, Element(FirsrRecipeonSwap).getText());
@@ -786,7 +786,7 @@ public class IBAobj extends TestBase {
 			Boolean isRecipeSwappedRec=VisibilityofELement(SwapSucess, 20);//
 
 			if (isRecipeSwapped==true && isRecipeSwappedRec==true ) {
-				
+
 				TestBase.result("Check user can swap recipes- By manually and By Recommendation engine", true); 
 				return true;
 
@@ -802,6 +802,34 @@ public class IBAobj extends TestBase {
 		}
 
 		return false;
+
+	}
+
+
+	public boolean validateRegionNameandVerify() {
+
+		try {
+			menuGrid=new MenuGrid(driver);
+			defineTheTarget=new DefineTheTarget(driver);
+			MenuCheckRightPanel();
+			click(tablevaluetoclick);
+			VisibilityofELement(Loader, 2);
+			InvisibilityofElement(Loader, 40);
+			menuGrid.ClickKPIArrowDown();
+			menuGrid.ClickEditTargetButton();
+			VisibilityofELement(LoaderGlobal, 2);
+			InvisibilityofElement(LoaderGlobal, 20);
+			InvisibilityofElement(LoaderGlobal, 20);
+			defineTheTarget.selectRegion();
+			defineTheTarget.click_SaveButton();
+		
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return true;
+
 
 	}
 }

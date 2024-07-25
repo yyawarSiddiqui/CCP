@@ -1,6 +1,8 @@
 package PageObjects;
 
 import java.io.IOException;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,8 +51,9 @@ public class TraditionalMenu extends TestBase{
 	private static final String Selected_Meal="//div[@class=\"meal-period-btn-container pl-3 pt-3 pb-3\"]//div[@class='row mb-2']//div[@class='pl-3']//h4";
 	private static final String Edit_Meal="(//*[name()='svg'])[1]";
 	private static final String Update_DateFilter="//button[@type='button' and text()='Update Date']";
-
-
+	private static final String SearchTable="//th";
+	private static final String DistributionGroup="//span[.='Distribution Group']";
+	private static final String TraditionalMenuNav="//a//span[.='Traditional Menus']";
 
 
 
@@ -63,11 +66,35 @@ public class TraditionalMenu extends TestBase{
 
 	}
 
+	public  boolean SearchHeaderValuesTraditionalMenu() {
+		InvisibilityofElement(Loader, 30);
+		click(Serach);
+		VisibilityofELement(Loader, 2);
+		InvisibilityofElement(Loader, 30);
+		List<String> Headerval=ListStringElements(SearchTable);
+		Boolean isRegionVisible=Headerval.contains("Region Name");
+
+		if (isRegionVisible==false) {
+
+			return true;
+
+		} else {
+
+			return false;
+		}
+
+
+
+
+	}
+
 	public  boolean clickonSearch() {
 
 
 		VisibilityofELement(Serach, 8);
 		jsClick(Serach);
+		VisibilityofELement(Loader, 2);
+		InvisibilityofElement(Loader, 20);
 		return true;
 
 	}
@@ -168,17 +195,24 @@ public class TraditionalMenu extends TestBase{
 
 
 
-	public  boolean Validate_EditMenu_Title() throws InterruptedException {
+	public  boolean Validate_EditMenu_Title()  {
 
-		InvisibilityofElement(Loader, 10);
-		click(Serach);
-		InvisibilityofElement(Loader, 10);
-		WebElement Ele=ListWebElement(Menu_Table_value).get(0);
-		Ele.click();
-		InvisibilityofElement(Loader, 10);
-		if (VisibilityofELement(Edit_Menu, 10)==true) {
-			return true;
+		try {
+			InvisibilityofElement(Loader, 10);
+			click(Serach);
+			InvisibilityofElement(Loader, 10);
+			WebElement Ele=ListWebElement(Menu_Table_value).get(0);
+			Ele.click();
+			InvisibilityofElement(Loader, 10);
+			if (VisibilityofELement(Edit_Menu, 10)==true) {
+				return true;
+			}
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
 		}
+		
 		return false;
 
 
@@ -193,7 +227,7 @@ public class TraditionalMenu extends TestBase{
 		WebElement Ele=ListWebElement(Menu_Table_value).get(0);
 		Ele.click();
 		VisibilityofELement(Loader, 2);
-		InvisibilityofElement(Loader, 10);
+		InvisibilityofElement(Loader, 20);
 
 		return true;	
 	}
@@ -238,7 +272,6 @@ public class TraditionalMenu extends TestBase{
 		click(Serach);
 		InvisibilityofElement(Loader, 10);
 		String Copy_Name=ListStringElements(Menu_Table_Description).get(3);
-		System.out.println(Copy_Name);
 		clickCopyIcon(4);
 		InvisibilityofElement(Loader, 30);
 		String Actual_Name=dtt.getDescriptionText();
@@ -316,11 +349,11 @@ public class TraditionalMenu extends TestBase{
 		return val;
 
 	}
-	
+
 	public  boolean Search_MenuCreated () {
 
 		try {
-			
+
 			dtt=new DefineTheTarget(driver);
 			String Menu_Name=dtt.NewName;
 			Sendval(Menu_Box, Menu_Name);
@@ -334,7 +367,7 @@ public class TraditionalMenu extends TestBase{
 
 			if(val==true) {
 				TestBase.result("Validate Menu created is Verified on Search Page", val);
-				
+
 				return true;
 			}
 
@@ -350,5 +383,25 @@ public class TraditionalMenu extends TestBase{
 
 	}
 
+	public  boolean MovetoDistributionGroup() {
+		InvisibilityofElement(Loader, 30);
+		click(DistributionGroup);
+		VisibilityofELement(Loader, 2);
+		InvisibilityofElement(Loader, 30);
 
+
+		return true;
+
+				
+	}
+	
+	public  boolean MovetoTraditionalMenu() {
+		click(TraditionalMenuNav);
+		VisibilityofELement(Loader, 2);
+		InvisibilityofElement(Loader, 30);
+
+		return true;
+
+				
+	}
 }

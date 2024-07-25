@@ -523,7 +523,7 @@ public class ClosestMenuObj extends TestBase {
 			rules.Click_to_BuildCLosestMenu();
 
 			jsClick(Search_Closeset);
-
+			InvisibilityofElement(LoaderGlobal, 10);
 
 			String NumberofCycleWeeks= GetValuesFilter(0);
 

@@ -4,6 +4,7 @@ Feature: Menu Page and it's Validation
     Given User is on Prima Web Master Homepage
     When USer login to the portal
 
+
   Scenario: Verifying the Menu Created
     Given User goes to Menu Section
     Then User Move to  DTT page

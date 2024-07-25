@@ -63,12 +63,28 @@ public class MenuGrid extends TestBase {
 	private static final String loaderIgnoreRules="//span[@class='pwm-spinner-message']//span[text()='Rules Ignoring....']";
 	private static final String MacroRUlesCheck="(//div[@id='rulesWarning']//label//div[@class='acord-btn'])[1]/..//h3[.='Macro-Micro Nutrients']";
 	private static final String IgnoreRules="//a//div[@class='toltip']//i";
+	private static final String EditTargetsButton="//button[.='Edit Targets']";
+	
 
 
 
 
 
+public boolean ClickKPIArrowDown() {
+	 
+	jsClick(KPI_Arrow_Down);
+	
+	return true;
+	
+}
 
+public boolean ClickEditTargetButton() {
+	 
+	jsClick(EditTargetsButton);
+	
+	return true;
+	
+}
 
 
 
@@ -346,7 +362,7 @@ public class MenuGrid extends TestBase {
 			click(ADDRecipeButton);
 			VisibilityofELement(loader, 3);
 			InvisibilityofElement(loader, 100);
-			click(SaveAddedRecipe);
+			jsClick(SaveAddedRecipe);
 			VisibilityofELement(Loadermenu, 10);
 			Boolean isloaderInvisble=InvisibilityofElement(Loadermenu, 20);
 			Thread.sleep(10000);
@@ -422,7 +438,7 @@ public class MenuGrid extends TestBase {
 			click(ADDRecipeButton);
 			VisibilityofELement(loader, 3);
 			InvisibilityofElement(loader, 20);
-			click(SaveAddedRecipe);
+			jsClick(SaveAddedRecipe);
 			VisibilityofELement(Loadermenu, 10);
 			Boolean isloaderInvisble=InvisibilityofElement(Loadermenu, 20);
 

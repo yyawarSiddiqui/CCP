@@ -6,15 +6,18 @@ import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import StepDefinitions.TestBase;
+import utils.ClipboardUtils;
 
 public class DefineTheTarget extends TestBase {
 
 	public  WebDriver driver;
 	TraditionalMenu tt;
+	public String RegionNameText="";
 
 
 	public DefineTheTarget(WebDriver driver) {
@@ -70,8 +73,89 @@ public class DefineTheTarget extends TestBase {
 	private static final String SelectEditRDA="//label[text()='RDA Type: ']/../..//select";
 	private static final String LoaderUpdateDTT="//span[@class='pwm-spinner-message']//span[contains(text(),'Validating and Editing Menu Changes...')]";
 	private static final String Back="//button[@type='button' and text()='Back']";
+	private static final String RegionName="//label[.='Region Name:']/../..//span";
+	private static final String PCGroupSelect="//label[text()='Profit Center Group']/../following::*//div[@id='react-select-5--value']";
+	private static final String PCGroupinput="//label[text()='Profit Center Group']/../following::*//div[@id='react-select-5--value']//input";
+	private static final String Distgrpinitialtext="//label[.='Distribution Group : ']/following::*//div[text()='Select...']";
+	
+	
 
 
+
+	public boolean selectRegion() {
+
+		click(ProfitCenterRadioButton);
+		click(ProfitCenterSelect);
+		VisibilityofELement(Profitcenterlist, 2);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+		selectProfitCenter(5);
+		VisibilityofELement(Loaderglobal, 2);
+		InvisibilityofElement(Loaderglobal, 20);
+		RegionNameText=Element(RegionName).getText();
+
+		return true;
+	}
+
+	public boolean selectProfitCenterGroup() {
+
+		
+		Boolean isElementWithoutPC=Element(Distgrpinitialtext).isDisplayed();
+		try {
+			
+			click(PCGroupSelect);
+			VisibilityofELement(Profitcenterlist, 2);
+			Thread.sleep(5000);
+			
+			String val=DistributionGroupOBJ.PC;
+			ClipboardUtils.copyToClipboard(val);
+			
+			VisibilityofELement(PCGroupinput, 2);
+			WebElement elem=Element(PCGroupinput);
+			Thread.sleep(2000);
+			elem.sendKeys(Keys.CONTROL+"V");
+			Thread.sleep(2000);
+			
+			ClickActionEnter(PCGroupSelect);
+			VisibilityofELement(Loaderglobal, 2);
+			InvisibilityofElement(Loaderglobal, 10);
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+		VisibilityofELement(Loaderglobal, 2);
+		InvisibilityofElement(Loaderglobal, 20);
+		RegionNameText=Element(RegionName).getText();
+		
+		if (RegionNameText.contains(RegionNameText) && isElementWithoutPC==true) {
+			
+			return true;
+			
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public  boolean click_SaveButton()   {
+
+		click(Save);
+		VisibilityofELement(Loaderglobal, 2);
+		InvisibilityofElement(Loaderglobal, 40);
+		InvisibilityofElement(Loaderglobal, 40);
+		click(Back);
+		return true;
+
+
+
+	}
 
 
 
@@ -85,7 +169,7 @@ public class DefineTheTarget extends TestBase {
 
 	public boolean selectProfitCenter(int i) {
 
-		String ProfitCenterSelect="(//div[@id='react-select-5--list']//div[@class='Select-option' and @role='option'])["+i+"]";
+		String ProfitCenterSelect="//div[@class='Select-option' and @role='option']["+i+"]";
 
 		driver.findElement(By.xpath(ProfitCenterSelect)).click();
 
@@ -465,6 +549,7 @@ public class DefineTheTarget extends TestBase {
 			SelectDropDown(Select_Cycle_Weeks, "5");
 			Element(Calorie_Level).clear();
 			Sendval(Calorie_Level, "334");
+			Thread.sleep(1000);
 			SelectDropDown(Taget_Type, "108");
 			SelectDropDown(Cost_Bucket, "31");
 			SelectDropDown(SelectRDAType, "M92");
@@ -618,12 +703,12 @@ public class DefineTheTarget extends TestBase {
 
 			Collections.sort(AllDTTValues);
 
-//			for (String a : AllDTTValues) {
-//
-//				System.out.println(a);			
-//			}
+			//			for (String a : AllDTTValues) {
+			//
+			//				System.out.println(a);			
+			//			}
 
-		//	System.out.println("=======================");
+			//	System.out.println("=======================");
 
 			String CheckStatus=GetSelectedDropDown(Status_DropDown).getText();
 			String CheckCostBucket=GetSelectedDropDown(Cost_Bucket).getText();
@@ -640,19 +725,19 @@ public class DefineTheTarget extends TestBase {
 
 
 			Collections.sort(AllDTTValuesCheck);
-//
-//			for (String b : AllDTTValuesCheck) {
-//
-//				System.out.println(b);			
-//			}
+			//
+			//			for (String b : AllDTTValuesCheck) {
+			//
+			//				System.out.println(b);			
+			//			}
 
 			Boolean islistMatched=AllDTTValues.containsAll(AllDTTValuesCheck);
 			//System.out.println(islistMatched);
-			
+
 			if (islistMatched==true && isBaselinelinkEnable==true) {
-				
+
 				TestBase.result("Verified Edit DTT fields are matched", true);
-				
+
 			} else {
 
 			}
